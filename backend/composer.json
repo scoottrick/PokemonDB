@@ -1,0 +1,6 @@
+{
+  "require": {
+    "monolog/monolog": "1.0.*",
+    "slim/slim": "^2.6"
+  }
+}
