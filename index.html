@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PokemonDB</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="frontend/images/favicon.ico" />
@@ -28,25 +29,23 @@
     <script src="frontend/js/app.js" type="text/javascript"></script>
 
     <!--- CSS ---->
-    <link href="frontend/styles/master.css" type="text/css" />
-    <link href="frontend/styles/views/mainPage.css" type="text/css" />
-    <link href="frontend/styles/views/pokedex.css" type="text/css" />
-    <link href="frontend/styles/views/trainers.css" type="text/css" />
-    <link href="frontend/styles/views/searchResults.css" type="text/css" />
-    <link href="frontend/styles/views/gyms.css" type="text/css" />
-    <link href="frontend/styles/views/badges.css" type="text/css" />
-    <link href="frontend/styles/views/trainer/trainer.css" type="text/css" />
-    <link href="frontend/styles/views/gym/gym.css" type="text/css" />
-    <link href="frontend/styles/views/pokemon/pokemon.css" type="text/css" />
+    <link href="frontend/styles/master.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/mainPage.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/pokedex.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/trainers.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/searchResults.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/gyms.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/badges.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/trainer/trainer.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/gym/gym.css" type="text/css" rel="stylesheet"/>
+    <link href="frontend/styles/views/pokemon/pokemon.css" type="text/css" rel="stylesheet"/>
     
 </head>
 
 <body>
     <header>
         <div class="siteHeader">
-            <span class="banner">
-                
-            </span>
+            <a class="banner" href="/">Pokémon DB</a>
             <span class="searchArea" ng-controller="SearchController">
                 <form class="searchForm">
                     <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
@@ -54,12 +53,12 @@
                 </form>
             </span>
         </div>
-        <div class="siteNavigation">
+        <div class="siteNavigation" ng-controller="NavController">
             <ul class="siteNavList">
-                <li>Pokedex</li>
-                <li>Trainers</li>
-                <li>Gyms</li>
-                <li>Badges</li>
+                <li ng-click="pokedexClick()">Pokedex</li>
+                <li ng-click="trainersClick()">Trainers</li>
+                <li ng-click="gymsClick()">Gyms</li>
+                <li ng-click="badgesClick()">Badges</li>
             </ul>
         </div>
     </header>

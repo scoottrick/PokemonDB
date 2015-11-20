@@ -1,4 +1,4 @@
-function PokemonController($http, $scope, $location) {
+function PokemonController($http, $scope, $location, $route) {
 
 
 };

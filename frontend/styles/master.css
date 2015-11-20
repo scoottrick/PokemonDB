@@ -1,0 +1,62 @@
+html {
+    background-color: #6E6E6E;
+    background-image: -webkit-linear-gradient(bottom left, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-image: -o-linear-gradient(bottom left, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-image: linear-gradient(to top right, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-size: 12px 12px;
+}
+
+html *{
+    position: relative;
+}
+
+header .siteHeader {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    width: 93%;
+}
+
+.siteHeader a, .siteHeader span {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.siteHeader .banner {
+    background-color: #323638;
+    background-image: image("../images/banner.png"), linear-gradient(#323638, #1B1D1E);
+    text-decoration: none;
+    width: 70%;
+}
+
+.siteHeader .searchArea {
+    padding-left: 4%;
+    width: 200px;
+}
+
+.searchArea form {
+    width: 100%;
+}
+
+header .siteNavigation {
+    margin: 5px auto;
+    width: 93%;
+}
+
+.siteNavigation .siteNavList{
+    margin: auto;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    width: 90%;
+}
+
+.siteNavList li{
+    cursor: pointer;
+    background-color: crimson;
+    display: inline-block;
+    margin: 0.5%;
+    padding: 0;
+    width: 23%;
+}
