@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <meta charset="utf-8" />
@@ -12,10 +12,18 @@
     <script src="frontend/js/src/angular.js" type="text/javascript"></script>
     <script src="frontend/js/src/angular-route.js" type="text/javascript"></script>
     <! --- Sub controllers before app controller -->
+    <script src="frontend/js/controllers/NavController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/SearchController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/MainPageController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/PokedexController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/TrainersController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/SearchResultsController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/GymsController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/BadgesController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/SingleItemControllers/GymController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/SingleItemControllers/PokemonController.js" type="text/javascript"></script>
+    <script src="frontend/js/controllers/SingleItemControllers/TrainerController.js" type="text/javascript"></script>
+    
 
     <script src="frontend/js/app.js" type="text/javascript"></script>
 
@@ -25,13 +33,43 @@
     <link href="frontend/styles/views/pokedex.css" type="text/css" />
     <link href="frontend/styles/views/trainers.css" type="text/css" />
     <link href="frontend/styles/views/searchResults.css" type="text/css" />
-
+    <link href="frontend/styles/views/gyms.css" type="text/css" />
+    <link href="frontend/styles/views/badges.css" type="text/css" />
+    <link href="frontend/styles/views/trainer/trainer.css" type="text/css" />
+    <link href="frontend/styles/views/gym/gym.css" type="text/css" />
+    <link href="frontend/styles/views/pokemon/pokemon.css" type="text/css" />
+    
 </head>
 
 <body>
-    <h1>Welcome to PokemonDB!</h1>
-
-
+    <header>
+        <div class="siteHeader">
+            <span class="banner">
+                
+            </span>
+            <span class="searchArea" ng-controller="SearchController">
+                <form class="searchForm">
+                    <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
+                    <button id="siteSearchButton" type="submit">Search</button>
+                </form>
+            </span>
+        </div>
+        <div class="siteNavigation">
+            <ul class="siteNavList">
+                <li>Pokedex</li>
+                <li>Trainers</li>
+                <li>Gyms</li>
+                <li>Badges</li>
+            </ul>
+        </div>
+    </header>
+    <ng-view>
+        
+    </ng-view>
+    <footer>
+        <p>The FOOTER!</p>
+        
+    </footer>
 </body>
 
 </html>
