@@ -24,4 +24,10 @@ $app->get('/trainers/', function() use ($app, $db) {
     echo json_encode($trainers);
 });
 
+$app->get('/trainers/:id', function($id) use ($app, $db) {
+    $result = $db->query(SQL::trainerById($id));
+    $trainer = Trainer::getById($result);
+    echo json_encode($trainer);
+});
+
 $app->run();

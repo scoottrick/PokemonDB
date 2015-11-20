@@ -5,16 +5,6 @@ class Trainer {
     private $name;
     private $rivalId;
 
-    public static function createFromResult($result) {
-        if (mysqli_num_rows($result) > 0) {
-            $row = $result->fetch_array();
-            $trainer = new Trainer($row);
-            return $trainer;
-        } else {
-            return false;
-        }
-    }
-
     private function serialize() {
         return array(
             'id' => $this->id,
@@ -27,7 +17,22 @@ class Trainer {
         if (is_array($data)) {
             $this->id = intval($data['trainer_id']);
             $this->name = $data['trainer_name'];
-            $this->rivalId = intval($data['trainer_rival']);
+
+            $rivalId = $data['trainer_rival'];
+            if ($rivalId !== null) {
+                $rivalId = intval($rivalId);
+            }
+            $this->rivalId = $rivalId;
+        }
+    }
+
+    public static function getById($result) {
+        if (mysqli_num_rows($result) > 0) {
+            $row = $result->fetch_array();
+            $trainer = new Trainer($row);
+            return $trainer->serialize();
+        } else {
+            return false;
         }
     }
 
@@ -36,11 +41,7 @@ class Trainer {
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $trainer = new Trainer($row);
-                if ($trainer) {
-                    array_push($trainers, $trainer->serialize());
-                } else {
-                    echo "no trainer";
-                }
+                array_push($trainers, $trainer->serialize());
             }
         }
         return $trainers;
