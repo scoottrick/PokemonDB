@@ -1,7 +1,7 @@
 <?php
 class Connection {
 
-    static function getConnection() {
+    static function createConnection() {
         $config = array();
         $config["host"] = "bgroff-pi2.dhcp.bsu.edu";
         $config["user"] = "_php";
@@ -9,17 +9,19 @@ class Connection {
         $config["db"] = "PokemonDB";
         $config["port"] = 3306;
 
-        $connection = Connection::connectionFromConfig($config);
+        $connection = new mysqli(
+            $config["host"],
+            $config["user"],
+            $config["pass"],
+            $config["db"],
+            $config["port"]
+        );
 
         if ($connection->connect_error) {
             die("Connection failed: " . $connection->connect_error);
         } else {
-            echo "Connected successfully";
+            echo "Connected successfully<br>";
             return $connection;
         }
-    }
-
-    private static function connectionFromConfig($config) {
-        return new mysqli($config["host"], $config["user"], $config["pass"], $config["db"], $config["port"]);
     }
 }
