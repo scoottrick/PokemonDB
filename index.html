@@ -24,50 +24,51 @@
     <script src="frontend/js/controllers/SingleItemControllers/GymController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/SingleItemControllers/PokemonController.js" type="text/javascript"></script>
     <script src="frontend/js/controllers/SingleItemControllers/TrainerController.js" type="text/javascript"></script>
-    
+
 
     <script src="frontend/js/app.js" type="text/javascript"></script>
 
     <!--- CSS ---->
-    <link href="frontend/styles/master.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/mainPage.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/pokedex.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/trainers.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/searchResults.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/gyms.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/badges.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/trainer/trainer.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/gym/gym.css" type="text/css" rel="stylesheet"/>
-    <link href="frontend/styles/views/pokemon/pokemon.css" type="text/css" rel="stylesheet"/>
-    
+    <link href="frontend/styles/master.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/mainPage.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/pokedex.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/trainers.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/searchResults.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/gyms.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/badges.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/trainer/trainer.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/gym/gym.css" type="text/css" rel="stylesheet" />
+    <link href="frontend/styles/views/pokemon/pokemon.css" type="text/css" rel="stylesheet" />
+
 </head>
 
 <body>
     <header>
         <div class="siteHeader">
-            <a class="banner" href="/">Pokémon DB</a>
-            <span class="searchArea" ng-controller="SearchController">
+            <a class="banner" href="/#/"><img src="frontend/images/newBanner.png" alt="banner" /> PokémonDB</a>
+            <div class="searchArea" ng-controller="SearchController">
                 <form class="searchForm">
                     <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
                     <button id="siteSearchButton" type="submit">Search</button>
                 </form>
-            </span>
+            </div>
         </div>
         <div class="siteNavigation" ng-controller="NavController">
             <ul class="siteNavList">
-                <li ng-click="pokedexClick()">Pokedex</li>
+                <li ng-click="pokedexClick()">Pokédex</li>
                 <li ng-click="trainersClick()">Trainers</li>
                 <li ng-click="gymsClick()">Gyms</li>
                 <li ng-click="badgesClick()">Badges</li>
             </ul>
         </div>
     </header>
-    <ng-view>
-        
-    </ng-view>
+    <div id="bodyArea">
+        <ng-view>
+
+        </ng-view>
+    </div>
     <footer>
-        <p>The FOOTER!</p>
-        
+        <span>Content and designt copyright of <a href="http://pokemondb.net">pokemondb.net</a>. Custom recreation for educational purposes only.</span>
     </footer>
 </body>
 
