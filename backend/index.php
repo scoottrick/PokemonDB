@@ -7,6 +7,7 @@ require 'model/Trainer.php';
 require 'model/Type.php';
 require 'model/Badge.php';
 
+ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 $db = Connection::createConnection();
