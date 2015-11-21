@@ -19,7 +19,7 @@ app.config(function ($routeProvider, $locationProvider) {
         })
         .when('/trainers', {
             controller: 'TrainersController',
-            templateUrl: '/frontend/html/trainers.html',
+            templateUrl: '/PokemonDB/frontend/html/trainers.html',
             css: '/PokemonDB/frontend/styles/views/trainers.css'
         })
         .when('/trainer/:name', {
