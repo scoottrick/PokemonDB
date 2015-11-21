@@ -15,4 +15,12 @@ class SQL {
     static function trainerById($id) {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
+
+    static function allBadges() {
+        return "SELECT * FROM `BADGE`";
+    }
+
+    static function badgeById($id) {
+        return "SELECT * FROM `BADGE` WHERE badge_id=" . $id;
+    }
 }

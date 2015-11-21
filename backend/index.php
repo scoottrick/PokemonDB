@@ -4,6 +4,7 @@ require 'connection.php';
 require 'sql.php';
 require 'model/Pokemon.php';
 require 'model/Trainer.php';
+require 'model/Badge.php';
 
 error_reporting(E_ALL);
 
@@ -41,6 +42,18 @@ $app->get('/trainers/:id', function($id) use ($app, $db) {
     $result = $db->query(SQL::trainerById($id));
     $trainer = Trainer::getById($result);
     echo json_encode($trainer);
+});
+
+$app->get('/badges', function() use ($app, $db) {
+    $result = $db->query(SQL::allBadges());
+    $badges = Badge::getAll($result);
+    echo json_encode($badges);
+});
+
+$app->get('/badges/:id', function($id) use ($app, $db) {
+    $result = $db->query(SQL::badgeById($id));
+    $badge = Badge::getById($result);
+    echo json_encode($badge);
 });
 
 $app->run();
