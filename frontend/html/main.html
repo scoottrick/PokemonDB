@@ -1,15 +1,15 @@
 <div class="bodyContent">
     <center>
-        <h1 id="welcome">Welcome to PokemonDB!</h1>
+        <h1 id="welcome">Welcome to PokémonDB!</h1>
     </center>
     <div class="randomPokemon">
         <span class="pokemonImage">
-            <img src="/frontend/images/pokemon/001.png" alt="randomPokemon"/>
+            <img ng-src="/frontend/images/pokemon/{{pokemon.id}}.png" alt="randomPokemon"/>
         </span>
         <span class="pokemonInfo">
-            <h3>Name {{pokemon.name}}</h3>
-            <h4>ID {{pokemon.id}}</h4>
-            <h6>Type(s): <span class="pokemonType">{{pokemon.type1}}</span> <span class="pokemonType">{{pokemon.type2}}</span> </h6>
+            <h3>{{pokemon.name}}</h3>
+            <h4>#{{pokemon.id}}</h4>
+            <h6>Type(s): <span class="pokemonType" ng-style="{'background-color': type1Color}">{{type1Str}}</span> <span class="pokemonType" ng-show="type2Str" ng-style="{'background-color': type2Color}">{{type2Str}}</span> </h6>
         </span>
     </div>
 </div>

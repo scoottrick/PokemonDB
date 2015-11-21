@@ -47,3 +47,15 @@
 .pokemonInfo h6 {
     font-size: 22px;
 }
+
+.pokemonType {
+    border: 1px solid black;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    margin: 0 5px;
+    padding: 5px;
+    width: 50px;
+}
+
+.pokemonTypeColor

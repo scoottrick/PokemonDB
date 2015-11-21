@@ -5,7 +5,7 @@ class Type {
 
     public function __construct($data) {
         if (is_array($data)) {
-            $this->id = intval(['type_id']);
+            $this->id = intval($data['type_id']);
             $this->name = $data['type_name'];
         }
     }

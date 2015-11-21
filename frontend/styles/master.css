@@ -229,6 +229,7 @@ footer {
 
 footer span {
     color: #FFF;
-    margin: 2px 5px;
-    text-indent: 5px;
+    display: block;
+    margin: 2px auto;
+    text-align: center;
 }

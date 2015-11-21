@@ -53,7 +53,7 @@ $app->get('/types', function() use ($app, $db) {
 
 $app->get('/types/:id', function($id) use ($app, $db) {
     $result = $db->query(SQL::typeById($id));
-    echo json_encode($result);
+    //echo json_encode($result);
     $type = Type::getById($result);
     echo json_encode($type);
 });
