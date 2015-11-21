@@ -1,0 +1,236 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700);
+@font-face {
+    font-family: "PokemonSolid";
+    src: url(../fonts/Pokemon%20Solid.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "PokemonHollow";
+    src: url(../fonts/Pokemon%20Hollow.ttf) format('truetype');
+}
+
+html {
+    background-color: #6E6E6E;
+    background-image: -webkit-linear-gradient(bottom left, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-image: -o-linear-gradient(bottom left, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-image: linear-gradient(to top right, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
+    background-size: 12px 12px;
+    min-width: 300px;
+}
+
+html * {
+    box-sizing: padding-box;
+    font-family: "Lato", "Ubuntu", "Trebuchet MS", "Helvetica", "Arial", "FreeSans", sans-serif;
+    font-size: 1em;
+    font-size-adjust: 0.6;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+a {
+    color: #FFFF00;
+    text-decoration: none;
+}
+
+
+/* ---------- HEADER ------------ */
+
+header .siteHeader {
+    background-color: #323638;
+    background-image: linear-gradient(#323638, #1B1D1E);
+    background-position: center 0px, 0px center;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: block;
+    margin: 10px auto 0 auto;
+    padding: 5px;
+    width: 93%;
+}
+
+.siteHeader a,
+.siteHeader span,
+.siteHeader img {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.siteHeader img {
+    height: 80px;
+    vertical-align: bottom;
+}
+
+.siteHeader a {
+    background-repeat: no-repeat;
+    color: #FFFF00;
+    font-family: "PokemonHollow";
+    font-size: 3.75em;
+    line-height: 80px;
+    margin-left: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.siteHeader .banner {
+    height: 80px;
+    margin: 5px 0;
+    width: 60%;
+}
+
+.siteHeader .searchArea {
+    box-sizing: content-box;
+    float: right;
+    padding-left: 3%;
+    right: 5%;
+    top: 20px;
+    width: 247px;
+}
+
+@media screen and (max-width:1075px) {
+    .siteHeader .searchArea {
+        float: none;
+        top: auto;
+        right: auto;
+    }
+}
+
+.searchArea form {
+    border: 5px solid #202020;
+    border-radius: 4px;
+    width: 247px;
+}
+
+#siteSearch {
+    background-color: #FFF;
+    border: 1px solid black;
+    box-shadow: 0px 0px 2px #AAA inset;
+    box-sizing: border-box;
+    line-height: 32px;
+    width: 180px;
+}
+
+#siteSearchButton {
+    background-image: linear-gradient(#2D8CC2, #0B5F9F);
+    box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2) inset;
+    color: #04243C;
+    font-weight: bold;
+    line-height: 26px;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+    width: 60px;
+}
+
+
+/* reconfigure header to stacked mode */
+
+@media screen and (max-width: 720px) {
+    .siteHeader a,
+    .siteHeader span,
+    .siteHeader img {
+        display: block;
+        margin: 2px auto;
+        padding: 0;
+        text-align: center;
+    }
+    .siteHeader a {
+        font-size: 2em;
+        min-height: 120px;
+        padding: 0;
+    }
+    .siteHeader a * {
+        display: block;
+        height: 60px;
+    }
+    .searchArea {
+        margin: 20px auto 10px auto
+    }
+}
+
+header .siteNavigation {
+    background-color: #404040;
+    background-image: linear-gradient(#525252, #404040);
+    border-color: use-text-color #000 #000;
+    border-radius: 0 0 8px 8px;
+    border-style: none solid solid;
+    border-width: 0px 1px 1px;
+    margin: 0px auto 10px auto;
+    padding: 0;
+    width: 90%;
+}
+
+.siteNavigation .siteNavList {
+    box-sizing: border-box;
+    font-weight: bold;
+    margin: 0 auto;
+    list-style: outside none none;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    padding: 0;
+    width: 90%;
+}
+
+.siteNavList li {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    box-sizing: border-box;
+    color: #EEE;
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    line-height: 26px;
+    list-style: outside none none;
+    margin: 0 -2.5px;
+    padding: 5px 0;
+    text-decoration: none;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+    width: 24.5%;
+}
+
+.siteNavList li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.siteNavList li:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ----------- BODY -------- */
+
+#bodyArea {
+    background: #FFF none repeat scroll 0% 0%;
+    border: 1px solid #000;
+    border-radius: 8px;
+    box-shadow: 0px 0px 2px #AAA inset;
+    margin: 23px auto 15px auto;
+    min-height: 300px;
+    padding: 20px;
+    width: 93%;
+}
+
+.bodyContent {
+    margin: 15px auto;
+    width: 95%;
+}
+
+
+/* -------------- FOOTER ------------ */
+
+footer {
+    background-color: #323638;
+    background-image: linear-gradient(#323638, #1B1D1E);
+    background-position: center 0px, 0px center;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: block;
+    margin: 10px auto 0 auto;
+    padding: 5px;
+    width: 93%;
+}
+
+footer span {
+    color: #FFF;
+    display: block;
+    margin: 2px auto;
+    text-align: center;
+}

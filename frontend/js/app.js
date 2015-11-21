@@ -24,7 +24,7 @@ app.config(function ($routeProvider, $locationProvider) {
         })
         .when('/trainer/:name', {
             controller: 'TrainerController',
-            templateUrl: '/frontend/html/singleItemViews/trainers.html',
+            templateUrl: '/frontend/html/singleItemViews/trainer.html',
             css: '/frontend/styles/views/trainer/trainer.css'
         })
         .when('/gyms', {
@@ -60,6 +60,6 @@ app.controller("TrainersController", ["$http", "$scope", "$location", TrainersCo
 app.controller("BadgesController", ["$http", "$scope", "$location", BadgesController]);
 app.controller("GymsController", ["$http", "$scope", "$location", GymsController]);
 app.controller("SearchResultsController", ["$http", "$scope", "$location", SearchResultsController]);
-app.controller("TrainerController", ["$http", "$scope", "$location", TrainerController]);
-app.controller("GymController", ["$http", "$scope", "$location", GymController]);
-app.controller("PokemonController", ["$http", "$scope", "$location", PokemonController]);
+app.controller("TrainerController", ["$http", "$scope", "$location", "$route", TrainerController]);
+app.controller("GymController", ["$http", "$scope", "$location", "$route", GymController]);
+app.controller("PokemonController", ["$http", "$scope", "$location", "$route", PokemonController]);
