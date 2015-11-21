@@ -14,7 +14,7 @@ $db = Connection::createConnection();
 
 $app = new \Slim\Slim(array(
     'mode' => 'development',
-    'log.writer' => new \My\LogWriter(),
+    'log.writer' => new \Slim\LogWriter(),
     'log.level' => \Slim\Log::DEBUG
 ));
 
