@@ -1,3 +1,12 @@
 <div class="bodyContent">
-    POKEDEX
+    <div class="pokedexTitle">
+        Pokédex
+    </div>
+    <div class="pokedexElementArea">
+        <div class="pokemonBox" ng-repeat="pokemon in pokedex" ng-click="viewPokemon(pokemon)">
+            <center><img ng-src="/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" /></center>
+            <h1>{{pokemon.name}}</h1>
+            <h2>#{{pokemon.id}}</h2>
+        </div>
+    </div>
 </div>

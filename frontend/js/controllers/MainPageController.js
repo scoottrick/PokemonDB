@@ -1,14 +1,19 @@
 function MainPageController($http, $scope, $location) {
     $scope.pokemon = [];
-    $scope.type1Str = "";
+    $scope.type1Str = null;
     $scope.type2Str = null;
     $scope.type1Color = "#000000";
     $scope.type2Color = "#000000";
 
+    $scope.viewPokemon = function () {
+        var id = $scope.pokemon['id'];
+        $location.path('/pokedex/' + id);
+    };
+
     var random = Math.floor(Math.random() * 151).toString();
     while (random.length < 3) {
         random = "0" + random;
-    }
+    };
 
     $http({
         method: 'GET',
@@ -51,7 +56,7 @@ function MainPageController($http, $scope, $location) {
                 console.log(response);
             });
         }
-    }
+    };
 
     var loadColorForType = function (type) {
         var temp;
@@ -107,6 +112,6 @@ function MainPageController($http, $scope, $location) {
         }
         return temp;
 
-    }
+    };
 
 };

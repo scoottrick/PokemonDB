@@ -2,14 +2,14 @@
     <center>
         <h1 id="welcome">Welcome to PokémonDB!</h1>
     </center>
-    <div class="randomPokemon">
+    <div class="randomPokemon" ng-click="viewPokemon()">
         <span class="pokemonImage">
             <img ng-src="/frontend/images/pokemon/{{pokemon.id}}.png" alt="randomPokemon"/>
         </span>
         <span class="pokemonInfo">
             <h3>{{pokemon.name}}</h3>
             <h4>#{{pokemon.id}}</h4>
-            <h6>Type(s): <span class="pokemonType" ng-style="{'background-color': type1Color}">{{type1Str}}</span> <span class="pokemonType" ng-show="type2Str" ng-style="{'background-color': type2Color}">{{type2Str}}</span> </h6>
+            <h6>Type(s): <span class="pokemonTypeMain" ng-style="{'background-color': type1Color}">{{type1Str}}</span> <span class="pokemonTypeMain" ng-show="type2Str" ng-style="{'background-color': type2Color}">{{type2Str}}</span> </h6>
         </span>
     </div>
 </div>

@@ -5,8 +5,13 @@
 }
 
 .randomPokemon {
-    border: 3px solid black;
-    box-shadow: 5px solid #555;
+    background-color: #A1A1A1;
+    background-image: linear-gradient(#B2B2B2, #A1A1A1);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 5px 5px 2px 2px black outset;
+    box-sizing: border-box;
+    cursor: pointer;
     display: block;
     margin: 10px auto 0 auto;
     max-width: 900px;
@@ -48,7 +53,7 @@
     font-size: 22px;
 }
 
-.pokemonType {
+.pokemonTypeMain {
     border: 1px solid black;
     border-radius: 4px;
     display: inline-block;
@@ -57,5 +62,3 @@
     padding: 5px;
     width: 50px;
 }
-
-.pokemonTypeColor

@@ -22,6 +22,7 @@ html * {
     box-sizing: padding-box;
     font-family: "Lato", "Ubuntu", "Trebuchet MS", "Helvetica", "Arial", "FreeSans", sans-serif;
     font-size: 1em;
+    font-size-adjust: 0.6;
     margin: 0;
     padding: 0;
     position: relative;
