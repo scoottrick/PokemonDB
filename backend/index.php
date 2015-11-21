@@ -1,11 +1,11 @@
 <?php
-require '../vendor/autoload.php';
-require '../connection.php';
-require '../sql.php';
-require '../model/Pokemon.php';
-require '../model/Trainer.php';
-require '../model/Type.php';
-require '../model/Badge.php';
+require 'vendor/autoload.php';
+require 'connection.php';
+require 'sql.php';
+require 'model/Pokemon.php';
+require 'model/Trainer.php';
+require 'model/Type.php';
+require 'model/Badge.php';
 
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
@@ -13,7 +13,9 @@ error_reporting(E_ALL);
 $db = Connection::createConnection();
 
 $app = new \Slim\Slim(array(
-    'mode' => 'development'
+    'mode' => 'development',
+    'log.writer' => new \My\LogWriter(),
+    'log.level' => \Slim\Log::DEBUG
 ));
 
 // Only invoked if mode is "production"
@@ -27,10 +29,11 @@ $app->configureMode('production', function () use ($app) {
 // Only invoked if mode is "development"
 $app->configureMode('development', function () use ($app) {
     $app->config(array(
-        'log.enable' => false,
+        'log.enable' => true,
         'debug' => true
     ));
 });
+
 
 $app->get('/', function() {
     echo "Welcome to the PokemonDB backend!";
