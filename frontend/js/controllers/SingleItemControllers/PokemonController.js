@@ -9,7 +9,7 @@ function PokemonController($http, $scope, $location, $route) {
 
     $http({
         method: 'GET',
-        url: 'http://localhost:8888/backend/pokemon/' + id
+        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
         loadTypes();
@@ -25,7 +25,7 @@ function PokemonController($http, $scope, $location, $route) {
         if (type1 != null) {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8888/backend/types/' + type1
+                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/types/' + type1
             }).then(function successCallback(response) {
                 $scope.type1Str = response.data['name'];
                 $scope.type1Color = loadColorForType(type1);
@@ -39,7 +39,7 @@ function PokemonController($http, $scope, $location, $route) {
         if (type2 != null) {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8888/backend/types/' + type2
+                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/types/' + type2
             }).then(function successCallback(response) {
                 $scope.type2Str = response.data['name'];
                 $scope.type2Color = loadColorForType(type2);
