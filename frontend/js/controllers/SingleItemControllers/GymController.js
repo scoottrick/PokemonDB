@@ -1,4 +1,4 @@
-function GymController($http, $scope, $location) {
+function GymController($http, $scope, $location, $route) {
 
 
 };

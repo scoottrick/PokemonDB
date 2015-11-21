@@ -1,0 +1,64 @@
+#welcome {
+    color: #222224;
+    font-size: 6vw;
+    font-family: "PokemonHollow"
+}
+
+.randomPokemon {
+    background-color: #A1A1A1;
+    background-image: linear-gradient(#B2B2B2, #A1A1A1);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 5px 5px 2px 2px black outset;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto 0 auto;
+    max-width: 900px;
+}
+
+.randomPokemon span {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.pokemonImage img {
+    width: 20vw;
+    max-width: 250px;
+}
+
+.pokemonInfo {
+    color: #222;
+    text-shadow: 1px 1px 1px #000;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.pokemonInfo * {
+    margin: 10px auto;
+    min-width: 150px;
+    width: 100%;
+}
+
+.pokemonInfo h3 {
+    font-size: 40px;
+}
+
+.pokemonInfo h4 {
+    font-size: 26px;
+}
+
+.pokemonInfo h6 {
+    font-size: 22px;
+}
+
+.pokemonTypeMain {
+    border: 1px solid black;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    margin: 0 5px;
+    padding: 5px;
+    width: 50px;
+}
