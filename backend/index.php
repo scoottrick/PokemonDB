@@ -12,30 +12,7 @@ error_reporting(E_ALL);
 
 $db = Connection::createConnection();
 
-$app = new \Slim\Slim(array(
-    'mode' => 'development',
-    'log.writer' => new \Slim\LogWriter(fopen('log.txt', 'a')),
-    'log.level' => \Slim\Log::DEBUG
-));
-
-// Only invoked if mode is "production"
-$app->configureMode('production', function () use ($app) {
-    $app->config(array(
-        'log.enable' => true,
-        'debug' => false
-    ));
-});
-
-// Only invoked if mode is "development"
-$app->configureMode('development', function () use ($app) {
-    $app->config(array(
-        'log.enable' => true,
-        'debug' => true
-    ));
-});
-
-$app->log->debug("TEST: ".$app->get);
-echo "TESTING";
+$app = new \Slim\Slim();
 
 $app->get('/', function() {
     echo "Welcome to the PokemonDB backend!";
