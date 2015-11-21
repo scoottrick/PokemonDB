@@ -16,6 +16,14 @@ class SQL {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
 
+    static function allTypes() {
+        return "SELECT * FROM `TYPE`";
+    }
+
+    static function typeById($id) {
+        return "SELECT * FROM `TYPE` WHERE type_id=" . $id;
+    }
+
     static function allBadges() {
         return "SELECT * FROM `BADGE`";
     }

@@ -4,6 +4,7 @@ require 'connection.php';
 require 'sql.php';
 require 'model/Pokemon.php';
 require 'model/Trainer.php';
+require 'model/Type.php';
 require 'model/Badge.php';
 
 error_reporting(E_ALL);
@@ -42,6 +43,19 @@ $app->get('/trainers/:id', function($id) use ($app, $db) {
     $result = $db->query(SQL::trainerById($id));
     $trainer = Trainer::getById($result);
     echo json_encode($trainer);
+});
+
+$app->get('/types', function() use ($app, $db) {
+    $result = $db->query(SQL::allTypes());
+    $types = Type::getAll($result);
+    echo json_encode($types);
+});
+
+$app->get('/types/:id', function($id) use ($app, $db) {
+    $result = $db->query(SQL::typeById($id));
+    echo json_encode($result);
+    $type = Type::getById($result);
+    echo json_encode($type);
 });
 
 $app->get('/badges', function() use ($app, $db) {
