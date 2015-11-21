@@ -1,20 +1,20 @@
 <?php
-class Trainer {
+class Badge {
 
     private $id;
     private $name;
-    private $rivalId;
+    private $obedienceLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
-            $this->id = intval($data['trainer_id']);
-            $this->name = $data['trainer_name'];
+            $this->id = intval(['badge_id']);
+            $this->name = $data['badge_name'];
 
-            $rivalId = $data['trainer_rival'];
-            if ($rivalId !== null) {
-                $rivalId = intval($rivalId);
+            $obedienceLevel = $data['badge_obedience_level'];
+            if ($obedienceLevel !== null) {
+                $obedienceLevel = intval($obedienceLevel);
             }
-            $this->rivalId = $rivalId;
+            $this->obedienceLevel = $obedienceLevel;
         }
     }
 
@@ -22,26 +22,26 @@ class Trainer {
         return array(
             'id' => $this->id,
             'name' => $this->name,
-            'rival_id' => $this->rivalId
+            'obedienceLevel' => $this->obedienceLevel
         );
     }
 
     public static function getAll($result) {
-        $trainers = array();
+        $badges = array();
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
-                $trainer = new Trainer($row);
-                array_push($trainers, $trainer->serialize());
+                $badge = new Badge($row);
+                array_push($badges, $badge->serialize());
             }
         }
-        return $trainers;
+        return $badges;
     }
 
     public static function getById($result) {
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
-            $trainer = new Trainer($row);
-            return $trainer->serialize();
+            $badge = new Badge($row);
+            return $badge->serialize();
         } else {
             return false;
         }
