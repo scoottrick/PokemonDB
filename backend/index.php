@@ -34,6 +34,8 @@ $app->configureMode('development', function () use ($app) {
     ));
 });
 
+$app->log->debug("TEST");
+
 
 $app->get('/', function() {
     echo "Welcome to the PokemonDB backend!";
