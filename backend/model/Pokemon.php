@@ -18,13 +18,17 @@ class Pokemon {
             $this->id = $data['pokemon_id'];
             $this->name = $data['pokemon_name'];
             $this->level = intval($data['pokemon_level']);
-            $this->type = intval($data['pokemon_type1']);
+
+            $type1 = Type::getById(intval($data['pokemon_type1']));
+            $this->type = $type1->serialize();
 
             $type2 = $data['pokemon_type2'];
             if ($type2 !== null) {
-                $type2 = intval($type2);
+                $type2 = Type::getById($type2);
+                $this->type2 = $type2->serialize();
+            } else {
+                $this->type2 = null;
             }
-            $this->type2 = $type2;
 
             $this->hp = intval($data['pokemon_hp']);
             $this->speed = intval($data['pokemon_speed']);
@@ -35,7 +39,7 @@ class Pokemon {
         }
     }
 
-    private function serialize() {
+    public function serialize() {
         return array(
             'id' => $this->id,
             'name' => $this->name,
@@ -51,7 +55,24 @@ class Pokemon {
         );
     }
 
-    public static function getAll($result) {
+    public function getTrainers() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::trainersForPokemon($this->id));
+
+        $trainers = array();
+        if (mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $trainer = new Trainer($row);
+                array_push($trainers, $trainer->serialize());
+            }
+        }
+        return $trainers;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allPokemon());
+
         $pokemonArr = array();
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
@@ -62,13 +83,17 @@ class Pokemon {
         return $pokemonArr;
     }
 
-    public static function getById($result) {
+    public static function getById($id) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::pokemonById($id));
+
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
             $pokemon = new Pokemon($row);
-            return $pokemon->serialize();
+            return $pokemon;
         } else {
             return false;
         }
     }
+
 }
