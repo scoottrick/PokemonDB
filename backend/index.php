@@ -14,14 +14,6 @@ $db = Connection::createConnection();
 
 $app = new \Slim\Slim();
 
-$app->get('/', function() {
-    echo "Welcome to the PokemonDB backend!";
-});
-
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});
-
 $app->get("/pokemon", function() use ($app, $db) {
     $result = $db->query(SQL::allPokemon());
     $pokemon = Pokemon::getAll($result);
@@ -32,6 +24,32 @@ $app->get("/pokemon/:id", function($id) use ($app, $db) {
     $result = $db->query(SQL::pokemonById($id));
     $pokemon = Pokemon::getById($result);
     echo (json_encode($pokemon));
+});
+
+$app->get("/pokemon/:id/owners", function($pokemonId) use ($app, $db) {
+    $result = $db->query(SQL::trainersOwningPokemon($pokemonId));
+    if (mysqli_num_rows($result) > 0) {
+        $trainers = array();
+        foreach ($result as $row) {
+            $trainerId = $row["trainer_id"];
+            $trainerResult = $db->query(SQL::trainerById($trainerId));
+            array_push($trainers, Trainer::getById($trainerResult));
+        }
+        echo json_encode($trainers);
+    }
+});
+
+$app->get("/trainers/:id/owned_pokemon", function($trainerId) use ($app, $db) {
+    $result = $db->query(SQL::pokemonOwnedByTrainer($trainerId));
+    if (mysqli_num_rows($result) > 0) {
+        $pokemon = array();
+        foreach ($result as $row) {
+            $pokemonId = $row["pokemon_id"];
+            $pokemonResult = $db->query(SQL::pokemonById($pokemonId));
+            array_push($pokemon, Pokemon::getById($pokemonResult));
+        }
+        echo json_encode($pokemon);
+    }
 });
 
 $app->get('/trainers', function() use ($app, $db) {

@@ -71,4 +71,8 @@ class Pokemon {
             return false;
         }
     }
+
+    public static function getByTrainer($result) {
+
+    }
 }

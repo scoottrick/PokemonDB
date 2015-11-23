@@ -8,6 +8,14 @@ class SQL {
         return "SELECT * FROM `POKEMON` WHERE pokemon_id=" . $id;
     }
 
+    static function trainersOwningPokemon($id) {
+        return "SELECT * FROM `OWNED_POKEMON` WHERE pokemon_id=" . $id;
+    }
+
+    static function pokemonOwnedByTrainer($id) {
+        return "SELECT * FROM `OWNED_POKEMON` WHERE trainer_id=" . $id;
+    }
+
     static function allTrainers() {
         return "SELECT * FROM `TRAINER`";
     }
