@@ -64,7 +64,7 @@
     }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:625px) {
     .pokemonBox {
         width: 98%;
     }
