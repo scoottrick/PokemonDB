@@ -18,7 +18,7 @@ class Badge {
         }
     }
 
-    private function serialize() {
+    public function serialize() {
         return array(
             'id' => $this->id,
             'name' => $this->name,
@@ -26,7 +26,10 @@ class Badge {
         );
     }
 
-    public static function getAll($result) {
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allBadges());
+
         $badges = array();
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
@@ -37,11 +40,14 @@ class Badge {
         return $badges;
     }
 
-    public static function getById($result) {
+    public static function getById($id) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::badgeById($id));
+
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
             $badge = new Badge($row);
-            return $badge->serialize();
+            return $badge;
         } else {
             return false;
         }

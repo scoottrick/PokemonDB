@@ -4,6 +4,8 @@ class Trainer {
     private $id;
     private $name;
     private $rivalId;
+    private $pokemon;
+    private $badges;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -15,18 +17,53 @@ class Trainer {
                 $rivalId = intval($rivalId);
             }
             $this->rivalId = $rivalId;
+            $this->pokemon = $this->getPokemon();
+            $this->badges = $this->getBadges();
         }
     }
 
-    private function serialize() {
+    public function serialize() {
         return array(
             'id' => $this->id,
             'name' => $this->name,
-            'rival_id' => $this->rivalId
+            'rival_id' => $this->rivalId,
+            'owned_pokemon' => $this->pokemon,
+            'earned_badges' => $this->badges
         );
     }
 
-    public static function getAll($result) {
+    public function getPokemon() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::pokemonOwnedByTrainer($this->id));
+
+        $pokemonArr = array();
+        if (mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $pokemon = new Pokemon($row);
+                array_push($pokemonArr, $pokemon->serialize());
+            }
+        }
+        return $pokemonArr;
+    }
+
+    public function getBadges() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::trainerBadges($this->id));
+
+        $badges = array();
+        if (mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $badge = new Badge($row);
+                array_push($badges, $badge->serialize());
+            }
+        }
+        return $badges;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allTrainers());
+
         $trainers = array();
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
@@ -37,11 +74,14 @@ class Trainer {
         return $trainers;
     }
 
-    public static function getById($result) {
+    public static function getById($id) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::trainerById($id));
+
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
             $trainer = new Trainer($row);
-            return $trainer->serialize();
+            return $trainer;
         } else {
             return false;
         }

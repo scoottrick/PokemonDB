@@ -8,6 +8,14 @@ class SQL {
         return "SELECT * FROM `POKEMON` WHERE pokemon_id=" . $id;
     }
 
+    static function trainersForPokemon($id) {
+        return "SELECT * FROM `TRAINER` t, `OWNED_POKEMON` o WHERE t.trainer_id = o.trainer_id and pokemon_id=" . $id;
+    }
+
+    static function pokemonOwnedByTrainer($id) {
+        return "select * from `POKEMON` p, `OWNED_POKEMON` o where p.pokemon_id = o.pokemon_id and o.trainer_id=" . $id;
+    }
+
     static function allTrainers() {
         return "SELECT * FROM `TRAINER`";
     }
@@ -16,11 +24,15 @@ class SQL {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
 
+    static function trainerBadges($id) {
+        return "select * from `BADGE` b, `EARNED_BADGE` e where b.badge_id = e.badge_id and e.trainer_id=" . $id;
+    }
+
     static function allGyms() {
         return "SELECT * FROM `GYM`";
     }
 
-    static function gymByName($id) {
+    static function gymById($id) {
         return "SELECT * FROM `GYM` WHERE gym_id=" . $id;
     }
 
