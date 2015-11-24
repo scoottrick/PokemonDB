@@ -3,7 +3,6 @@ class Pokemon {
 
     private $id;
     private $name;
-    private $level;
     private $type;
     private $type2;
     private $hp;
@@ -12,12 +11,15 @@ class Pokemon {
     private $specialAttack;
     private $defense;
     private $specialDefense;
+    private $previousEvolution;
+    private $previousEvolutionLevel;
+    private $nextEvolution;
+    private $nextEvolutionLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
             $this->id = $data['pokemon_id'];
             $this->name = $data['pokemon_name'];
-            $this->level = intval($data['pokemon_level']);
 
             $type1 = Type::getById(intval($data['pokemon_type1']));
             $this->type = $type1->serialize();
@@ -36,6 +38,27 @@ class Pokemon {
             $this->specialAttack = intval($data['pokemon_special_attack']);
             $this->defense = intval($data['pokemon_defense']);
             $this->specialDefense = intval($data['pokemon_special_defense']);
+
+            if ($data['pokemon_before'] != null){
+                $this->previousEvolution = $data['pokemon_before'];
+            } else {
+                $this->previousEvolution = null;
+            }
+            if (intval($data['pokemon_before_evo_level']) != null){
+                $this->previousEvolutionLevel = intval($data['pokemon_before_evo_level']);
+            } else {
+                $this->previousEvolutionLevel = null;
+            }
+            if ($data['pokemon_after'] != null){
+                $this->nextEvolution = $data['pokemon_after'];
+            } else {
+                $this->nextEvolution = null;
+            }
+            if (intval($data['pokemon_after_evo_level']) != null){
+                $this->nextEvolutionLevel = intval($data['pokemon_after_evo_level']);
+            } else {
+                $this->nextEvolutionLevel = null;
+            }
         }
     }
 
@@ -43,7 +66,6 @@ class Pokemon {
         return array(
             'id' => $this->id,
             'name' => $this->name,
-            'level' => $this->level,
             'type' => $this->type,
             'type2' => $this->type2,
             'hp' => $this->hp,
@@ -51,7 +73,11 @@ class Pokemon {
             'attack' => $this->attack,
             'specialAttack' => $this->specialAttack,
             'defense' => $this->defense,
-            'specialDefense' => $this->specialDefense
+            'specialDefense' => $this->specialDefense,
+            'lastEvolution' => $this->previousEvolution,
+            'lastEvolutionLevel' => $this->previousEvolutionLevel,
+            'nextEvolution' => $this->nextEvolution,
+            'nextEvolutionLevel' => $this->nextEvolutionLevel
         );
     }
 
