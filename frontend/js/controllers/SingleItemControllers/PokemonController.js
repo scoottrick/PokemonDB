@@ -19,36 +19,19 @@ function PokemonController($http, $scope, $location, $route) {
     });
 
     var loadTypes = function () {
+        console.log($scope.pokemon);
         var type1 = $scope.pokemon['type'];
         var type2 = $scope.pokemon['type2'];
 
-        if (type1 != null) {
-            $http({
-                method: 'GET',
-                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/types/' + type1
-            }).then(function successCallback(response) {
-                $scope.type1Str = response.data['name'];
-                $scope.type1Color = loadColorForType(type1);
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
-        }
-
+        $scope.type1Str = type1['name'];
+        $scope.type1Color = loadColorForType(type1['id']);
 
         if (type2 != null) {
-            $http({
-                method: 'GET',
-                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/types/' + type2
-            }).then(function successCallback(response) {
-                $scope.type2Str = response.data['name'];
-                $scope.type2Color = loadColorForType(type2);
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
+            $scope.type2Str = type2['name'];
+            $scope.type2Color = loadColorForType(type2['id']);
         }
     };
+
 
     var loadColorForType = function (type) {
         var temp;
