@@ -9,7 +9,8 @@ function PokemonController($http, $scope, $location, $route) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
+        url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + id
+            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
         loadTypes();

@@ -7,7 +7,8 @@ function TrainersController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
+        url: 'http://localhost:8888/PokemonDB/backend/trainers'
+            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
     }).then(function successCallback(response) {
         $scope.trainers = response.data;
     }, function errorCallback(response) {

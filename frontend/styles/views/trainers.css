@@ -1,0 +1,49 @@
+#trainerArea {
+    align-content: center;
+    align-items: baseline;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.trainerContainer {
+    background-color: #619466;
+    background-image: linear-gradient(#7EBD83, #619466);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 3px 2px black;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex: 0 1 200px;
+    height: 80px;
+    margin: 10px;
+    min-width: 200px;
+    padding: 5px;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+}
+
+.trainerContainer:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #619466);
+    box-shadow: 6px 4px black;
+}
+
+.trainerContainer:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#619466, #676767);
+    box-shadow: none;
+}
+
+.trainerImgDiv {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.trainerInfoDiv {
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    text-align: right;
+    width: 70px;
+}

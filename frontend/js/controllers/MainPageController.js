@@ -17,7 +17,8 @@ function MainPageController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + random
+        url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + random
+            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + random
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
         loadTypes();
@@ -27,20 +28,20 @@ function MainPageController($http, $scope, $location) {
     });
 
     var loadTypes = function () {
-    console.log($scope.pokemon);
-    var type1 = $scope.pokemon['type'];
-    var type2 = $scope.pokemon['type2'];
+        console.log($scope.pokemon);
+        var type1 = $scope.pokemon['type'];
+        var type2 = $scope.pokemon['type2'];
 
-    $scope.type1Str = type1['name'];
-    $scope.type1Color = loadColorForType(type1['id']);
+        $scope.type1Str = type1['name'];
+        $scope.type1Color = loadColorForType(type1['id']);
 
-    if (type2 != null) {
-        $scope.type2Str = type2['name'];
-        $scope.type2Color = loadColorForType(type2['id']);
-    }
+        if (type2 != null) {
+            $scope.type2Str = type2['name'];
+            $scope.type2Color = loadColorForType(type2['id']);
+        }
 
 
-};
+    };
     var loadColorForType = function (type) {
         var temp;
         switch (type) {

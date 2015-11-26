@@ -1,0 +1,39 @@
+#badgeContainer {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.badge {
+    background-color: #7080C0;
+    background-image: linear-gradient(#8698E4, #7080C0);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 3px 2px black;
+    box-sizing: border-box;
+    flex: 0 1 200px;
+    height: 140px;
+    margin: 10px;
+    min-width: 200px;
+    text-align: center;
+    padding: 5px;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+}
+
+.badge:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #7080C0);
+    box-shadow: 6px 4px black;
+}
+
+.badge img {
+    height: 80px;
+    padding: 5px;
+}
+
+.badge h2 {
+    margin-bottom: 0;
+}

@@ -8,7 +8,8 @@ function PokedexController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon'
+        url: 'http://localhost:8888/PokemonDB/backend/pokemon'
+            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon'
     }).then(function successCallback(response) {
         $scope.pokedex = response.data;
     }, function errorCallback(response) {
