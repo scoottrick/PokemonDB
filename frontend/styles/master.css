@@ -224,6 +224,84 @@ header .siteNavigation {
 }
 
 
+/* ------ POKEMON TYPE CLASSES ------- */
+
+.Normal {
+    background-color: #8A8A59;
+    background-image: linear-gradient(#9C9766, #8A8A59);
+}
+
+.Fighting {
+    background-color: #C03028;
+    background-image: linear-gradient(#CA3A32, #C03028);
+}
+
+.Flying {
+    background-color: #A890F0;
+    background-image: linear-gradient(#B29AFA, #A890F0);
+}
+
+.Poison {
+    background-color: #A040A0;
+    background-image: linear-gradient(#AA4AAA, #A040A0);
+}
+
+.Ground {
+    background-color: #E0C068;
+    background-image: linear-gradient(#EACA72, #E0C068);
+}
+
+.Rock {
+    background-color: #B8A038;
+    background-image: linear-gradient(#C2AA42, #B8A038);
+}
+
+.Bug {
+    background-color: #A8B820;
+    background-image: linear-gradient(#B2C22A, #A8B820);
+}
+
+.Ghost {
+    background-color: #705898;
+    background-image: linear-gradient(#7A62A2, #705898);
+}
+
+.Fire {
+    background-color: #F08030;
+    background-image: linear-gradient(#FA8A3A, #F08030);
+}
+
+.Water {
+    background-color: #6890F0;
+    background-image: linear-gradient(#729AFA, #6890F0);
+}
+
+.Grass {
+    background-color: #78C850;
+    background-image: linear-gradient(#82D25A, #78C850);
+}
+
+.Electric {
+    background-color: #F8D030;
+    background-image: linear-gradient(#FFDA3A, #F8D030);
+}
+
+.Psychic {
+    background-color: #F85888;
+    background-image: linear-gradient(#FF6292, #F85888);
+}
+
+.Ice {
+    background-color: #98D8D8;
+    background-image: linear-gradient(#A2E2E2, #98D8D8);
+}
+
+.Dragon {
+    background-color: #7038F8;
+    background-image: linear-gradient(#7A42FF, #7038F8);
+}
+
+
 /* -------------- FOOTER ------------ */
 
 footer {

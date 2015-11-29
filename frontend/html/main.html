@@ -9,7 +9,7 @@
         <span class="pokemonInfo">
             <h3>{{pokemon.name}}</h3>
             <h4>#{{pokemon.id}}</h4>
-            <h6>Type(s): <span class="pokemonTypeMain" ng-style="{'background-color': type1Color}">{{type1Str}}</span> <span class="pokemonTypeMain" ng-show="type2Str" ng-style="{'background-color': type2Color}">{{type2Str}}</span> </h6>
+            <h6>Type(s): <span class="pokemonTypeMain" ng-class=pokemon.type.name>{{pokemon.type.name}}</span> <span class="pokemonTypeMain" ng-show="pokemon.type2.name" ng-class=pokemon.type2.name>{{pokemon.type2.name}}</span> </h6>
         </span>
     </div>
 </div>

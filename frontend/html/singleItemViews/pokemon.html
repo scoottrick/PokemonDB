@@ -1,11 +1,19 @@
 <div class="bodyContent">
+    <div class="pokemonNav">
+        <div class="lastNav navArrow" ng-click="navLastPokemon()">
+            <h2>{{navLast}}</h2>
+        </div>
+        <div class="nextNav navArrow" ng-click="navNextPokemon()">
+            <h2>{{navNext}}</h2>
+        </div>
+    </div>
     <center>
         <img class="pokemonImage" ng-src="/PokemonDB/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" />
         <h3 id="pokemonId">#{{pokemon.id}}</h3>
         <h1 id="pokemonName">{{pokemon.name}}</h1>
         <div class="pokemonTypeBlock">
-            <span class="pokemonType" ng-style="{'background-color': type1Color}">{{type1Str}}</span>
-            <span class="pokemonType" ng-show="type2Str" ng-style="{'background-color': type2Color}">{{type2Str}}</span>
+            <span class="pokemonType" ng-class="pokemon.type.name">{{pokemon.type.name}}</span>
+            <span class="pokemonType" ng-show="pokemon.type2.name" ng-class="pokemon.type2.name">{{pokemon.type2.name}}</span>
         </div>
         <div class="extendedInfo">
             <table class="statsTable">
@@ -34,6 +42,21 @@
                     <td>{{pokemon.specialDefense}}</td>
                 </tr>
             </table>
+        </div>
+        <div class="pokemonEvolution">
+            <span class="preform" ng-show="pokemon.lastEvolution">
+                <h4>Previous Form</h4>
+                <img ng-src="/PokemonDB/frontend/images/pokemon/{{lastEvolution.id}}.png" alt="{lastEvolution.name}" />
+                <h3>{{lastEvolution.name}}</h3>
+                <h5>Level {{pokemon.lastEvolutionLevel}}</h5>
+            </span>
+
+            <span class="postform" ng-show="pokemon.nextEvolution">
+                <h4>Next Form</h4>
+                <img ng-src="/PokemonDB/frontend/images/pokemon/{{nextEvolution.id}}.png" alt="{nextEvolution.name}" />
+                <h3>{{nextEvolution.name}}</h3>
+                <h5>Level {{pokemon.nextEvolutionLevel}}</h5>
+            </span>
         </div>
     </center>
 </div>
