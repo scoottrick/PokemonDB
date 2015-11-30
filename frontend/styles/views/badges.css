@@ -14,6 +14,7 @@
     border-radius: 8px;
     box-shadow: 3px 2px black;
     box-sizing: border-box;
+    cursor: default;
     flex: 0 1 200px;
     height: 140px;
     margin: 10px;

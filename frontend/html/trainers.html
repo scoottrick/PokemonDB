@@ -2,7 +2,7 @@
     <div id="trainerArea">
         <div class="trainerContainer" ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.id)">
             <div class="trainerImgDiv">
-                <img src="../PokemonDB/frontend/images/trainers/VSKoga.png" alt="{trainer.name}" />
+                <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.name}}.png" alt="{trainer.name}" />
             </div>
             <div class="trainerInfoDiv">
                 <h2>{{trainer.name}}</h2>

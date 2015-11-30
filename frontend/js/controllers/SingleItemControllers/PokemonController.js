@@ -13,16 +13,28 @@ function PokemonController($http, $scope, $location, $route) {
         $location.path('/pokedex/' + $scope.navLast);
     };
 
+    $scope.openForm = function (id) {
+        $location.path('/pokedex/' + id);
+    }
+
     var id = $route.current.params.id;
 
     $http({
         method: 'GET',
-        url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + id
-            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
+        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
+        if ($scope.pokemon.id == "133") { //Eevee
+            handleEeveeException();
+        }
         loadPreEvolutionData();
         navLoad();
+        if ($scope.pokemon['nextEvolutionLevel'] == null) {
+            $scope.pokemon['nextEvolutionLevel'] = "Special";
+        }
+        if ($scope.pokemon['lastEvolutionLevel'] == null) {
+            $scope.pokemon['lastEvolutionLevel'] = "Special";
+        }
     }, function errorCallback(response) {
         alert("Database unreachable. Check console for more info.");
         console.log(response);
@@ -34,8 +46,7 @@ function PokemonController($http, $scope, $location, $route) {
             var pastID = $scope.pokemon['lastEvolution'];
             $http({
                 method: 'GET',
-                url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + pastID
-                    //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + pastID
+                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + pastID
             }).then(function successCallback(response) {
                 $scope.lastEvolution = response.data;
                 loadPostEvolutionData();
@@ -53,8 +64,7 @@ function PokemonController($http, $scope, $location, $route) {
             var nextID = $scope.pokemon['nextEvolution'];
             $http({
                 method: 'GET',
-                url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + nextID
-                    //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
             }).then(function successCallback(response) {
                 $scope.nextEvolution = response.data;
             }, function errorCallback(response) {
@@ -99,5 +109,42 @@ function PokemonController($http, $scope, $location, $route) {
         } else {
             return id;
         }
+    };
+
+    var handleEeveeException = function () {
+        $scope.pokemon['nextEvolution'] = null;
+        var temp = [];
+
+        $http({
+            method: 'GET',
+            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+        }).then(function successCallback(response) {
+            temp[0] = response.data;
+        }, function errorCallback(response) {
+            alert("Database unreachable. Check console for more info.");
+            console.log(response);
+        });
+
+        $http({
+            method: 'GET',
+            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+        }).then(function successCallback(response) {
+            temp[1] = response.data;
+        }, function errorCallback(response) {
+            alert("Database unreachable. Check console for more info.");
+            console.log(response);
+        });
+
+        $http({
+            method: 'GET',
+            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+        }).then(function successCallback(response) {
+            temp[2] = response.data;
+        }, function errorCallback(response) {
+            alert("Database unreachable. Check console for more info.");
+            console.log(response);
+        });
+
+        $scope.pokemon['eeveeEvolution'] = temp;
     };
 };

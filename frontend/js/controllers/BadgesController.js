@@ -3,8 +3,7 @@ function BadgesController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://localhost:8888/PokemonDB/backend/badges'
-            //url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
+        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
     }).then(function successCallback(response) {
         var badgeData = response.data;
         console.log(badgeData);

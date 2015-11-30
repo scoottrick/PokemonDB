@@ -1,6 +1,25 @@
 <div class="bodyContent">
-    <div>TRAINER</div>
-    <p>{{trainer.id}}</p>
-    <p>{{trainer.name}}</p>
-    <p>{{trainer.rivalId}}</p>
+    <div class="trainerContent">
+        <div class="trainerStats">
+            <h1>{{trainer.name}}</h1>
+            <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.name}}.png" alt="{trainer.name}" />
+            <h3>Trainer ID #{{trainer.id}}</h3>
+            <h3 ng-show="trainer.rivalId">Rival: {{trainer.rivalId}}</h3>
+        </div>
+        <div class="trainerBadges">
+            <div class="ownedBadge" ng-repeat="badge in trainer.earned_badges">
+
+                <img ng-src="/PokemonDB/frontend/images/badges/{{badge.image}}badge.png" alt="{{badge.name}}" />
+
+                <p>{{badge.name}}</p>
+            </div>
+        </div>
+        <div class="ownedPokemonList">
+            <div class="ownedPokemon" ng-repeat="pokemon in trainer.owned_pokemon">
+                <img class="ownedPokemonImage" ng-src="/PokemonDB/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" />
+                <h4 class="ownedPokemonName">{{pokemon.name}}</h4>
+                <h5 class="ownedPokemonLevel">Level {{pokemon.level}}</h5>
+            </div>
+        </div>
+    </div>
 </div>

@@ -38,6 +38,14 @@
 .trainerImgDiv {
     display: inline-block;
     vertical-align: middle;
+    width: 50%;
+}
+
+.trainerImgDiv img {
+    display: block;
+    height: 64px;
+    margin: 4px auto;
+    padding-bottom: 4px;
 }
 
 .trainerInfoDiv {
@@ -45,5 +53,4 @@
     height: 80px;
     line-height: 80px;
     text-align: right;
-    width: 70px;
 }

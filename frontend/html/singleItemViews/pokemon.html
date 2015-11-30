@@ -44,19 +44,27 @@
             </table>
         </div>
         <div class="pokemonEvolution">
-            <span class="preform" ng-show="pokemon.lastEvolution">
+            <span class="preform" ng-show="pokemon.lastEvolution" ng-click="openForm(pokemon.lastEvolution)">
                 <h4>Previous Form</h4>
                 <img ng-src="/PokemonDB/frontend/images/pokemon/{{lastEvolution.id}}.png" alt="{lastEvolution.name}" />
                 <h3>{{lastEvolution.name}}</h3>
                 <h5>Level {{pokemon.lastEvolutionLevel}}</h5>
             </span>
 
-            <span class="postform" ng-show="pokemon.nextEvolution">
+            <span class="postform" ng-show="pokemon.nextEvolution" ng-click="openForm(pokemon.nextEvolution)">
                 <h4>Next Form</h4>
                 <img ng-src="/PokemonDB/frontend/images/pokemon/{{nextEvolution.id}}.png" alt="{nextEvolution.name}" />
                 <h3>{{nextEvolution.name}}</h3>
                 <h5>Level {{pokemon.nextEvolutionLevel}}</h5>
             </span>
+
+            <span class="eeveeException" ng-show="pokemon.eeveeEvolution" ng-repeat="form in pokemon.eeveeEvolution" ng-click="openForm(form.id)">
+                <h4>Next Form</h4>
+                <img ng-src="/PokemonDB/frontend/images/pokemon/{{form.id}}.png" alt="{form.name}" />
+                <h3>{{form.name}}</h3>
+                <h5>Level Special</h5>
+            </span>
+
         </div>
     </center>
 </div>
