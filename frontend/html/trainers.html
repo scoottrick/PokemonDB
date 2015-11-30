@@ -1,5 +1,13 @@
 <div class="bodyContent">
-    <ul>
-        <li ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.id)">{{trainer.name}}</li>
-    </ul>
+    <div id="trainerArea">
+        <div class="trainerContainer" ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.id)">
+            <div class="trainerImgDiv">
+                <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.name}}.png" alt="{trainer.name}" />
+            </div>
+            <div class="trainerInfoDiv">
+                <h2>{{trainer.name}}</h2>
+            </div>
+        </div>
+    </div>
+
 </div>
