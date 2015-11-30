@@ -1,0 +1,67 @@
+.trainerStats,
+.trainerBadges {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 49%;
+}
+
+.trainerStats * {
+    margin: 10px auto;
+}
+
+.trainerStats img {
+    height: 80px;
+}
+
+.ownedBadge {
+    background-color: #7080C0;
+    background-image: linear-gradient(#8698E4, #7080C0);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 3px 2px black;
+    box-sizing: border-box;
+    cursor: default;
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 7px;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+    width: 70px;
+}
+
+.ownedBadge img {
+    height: 40px;
+}
+
+.ownedPokemonList {
+    align-content: center;
+    align-items: baseline;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.ownedPokemon {
+    flex: 0 1 120px;
+    height: 120px;
+    margin: 10px 5px;
+    width: 120px;
+}
+
+.ownedPokemon img {
+    width: 95px;
+}
+
+.ownedPokemonName {
+    font-size: 11px;
+}
+
+.ownedPokemonLevel {
+    font-size: 9px;
+}

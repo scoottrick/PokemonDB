@@ -15,6 +15,7 @@ class Pokemon {
     private $previousEvolutionLevel;
     private $nextEvolution;
     private $nextEvolutionLevel;
+    private $level;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -59,6 +60,16 @@ class Pokemon {
             } else {
                 $this->nextEvolutionLevel = null;
             }
+            if (array_key_exists('pokemon_level', $data)){
+                if (intval($data['pokemon_level']) != null){
+                $this->level = intval($data['pokemon_level']);
+            } else {
+                $this->level = null;
+            }
+            } else {
+                $this->level = null;
+            }
+
         }
     }
 
@@ -77,7 +88,8 @@ class Pokemon {
             'lastEvolution' => $this->previousEvolution,
             'lastEvolutionLevel' => $this->previousEvolutionLevel,
             'nextEvolution' => $this->nextEvolution,
-            'nextEvolutionLevel' => $this->nextEvolutionLevel
+            'nextEvolutionLevel' => $this->nextEvolutionLevel,
+            'level' => $this->level
         );
     }
 
