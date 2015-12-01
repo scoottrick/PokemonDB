@@ -13,6 +13,10 @@ error_reporting(E_ALL);
 
 $app = new \Slim\Slim();
 
+$app->get("/search/:str", function($searchStr) use ($app) {
+    echo json_encode(Badge::search($searchStr));
+});
+
 $app->get("/pokemon", function() use ($app) {
     echo json_encode(Pokemon::getAll());
 });

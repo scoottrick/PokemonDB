@@ -1,5 +1,10 @@
 <?php
 class SQL {
+
+    static function searchBadges($str) {
+        return "SELECT * FROM `BADGE` WHERE CONCAT(badge_id, badge_name, badge_obedience_level) LIKE '%" . $str . "%'";
+    }
+
     static function allPokemon() {
         return "SELECT * FROM `POKEMON`";
     }

@@ -18,6 +18,17 @@ class Badge {
         }
     }
 
+    private static function badgesForResult($result) {
+        $badges = array();
+        if (mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $badge = new Badge($row);
+                array_push($badges, $badge->serialize());
+            }
+        }
+        return $badges;
+    }
+
     public function serialize() {
         return array(
             'id' => $this->id,
@@ -29,15 +40,7 @@ class Badge {
     public static function getAll() {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::allBadges());
-
-        $badges = array();
-        if (mysqli_num_rows($result) > 0) {
-            foreach ($result as $row) {
-                $badge = new Badge($row);
-                array_push($badges, $badge->serialize());
-            }
-        }
-        return $badges;
+        return Badge::badgesForResult($result);
     }
 
     public static function getById($id) {
@@ -51,5 +54,11 @@ class Badge {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchBadges($searchStr));
+        return Badge::badgesForResult($result);
     }
 }
