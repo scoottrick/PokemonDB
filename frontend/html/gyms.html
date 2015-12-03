@@ -1,3 +1,10 @@
 <div class="bodyContent">
-    GYMS
+    <div id="gymsContainer">
+        <div class="gym" ng-repeat="gym in gyms">
+            <center>
+                <img ng-src="/PokemonDB/frontend/images/gyms/{{gym.name}}.png" alt="{{gym.name}}" />
+            </center>
+            <h2>{{gym.name}}</h2>
+        </div>
+    </div>
 </div>
