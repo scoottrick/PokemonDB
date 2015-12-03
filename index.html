@@ -45,12 +45,17 @@
 <body>
     <header>
         <div class="siteHeader">
-            <a class="banner" href="/PokemonDB/#/"><img src="frontend/images/newBanner.png" alt="banner" /> PokémonDB</a>
-            <div class="searchArea" ng-controller="SearchController">
-                <form class="searchForm">
-                    <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
-                    <button id="siteSearchButton" type="submit">Search</button>
-                </form>
+            <div class="flexHeader">
+                <a class="banner" href="/PokemonDB/#/">
+                    <img src="frontend/images/newBanner.png" alt="banner" class="bannerObject" />
+                    <h1 class="bannerObject">PokémonDB</h1>
+                </a>
+                <div class="searchArea" ng-controller="SearchController">
+                    <form class="searchForm">
+                        <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
+                        <button id="siteSearchButton" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="siteNavigation" ng-controller="NavController">

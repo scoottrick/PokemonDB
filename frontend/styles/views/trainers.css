@@ -54,3 +54,17 @@
     line-height: 80px;
     text-align: right;
 }
+
+.trainerCreationBlock {
+    background-color: #619466;
+    background-image: linear-gradient(#7EBD83, #619466);
+    height: 75%;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 300px;
+    min-width: 250px;
+    width: 50%;
+    z-index: 1000;
+}

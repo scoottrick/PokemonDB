@@ -2,12 +2,26 @@
     <div id="trainerArea">
         <div class="trainerContainer" ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.id)">
             <div class="trainerImgDiv">
-                <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.name}}.png" alt="{trainer.name}" />
+                <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.image}}.png" alt="{trainer.name}" />
             </div>
             <div class="trainerInfoDiv">
                 <h2>{{trainer.name}}</h2>
             </div>
         </div>
+        <div class="trainerContainer" ng-click="createTrainer()">
+            <div class="trainerImgDiv">
+                <img ng-src="../PokemonDB/frontend/images/trainers/Pokeball.png" alt="Pokeball" />
+            </div>
+            <div class="trainerInfoDiv">
+                <h2>Create</h2>
+            </div>
+        </div>
     </div>
-
+    <div class="trainerCreationBlock" ng-show="createMode">
+        <form>
+            <input type="text" placeholder="Trainer Name" />
+            <input type="button" title="Cancel" value="Cancel" ng-click="createTrainer()" />
+            <input type="submit" title="Create" ng-click="submitNewTrainer()" />
+        </form>
+    </div>
 </div>
