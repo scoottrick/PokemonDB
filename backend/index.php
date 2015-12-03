@@ -35,9 +35,47 @@ $app->get('/trainers', function() use ($app) {
     echo json_encode(Trainer::getAll());
 });
 
+$app->post('/trainers/:id/pokemon/add', function($id) use ($app) {
+    $body = $app->request->getBody();
+    parse_str(urldecode($body));
+    $trainer = Trainer::getById($id);
+    $trainer->addPokemon($pokemonId, intval($pokemonLevel));
+});
+
+$app->post('/trainers/:id/pokemon/remove', function($id) use ($app) {
+    $body = $app->request->getBody();
+    parse_str(urldecode($body));
+    $trainer = Trainer::getById($id);
+    $trainer->removePokemon($pokemonId);
+});
+
+$app->post('/trainers/:id/badges/add', function($id) use ($app) {
+    $body = $app->request->getBody();
+    parse_str(urldecode($body));
+    $trainer = Trainer::getById($id);
+    $trainer->addBadge($badgeId);
+});
+
+$app->post('/trainers/:id/badges/remove', function($id) use ($app) {
+    $body = $app->request->getBody();
+    parse_str(urldecode($body));
+    $trainer = Trainer::getById($id);
+    $trainer->removeBadge($badgeId);
+});
+
 $app->get('/trainers/:id', function($id) use ($app) {
     $trainer = Trainer::getById($id);
     echo json_encode($trainer->serialize());
+});
+
+$app->get('/trainers/:id/pokemon', function($id) use ($app) {
+    $trainer = Trainer::getById($id);
+    echo json_encode($trainer->getPokemon());
+});
+
+$app->get('/trainers/:id/badges', function($id) use ($app) {
+    $trainer = Trainer::getById($id);
+    echo json_encode($trainer->getBadges());
 });
 
 $app->get('/gyms', function() use ($app) {

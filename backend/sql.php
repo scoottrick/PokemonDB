@@ -25,6 +25,22 @@ class SQL {
         return "SELECT * FROM `TRAINER`";
     }
 
+    static function addPokemonToTrainer($trainerId, $pokemonId, $pokemonLevel) {
+        return "INSERT INTO `OWNED_POKEMON`(`pokemon_id`, `trainer_id`, `pokemon_level`) VALUES ('" . $pokemonId . "', " . $trainerId . ", " . $pokemonLevel .")";
+    }
+
+    static function removePokemonFromTrainer($trainerId, $pokemonId) {
+        return "DELETE FROM `OWNED_POKEMON` WHERE trainer_id = " . $trainerId . " AND pokemon_id = '" . $pokemonId . "'";
+    }
+
+    static function addBadgeToTrainer($trainerId, $badgeId) {
+        return "INSERT INTO `EARNED_BADGE`(`badge_id`, `trainer_id`) VALUES (" . $badgeId . ", " . $trainerId . ")";
+    }
+
+    static function removeBadgeFromTrainer($trainerId, $badgeId) {
+        return "DELETE FROM `EARNED_BADGE` WHERE trainer_id = " . $trainerId . " AND badge_id = " . $badgeId;
+    }
+
     static function trainerById($id) {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
