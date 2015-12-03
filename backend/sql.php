@@ -25,6 +25,10 @@ class SQL {
         return "SELECT * FROM `TRAINER`";
     }
 
+    static function addTrainer($trainerName, $badges, $pokemon){
+        return "INSERT INTO TRAINER VALUES(DEFAULT,'". $trainerName."' , NULL)";
+    }
+
     static function addPokemonToTrainer($trainerId, $pokemonId, $pokemonLevel) {
         return "INSERT INTO `OWNED_POKEMON`(`pokemon_id`, `trainer_id`, `pokemon_level`) VALUES ('" . $pokemonId . "', " . $trainerId . ", " . $pokemonLevel .")";
     }

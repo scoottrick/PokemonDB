@@ -5,7 +5,8 @@ function TrainerController($http, $scope, $location, $route) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers/' + id
+//        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers/' + id
+        url: 'http://localhost:8888/PokemonDB/backend/trainers/' + id
     }).then(function successCallback(response) {
         $scope.trainer = response.data;
         $scope.trainer['earned_badges'] = setImages(response.data['earned_badges']);

@@ -21,7 +21,8 @@ function PokemonController($http, $scope, $location, $route) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
+        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + id
+        url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + id
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
         if ($scope.pokemon.id == "133") { //Eevee
@@ -46,7 +47,8 @@ function PokemonController($http, $scope, $location, $route) {
             var pastID = $scope.pokemon['lastEvolution'];
             $http({
                 method: 'GET',
-                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + pastID
+                //                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + pastID
+                url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + pastID
             }).then(function successCallback(response) {
                 $scope.lastEvolution = response.data;
                 loadPostEvolutionData();
@@ -64,7 +66,8 @@ function PokemonController($http, $scope, $location, $route) {
             var nextID = $scope.pokemon['nextEvolution'];
             $http({
                 method: 'GET',
-                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+                //                url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + nextID
+                url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + nextID
             }).then(function successCallback(response) {
                 $scope.nextEvolution = response.data;
             }, function errorCallback(response) {
@@ -117,7 +120,8 @@ function PokemonController($http, $scope, $location, $route) {
 
         $http({
             method: 'GET',
-            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 134
+            //            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 134
+            url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + 134
         }).then(function successCallback(response) {
             temp[0] = response.data;
         }, function errorCallback(response) {
@@ -127,7 +131,8 @@ function PokemonController($http, $scope, $location, $route) {
 
         $http({
             method: 'GET',
-            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 135
+            //            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 135
+            url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + 135
         }).then(function successCallback(response) {
             temp[1] = response.data;
         }, function errorCallback(response) {
@@ -137,7 +142,8 @@ function PokemonController($http, $scope, $location, $route) {
 
         $http({
             method: 'GET',
-            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 136
+            //            url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + 136
+            url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + 136
         }).then(function successCallback(response) {
             temp[2] = response.data;
         }, function errorCallback(response) {

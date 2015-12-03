@@ -18,10 +18,10 @@
         </div>
     </div>
     <div class="trainerCreationBlock" ng-show="createMode">
-        <form>
-            <input type="text" placeholder="Trainer Name" />
+        <form novalidate>
+            <input type="text" placeholder="Trainer Name" ng-model="createTrainer.name"/>
             <input type="button" title="Cancel" value="Cancel" ng-click="createTrainer()" />
-            <input type="submit" title="Create" ng-click="submitNewTrainer()" />
+            <input type="submit" title="Create" ng-click="submitNewTrainer(createTrainer)" />
         </form>
     </div>
 </div>

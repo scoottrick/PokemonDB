@@ -13,7 +13,8 @@ function MainPageController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + random
+        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + random
+        url: 'http://localhost:8888/PokemonDB/backend/pokemon/' + random
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
     }, function errorCallback(response) {
