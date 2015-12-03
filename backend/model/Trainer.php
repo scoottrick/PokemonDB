@@ -46,6 +46,18 @@ class Trainer {
         return $pokemonArr;
     }
 
+    public function addPokemon($pokemonId, $pokemonLevel) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::addPokemonToTrainer($this->id, $pokemonId, $pokemonLevel));
+        echo json_encode($result);
+    }
+
+    public function removePokemon($pokemonId) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::removePokemonFromTrainer($this->id, $pokemonId));
+        echo (json_encode($result));
+    }
+
     public function getBadges() {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::trainerBadges($this->id));
@@ -58,6 +70,18 @@ class Trainer {
             }
         }
         return $badges;
+    }
+
+    public function addBadge($badgeId) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::addBadgeToTrainer($this->id, $badgeId));
+        echo json_encode($result);
+    }
+
+    public function removeBadge($badgeId) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::removeBadgeFromTrainer($this->id, $badgeId));
+        echo (json_encode($result));
     }
 
     public static function getAll() {

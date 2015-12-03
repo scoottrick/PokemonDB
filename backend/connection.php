@@ -11,13 +11,13 @@ class Connection {
             $config["pass"] = "cGHtQ3YCStNHM7j4";
             $config["db"] = "PokemonDB";
             $config["port"] = 3306;
-            /*
-            $config["host"] = "localhost";
-            $config["user"] = "root";
-            $config["pass"] = "root";
-            $config["db"] = "PokemonDB";
-            $config["port"] = 8889;
-*/
+
+//            $config["host"] = "localhost";
+//            $config["user"] = "root";
+//            $config["pass"] = "root";
+//            $config["db"] = "PokemonDB";
+//            $config["port"] = 8889;
+
             Connection::$singleton = new mysqli(
                 $config["host"],
                 $config["user"],
