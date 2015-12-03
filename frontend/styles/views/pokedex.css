@@ -12,7 +12,7 @@
     background-image: linear-gradient(#B2B2B2, #A1A1A1);
     border: 2px solid #CCC;
     border-radius: 8px;
-    box-shadow: 5px 5px 2px 2px black outset;
+    box-shadow: 3px 2px black;
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
@@ -26,11 +26,13 @@
 .pokemonBox:hover {
     background-color: rgba(0, 0, 0, 0.25);
     background-image: radial-gradient(#DDDDDD, #A1A1A1);
+    box-shadow: 6px 4px black;
 }
 
 .pokemonBox:active {
     background-color: rgba(255, 255, 255, 0.25);
     background-image: radial-gradient(#A1A1A1, #676767);
+    box-shadow: none;
 }
 
 .pokemonBox * {

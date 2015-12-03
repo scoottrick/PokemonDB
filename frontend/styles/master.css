@@ -48,57 +48,79 @@ header .siteHeader {
     width: 93%;
 }
 
-.siteHeader a,
-.siteHeader span,
-.siteHeader img {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
+.flexHeader {
+    align-content: center;
+    align-items: baseline;
+    display: inline-flex;
+    flex-flow: row wrap;
+    height: 100%;
+    justify-content: left;
+    width: 100%;
 }
 
-.siteHeader img {
+.flexHeader div {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: 250px;
+    margin: 0;
+    padding: 0;
+    min-width: 250px;
+}
+
+.flexHeader a {
+    flex-shrink: 1;
+    flex-grow: 10;
+    flex-basis: 400px;
+    margin: 0;
+    padding: 0;
+    min-width: 400px;
+}
+
+.flexHeader a img {
     height: 80px;
     vertical-align: bottom;
 }
 
-.siteHeader a {
+.flexHeader a {
     background-repeat: no-repeat;
-    color: #FFFF00;
-    font-family: "PokemonHollow";
-    font-size: 3.75em;
-    line-height: 80px;
-    margin-left: 10px;
     text-align: left;
     text-shadow: 1px 1px 1px #000;
 }
 
-.siteHeader .banner {
-    height: 80px;
-    margin: 5px 0;
-    width: 60%;
+.banner {
+    align-content: center;
+    align-items: baseline;
+    display: inline-flex;
+    flex-flow: row wrap;
+    height: auto;
+    justify-content: left;
 }
 
-.siteHeader .searchArea {
+.bannerObject {
+    display: inline-flex;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: auto;
+    margin: 2px 10px;
+}
+
+.banner h1 {
+    color: #FFFF00;
+    font-family: "PokemonHollow";
+    font-size: 3.75em;
+    line-height: 80px;
+    padding-left: 20px;
+}
+
+.flexHeader .searchArea {
     box-sizing: content-box;
-    float: right;
-    padding-left: 3%;
-    right: 5%;
-    top: 20px;
     width: 247px;
-}
-
-@media screen and (max-width:1075px) {
-    .siteHeader .searchArea {
-        float: none;
-        top: auto;
-        right: auto;
-    }
 }
 
 .searchArea form {
     border: 5px solid #202020;
     border-radius: 4px;
-    width: 247px;
+    width: 249px;
 }
 
 #siteSearch {
@@ -121,28 +143,18 @@ header .siteHeader {
 }
 
 
-/* reconfigure header to stacked mode */
+/* Centering items header*/
 
 @media screen and (max-width: 720px) {
-    .siteHeader a,
-    .siteHeader span,
-    .siteHeader img {
-        display: block;
-        margin: 2px auto;
-        padding: 0;
-        text-align: center;
+    .searchForm {
+        margin: auto;
     }
-    .siteHeader a {
-        font-size: 2em;
-        min-height: 120px;
-        padding: 0;
-    }
-    .siteHeader a * {
-        display: block;
-        height: 60px;
-    }
-    .searchArea {
-        margin: 20px auto 10px auto
+}
+
+@media screen and (max-width: 640px) {
+    .flexHeader,
+    .banner {
+        justify-content: center;
     }
 }
 
@@ -221,6 +233,84 @@ header .siteNavigation {
 .bodyContent {
     margin: 15px auto;
     width: 95%;
+}
+
+
+/* ------ POKEMON TYPE CLASSES ------- */
+
+.Normal {
+    background-color: #8A8A59;
+    background-image: linear-gradient(#9C9766, #8A8A59);
+}
+
+.Fighting {
+    background-color: #C03028;
+    background-image: linear-gradient(#CA3A32, #C03028);
+}
+
+.Flying {
+    background-color: #A890F0;
+    background-image: linear-gradient(#B29AFA, #A890F0);
+}
+
+.Poison {
+    background-color: #A040A0;
+    background-image: linear-gradient(#AA4AAA, #A040A0);
+}
+
+.Ground {
+    background-color: #E0C068;
+    background-image: linear-gradient(#EACA72, #E0C068);
+}
+
+.Rock {
+    background-color: #B8A038;
+    background-image: linear-gradient(#C2AA42, #B8A038);
+}
+
+.Bug {
+    background-color: #A8B820;
+    background-image: linear-gradient(#B2C22A, #A8B820);
+}
+
+.Ghost {
+    background-color: #705898;
+    background-image: linear-gradient(#7A62A2, #705898);
+}
+
+.Fire {
+    background-color: #F08030;
+    background-image: linear-gradient(#FA8A3A, #F08030);
+}
+
+.Water {
+    background-color: #6890F0;
+    background-image: linear-gradient(#729AFA, #6890F0);
+}
+
+.Grass {
+    background-color: #78C850;
+    background-image: linear-gradient(#82D25A, #78C850);
+}
+
+.Electric {
+    background-color: #F8D030;
+    background-image: linear-gradient(#FFDA3A, #F8D030);
+}
+
+.Psychic {
+    background-color: #F85888;
+    background-image: linear-gradient(#FF6292, #F85888);
+}
+
+.Ice {
+    background-color: #98D8D8;
+    background-image: linear-gradient(#A2E2E2, #98D8D8);
+}
+
+.Dragon {
+    background-color: #7038F8;
+    background-image: linear-gradient(#7A42FF, #7038F8);
 }
 
 
