@@ -8,7 +8,7 @@
                 <h2>{{trainer.name}}</h2>
             </div>
         </div>
-        <div class="trainerContainer" ng-click="createTrainer()">
+        <div class="trainerContainer" ng-click="createTrainerMode()">
             <div class="trainerImgDiv">
                 <img ng-src="../PokemonDB/frontend/images/trainers/Pokeball.png" alt="Pokeball" />
             </div>
@@ -18,10 +18,51 @@
         </div>
     </div>
     <div class="trainerCreationBlock" ng-show="createMode">
-        <form novalidate>
-            <input type="text" placeholder="Trainer Name" ng-model="createTrainer.name"/>
-            <input type="button" title="Cancel" value="Cancel" ng-click="createTrainer()" />
-            <input type="submit" title="Create" ng-click="submitNewTrainer(createTrainer)" />
+        <form name="createTrainerForm" ng-submit="submitNewTrainer()" novalidate>
+            <div class="inputTrainerName child">
+                <input type="text" name="name" placeholder="Trainer Name" ng-model="createTrainer.name" required/>
+            </div>
+            <div class="inputTrainerRival child">
+                <label>Rival</label>
+                <div>
+                    <select class="rivalSelector">
+                        <option value="None">None</option>
+                        <option ng-repeat="trainer in trainers" value="trainer.id">{{trainer.name}}</option>
+                    </select>
+                </div>
+
+            </div>
+            <center><h2><strong>Earned Badges</strong></h2></center>
+            <div class="badgeSelector child">
+                <div class="trainerBadge" ng-repeat="badge in badges" ng-click="selectBadge(badge.id)" ng-class="badgeIsSelected(badge.id) ? 'badgeSelected' : 'badgeNotSelected'">
+                    <center>
+                        <img ng-src="/PokemonDB/frontend/images/badges/{{badge.image}}badge.png" alt="{{badge.name}}" />
+                    </center>
+                    <h2>{{badge.name}}</h2>
+                </div>
+            </div>
+            <center><h2><strong>Owned Pokemon</strong></h2></center>
+                <div class="pokemonSelectArea child">
+                <div class="pokeSelectBlock" ng-repeat="i in addPokemonSize track by $index">
+                    <center><img ng-src="/PokemonDB/frontend/images/pokemon/{{selectedPokemon[$index]}}.png" alt="" /></center>
+                    <div class="pokemonSelectorCase">
+                        <select class="pokemonSelector" ng-options="pokemon.name for pokemon in pokedex track by pokemon.id" ng-model="pkmn.$index.selectedOption" ng-change="selectPokemon($index, pkmn.$index.selectedOption.id)">
+                        </select>
+                    </div>
+                    <label>Level</label>
+                    <input type="text" name="pokemonLevel" placeholder="5" ng-model="pkmn.$index.level" />
+                </div>
+                <div class="pokeSelectBlock addPokemonBlock" ng-show="addPokemonSize.length < 6 && selectedPokemon.length > 0" ng-click="addMorePokemon()">
+                    <div>+</div>
+                </div>
+            </div>
+
+            <br/>
+            <div class="inputButtons child">
+                <input type="button" title="Cancel" value="Cancel" ng-click="createTrainerMode()" class="inputTrainerCancel" />
+                <input type="submit" title="Create" class="inputTrainerSubmit" />
+            </div>
+
         </form>
     </div>
 </div>

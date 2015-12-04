@@ -7,7 +7,7 @@ class Badge {
 
     public function __construct($data) {
         if (is_array($data)) {
-            $this->id = intval(['badge_id']);
+            $this->id = intval($data['badge_id']);
             $this->name = $data['badge_name'];
 
             $obedienceLevel = $data['badge_obedience_level'];
