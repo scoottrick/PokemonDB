@@ -27,6 +27,11 @@ class SQL {
     static function gymById($id) {
         return "SELECT * FROM `GYM` WHERE gym_id=" . $id;
     }
+
+    static function getLeaderForGym($id) {
+        return "select * from `TRAINER` t, `GYM_LEADER` g where g.trainer_id = t.trainer_id and g.gym_id =" . $id;
+    }
+
     static function allTypes() {
         return "SELECT * FROM `TYPE`";
     }

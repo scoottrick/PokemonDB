@@ -25,8 +25,22 @@ class Gym {
             'name' => $this->name,
             'city' => $this->city,
             'type' => $this->type,
-            'badge' => $this->badge
+            'badge' => $this->badge,
+            'leader' => $this->getLeader()->serialize()
         );
+    }
+
+    public function getLeader() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::getLeaderForGym($this->id));
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = $result->fetch_array();
+            $leader = new Trainer($row);
+            return $leader;
+        } else {
+            return false;
+        }
     }
 
     public static function getAll() {
