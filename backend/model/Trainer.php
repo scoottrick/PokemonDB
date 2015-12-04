@@ -55,13 +55,13 @@ class Trainer {
     public function addPokemon($pokemonId, $pokemonLevel) {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::addPokemonToTrainer($this->id, $pokemonId, $pokemonLevel));
-        echo json_encode($result);
+        return $result;
     }
 
     public function removePokemon($pokemonId) {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::removePokemonFromTrainer($this->id, $pokemonId));
-        echo (json_encode($result));
+        return $result;
     }
 
     public function getBadges() {
@@ -81,13 +81,13 @@ class Trainer {
     public function addBadge($badgeId) {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::addBadgeToTrainer($this->id, $badgeId));
-        echo json_encode($result);
+        return $result;
     }
 
     public function removeBadge($badgeId) {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::removeBadgeFromTrainer($this->id, $badgeId));
-        echo (json_encode($result));
+        return $result;
     }
 
     public static function getAll() {
@@ -115,5 +115,25 @@ class Trainer {
         } else {
             return false;
         }
+    }
+
+    public static function create($name, $rivalId, $pokemon, $badgeIds) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::createTrainer($name, $rivalId));
+        if ($result) {
+            $lastId = mysqli_insert_id($db);
+            $trainer = Trainer::getById($lastId);
+
+            foreach($pokemon as $p) {
+                $trainer->addPokemon($p->pokemonId, $p->pokemonLevel);
+            }
+
+            foreach($badgeIds as $id) {
+                $trainer->addBadge($id);
+            }
+
+            return Trainer::getById($lastId)->serialize();
+        }
+        return false;
     }
 }

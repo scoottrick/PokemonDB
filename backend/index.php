@@ -31,6 +31,13 @@ $app->get("/pokemon/:id/owners", function($pokemonId) use ($app) {
     echo json_encode($pokemon->getTrainers());
 });
 
+$app->post('/trainers/create', function() use ($app) {
+    $body = $app->request->getBody();
+    $json = json_decode($body);
+    $trainer = Trainer::create($json->name, $json->rivalId, $json->pokemon, $json->badgeIds);
+    echo json_encode($trainer);
+});
+
 $app->get('/trainers', function() use ($app) {
     echo json_encode(Trainer::getAll());
 });
@@ -47,30 +54,34 @@ $app->post('/trainers', function($id) use ($app){
 
 $app->post('/trainers/:id/pokemon/add', function($id) use ($app) {
     $body = $app->request->getBody();
-    parse_str(urldecode($body));
+    $json = json_decode($body);
     $trainer = Trainer::getById($id);
-    $trainer->addPokemon($pokemonId, intval($pokemonLevel));
+    $result = $trainer->addPokemon($json->pokemonId, $json->pokemonLevel);
+    echo json_encode($result);
 });
 
 $app->post('/trainers/:id/pokemon/remove', function($id) use ($app) {
     $body = $app->request->getBody();
-    parse_str(urldecode($body));
+    $json = json_decode($body);
     $trainer = Trainer::getById($id);
-    $trainer->removePokemon($pokemonId);
+    $result = $trainer->removePokemon($json->pokemonId);
+    echo json_encode($result);
 });
 
 $app->post('/trainers/:id/badges/add', function($id) use ($app) {
     $body = $app->request->getBody();
-    parse_str(urldecode($body));
+    $json = json_decode($body);
     $trainer = Trainer::getById($id);
-    $trainer->addBadge($badgeId);
+    $result = $trainer->addBadge($json->badgeId);
+    echo json_encode($result);
 });
 
 $app->post('/trainers/:id/badges/remove', function($id) use ($app) {
     $body = $app->request->getBody();
-    parse_str(urldecode($body));
+    $json = json_decode($body);
     $trainer = Trainer::getById($id);
-    $trainer->removeBadge($badgeId);
+    $result = $trainer->removeBadge($json->badgeId);
+    echo json_encode($result);
 });
 
 $app->get('/trainers/:id', function($id) use ($app) {
