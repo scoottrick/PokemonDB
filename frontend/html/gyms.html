@@ -1,6 +1,6 @@
 <div class="bodyContent">
     <div id="gymsContainer">
-        <div class="gym" ng-repeat="gym in gyms">
+        <div class="gym" ng-repeat="gym in gyms" ng-click="openGym(gym.name)">
             <center>
                 <img ng-src="/PokemonDB/frontend/images/gyms/{{gym.name}}.png" alt="{{gym.name}}" />
             </center>

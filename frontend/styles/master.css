@@ -224,6 +224,7 @@ header .siteNavigation {
     border: 1px solid #000;
     border-radius: 8px;
     box-shadow: 0px 0px 2px #AAA inset;
+    box-sizing: border-box;
     margin: 23px auto 15px auto;
     min-height: 300px;
     padding: 20px;

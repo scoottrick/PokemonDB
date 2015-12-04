@@ -8,7 +8,6 @@ function BadgesController($http, $scope, $location) {
     }).then(function successCallback(response) {
         var badgeData = response.data;
         setImage(badgeData);
-        console.log(response.data);
     }, function errorCallback(response) {
         alert("Database unreachable. Check console for more info.");
         console.log(response);

@@ -234,19 +234,20 @@
     flex: 0 1 150px;
     height: 150px;
     margin: 10px;
-    width: 150px;
+    min-width: 150px;
+    max-width: 250px;
     text-align: center;
     padding: 5px;
     transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
 }
 
 .pokemonSelectorCase {
-    margin: 6px auto;
+    margin: 5px auto;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 1px 1px 11px #303;
     background: #619466 scroll 100px 5px;
-    width: 100px;
+    width: 120px;
 }
 
 
@@ -254,10 +255,10 @@
     border: 0px none;
     color: #EEE;
     background: transparent none repeat scroll 0% 0%;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     padding: 2px 10px;
-    width: 100px;
+    width: 120px;
 }
 
 
