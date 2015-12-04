@@ -108,6 +108,11 @@ $app->get('/gyms/:id', function($id) use ($app) {
     echo json_encode($gym->serialize());
 });
 
+$app->get('/gyms/:id/leader', function($id) use ($app) {
+    $gym = Gym::getById($id);
+    echo json_encode($gym->getLeader()->serialize());
+});
+
 $app->get('/types', function() use ($app) {
     echo json_encode(Type::getAll());
 });
