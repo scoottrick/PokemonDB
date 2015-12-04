@@ -17,18 +17,21 @@ class Type {
         );
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allTypes());
-
+    private static function typesFromResult($result) {
         $types = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $type = new Type($row);
                 array_push($types, $type->serialize());
             }
         }
         return $types;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allTypes());
+        return Type::typesFromResult($result);
     }
 
     public static function getById($id) {
@@ -42,5 +45,11 @@ class Type {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchTypes($searchStr));
+        return Type::typesFromResult($result);
     }
 }

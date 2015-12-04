@@ -90,18 +90,21 @@ class Trainer {
         return $result;
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allTrainers());
-
+    private static function trainersFromResult($result) {
         $trainers = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $trainer = new Trainer($row);
                 array_push($trainers, $trainer->serialize());
             }
         }
         return $trainers;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allTrainers());
+        return Trainer::trainersFromResult($result);
     }
 
     public static function getById($id) {
@@ -115,6 +118,12 @@ class Trainer {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchTrainers($searchStr));
+        return Trainer::trainersFromResult($result);
     }
 
     public static function create($name, $rivalId, $pokemon, $badgeIds) {

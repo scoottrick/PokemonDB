@@ -107,18 +107,21 @@ class Pokemon {
         return $trainers;
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allPokemon());
-
+    private static function pokemonFromResult($result) {
         $pokemonArr = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $pokemon = new Pokemon($row);
                 array_push($pokemonArr, $pokemon->serialize());
             }
         }
         return $pokemonArr;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allPokemon());
+        Pokemon::pokemonFromResult($result);
     }
 
     public static function getById($id) {
@@ -132,6 +135,12 @@ class Pokemon {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchPokemon($searchStr));
+        return Pokemon::pokemonFromResult($result);
     }
 
 }

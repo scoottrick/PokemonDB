@@ -44,4 +44,24 @@ class SQL {
     static function badgeById($id) {
         return "SELECT * FROM `BADGE` WHERE badge_id=" . $id;
     }
+
+    static function searchBadges($searchStr) {
+        return "select * from `BADGE` where concat(`badge_name`, `badge_obedience_level`) like '%" . $searchStr . "%'";
+    }
+
+    static function searchGyms($searchStr) {
+        return "select * from `GYM` where concat(`gym_name`, `gym_city`) like '%" . $searchStr . "%'";
+    }
+
+    static function searchPokemon($searchStr) {
+        return "select * from `POKEMON` where concat(`pokemon_name`) like '%" . $searchStr . "%'";
+    }
+
+    static function searchTrainers($searchStr) {
+        return "select * from `TRAINER` where concat(`trainer_name`) like '%" . $searchStr . "%'";
+    }
+
+    static function searchTypes($searchStr) {
+        return "select * from `TYPE` where concat(`type_name`) like '%" . $searchStr . "%'";
+    }
 }

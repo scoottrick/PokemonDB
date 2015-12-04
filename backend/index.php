@@ -14,7 +14,13 @@ error_reporting(E_ALL);
 $app = new \Slim\Slim();
 
 $app->get("/search/:str", function($searchStr) use ($app) {
-    echo json_encode(Badge::search($searchStr));
+    $objects = array();
+    $objects["badges"] = Badge::search($searchStr);
+    $objects["gyms"] = Gym::search($searchStr);
+    $objects["pokemon"] = Pokemon::search($searchStr);
+    $objects["trainers"] = Trainer::search($searchStr);
+    $objects["types"] = Type::search($searchStr);
+    echo json_encode($objects);
 });
 
 $app->get("/pokemon", function() use ($app) {
