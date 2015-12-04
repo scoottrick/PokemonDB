@@ -16,8 +16,8 @@
         <span class="pokemonType pkmnTypeGym" ng-class="gym.type.name">{{gym.type.name}}</span>
     </div>
     <div class="lastPane pane">
-        <div class="leaderImgDiv">
-            <img ng-src="../PokemonDB/frontend/images/trainers/VS{{gym.leader.image}}.png" alt="{gym.leader.name}" />
+        <div class="leaderImgDiv" ng-click="openLeader()">
+            <img ng-src="../PokemonDB/frontend/images/trainers/VS{{gym.leader.name}}.png" alt="{gym.leader.name}" />
         </div>
         <h2 class="gymLeader">Gym Leader {{gym.leader.name}}</h2>
     </div>

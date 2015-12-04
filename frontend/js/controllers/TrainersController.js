@@ -20,8 +20,8 @@ function TrainersController($http, $scope, $location) {
     });
 
 
-    $scope.viewTrainer = function (id) {
-        $location.path("/trainer/" + id);
+    $scope.viewTrainer = function (name) {
+        $location.path("/trainer/" + name);
     };
 
     $scope.createTrainerMode = function () {
