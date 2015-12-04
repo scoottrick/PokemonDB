@@ -32,6 +32,12 @@ class Trainer {
         );
     }
 
+    public function addTrainer(){
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::addTrainer($this->name));
+        echo json_encode($result);
+    }
+
     public function getPokemon() {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::pokemonOwnedByTrainer($this->id));
