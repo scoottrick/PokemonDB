@@ -1,4 +1,4 @@
-#gymContainer {
+#gymsContainer {
     align-content: center;
     align-items: center;
     display: flex;
@@ -8,14 +8,14 @@
 }
 
 .gym {
-    background-color: #7080C0;
-    background-image: linear-gradient(#8698E4, #7080C0);
+    background-color: #BA762D;
+    background-image: linear-gradient(#BA762D, #E5933A);
     border: 2px solid #CCC;
     border-radius: 8px;
     box-shadow: 3px 2px black;
     box-sizing: border-box;
-    cursor: default;
-    flex: 0 1 200px;
+    cursor: pointer;
+    flex: 1 1 200px;
     height: 140px;
     margin: 10px;
     min-width: 200px;
@@ -26,11 +26,12 @@
 
 .gym:hover {
     background-color: rgba(0, 0, 0, 0.25);
-    background-image: radial-gradient(#DDDDDD, #7080C0);
+    background-image: radial-gradient(#DDDDDD, #E5933A);
     box-shadow: 6px 4px black;
 }
 
 .gym img {
+    border-radius: 5px 5px;
     height: 80px;
     padding: 5px;
 }

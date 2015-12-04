@@ -1,5 +1,10 @@
 function GymsController($http, $scope, $location) {
     $scope.gyms = [];
+    
+    $scope.openGym = function(name){
+        name = name.replace(" ", "_");
+        $location.path('/gym/' + name);
+    };
 
     $http({
         method: 'GET',

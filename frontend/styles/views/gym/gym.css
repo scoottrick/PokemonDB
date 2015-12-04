@@ -1,0 +1,105 @@
+.pane{
+    display: inline-block;
+    min-width: 300px;
+    text-align: center;
+    width: 32%;
+}
+
+@media screen and (max-width: 1075px){
+    .pane {
+        width: 49%;
+    }
+    
+    .lastPane {
+        display: block;
+        margin: 20px auto;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .pane {
+        display: block;
+        margin: 20px auto;
+    }
+}
+
+.gymImage {
+    border-radius: 8px 8px;
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.gymBadge {
+    background-color: #7080C0;
+    background-image: linear-gradient(#8698E4, #7080C0);
+    border: 2px solid #CCC;
+    border-radius: 100% 100%;
+    box-shadow: 3px 2px black;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 110px;
+    margin: 10px auto;
+    width: 110px;
+    text-align: center;
+    padding: 5px;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+}
+
+.gymBadge:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #7080C0);
+    box-shadow: 6px 4px black;
+}
+
+.gymBadge:active {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#000, #7080C0);
+    box-shadow: none;
+}
+
+.gymBadge img {
+    max-height: 100px;
+    padding: 5px;
+    margin: auto;
+    line-height: 140px;
+}
+
+.gymBadgeh2 {
+    margin: 10px auto 0 auto;
+}
+
+.gymBadgeSpecial {
+    font-size: 0.75em;
+}
+
+.gymType {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.pkmnTypeGym {
+    display: inline-block;
+}
+
+.leaderImgDiv {
+    background-color: #619466;
+    background-image: linear-gradient(#7EBD83, #619466);
+    border: 2px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 3px 2px black;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    margin: 5px auto;
+    height: 200px;
+    width: 200px
+}
+
+.leaderImgDiv img {
+    margin: 5px auto;
+    
+    max-width: 150px;
+    max-height: 150px;
+}

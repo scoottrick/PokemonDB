@@ -25,9 +25,7 @@
             <div class="inputTrainerRival child">
                 <label>Rival</label>
                 <div>
-                    <select class="rivalSelector">
-                        <option value="None">None</option>
-                        <option ng-repeat="trainer in trainers" value="trainer.id">{{trainer.name}}</option>
+                    <select class="rivalSelector" ng-options="trainer.name for trainer in trainers track by trainer.id" ng-model="createTrainer.rival">
                     </select>
                 </div>
 
@@ -60,7 +58,7 @@
             <br/>
             <div class="inputButtons child">
                 <input type="button" title="Cancel" value="Cancel" ng-click="createTrainerMode()" class="inputTrainerCancel" />
-                <input type="submit" title="Create" class="inputTrainerSubmit" />
+                <input type="submit" title="Create" value="Create" class="inputTrainerSubmit" />
             </div>
 
         </form>

@@ -1,3 +1,24 @@
 <div class="bodyContent">
-    GYM
+    <div class="leftPane pane">
+        <h2 class="gymName">{{gym.name}}</h2>
+        <br/>
+        <img ng-src="/PokemonDB/frontend/images/gyms/{{gym.name}}.png" alt="{{gym.name}}" class="gymImage" />
+        <h4 class="gymCity">Location: {{gym.city}}</h4>
+    </div>
+    <div class="middlePane pane">
+        <div class="gymBadge" ng-click="openBadges()">
+            <img ng-src="/PokemonDB/frontend/images/badges/{{gym.badge.image}}badge.png" alt="{{gym.badge.name}}" />
+        </div>
+        <h2 class="gymBadgeh2">{{gym.badge.name}}</h2>
+        <h3 class="gymBadgeSpecial" ng-show="gym.badge.obedienceLevel">Obedience Level: {{gym.badge.obedienceLevel}}</h3>
+        <br/>
+        <h3 class="gymType">Pokemon Type</h3>
+        <span class="pokemonType pkmnTypeGym" ng-class="gym.type.name">{{gym.type.name}}</span>
+    </div>
+    <div class="lastPane pane">
+        <div class="leaderImgDiv">
+            <img ng-src="../PokemonDB/frontend/images/trainers/VS{{gym.leader.image}}.png" alt="{gym.leader.name}" />
+        </div>
+        <h2 class="gymLeader">Gym Leader {{gym.leader.name}}</h2>
+    </div>
 </div>
