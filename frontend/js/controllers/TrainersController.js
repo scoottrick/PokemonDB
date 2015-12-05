@@ -53,9 +53,21 @@ function TrainersController($http, $scope, $location) {
     }
 
     $scope.selectPokemon = function (index, id) {
+        if ($scope.selectedPokemon[index] == null){
+            $scope.selectedPokemon[index] = {pokemonId: id, pokemonLevel: 5};
+        } else {
+            var temp = $scope.selectedPokemon[index];
+            temp = {pokemonId: id, pokemonLevel: temp['pokemonLevel']};
+            $scope.selectedPokemon[index] = temp;
+        }
 
-        $scope.selectedPokemon[index] = id;
         //need to prevent from reselecting same pokemon with same level
+    }
+
+    $scope.updatePokemonLevel = function(index, level){
+        var temp = $scope.selectedPokemon[index];
+        temp = {pokemonId: temp['pokemonId'], pokemonLevel: level};
+        $scope.selectedPokemon[index] = temp;
     }
 
     $scope.pokemonIsSelected = function (id) {
@@ -69,34 +81,47 @@ function TrainersController($http, $scope, $location) {
 
     $scope.addMorePokemon = function () {
         var last = $scope.addPokemonSize[$scope.addPokemonSize.length - 1];
-        last+=1;
+        last += 1;
         $scope.addPokemonSize.push(last);
     }
 
     $scope.submitNewTrainer = function () {
-        console.log($scope.createTrainer);
+        var data = {name: $scope.newTrainer.name,
+                   rivalId: $scope.newTrainer.rival.id,
+                   pokemon: $scope.selectedPokemon,
+                   badgeIds: $scope.selectedBadges};
+        console.log(data);
 
-        //        $http({
-        //            method: 'POST',
-        //            url: 'http://localhost:8888/PokemonDB/backend/trainers/create',
-        //            headers: {
-        //                'Content-Type': 'application/json'
-        //            },
-        //            transformRequest: function (obj) {
-        //                var str = [];
-        //                for (var p in obj)
-        //                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-        //                return str.join("&");
-        //            },
-        //            data: {
-        //                name: trainer
-        //            }
-        //        }).success(function (response) {
-        //            console.log("Success");
-        //            console.log(response);
-        //        });
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8888/PokemonDB/backend/trainers/create',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+//            transformRequest: function (obj) {
+//                var str = [];
+//                for (var p in obj)
+//                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//                return str.join("&");
+//            },
+            data: {
+                name: data.name,
+                rivalId: data.rivalId,
+                pokemon: data.pokemon,
+                badgeIds: data.badgeIds
+            }
+        }).then(function callback(response) {
+            console.log(response);
+        });
 
-        $scope.createTrainer();
+//        data: {
+//                name: trainer,
+//                rivalId: id,
+//                pokemon: [{pokemonId: id, pokemonLevel: level}],
+//                badgeIds: [id]
+//            }
+
+        $scope.createTrainerMode();
     };
 
 

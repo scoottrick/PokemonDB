@@ -50,9 +50,9 @@ class Pokemon {
             if (array_key_exists('pokemon_level', $data)){
                 if (intval($data['pokemon_level']) != null){
                 $this->level = intval($data['pokemon_level']);
-            } else {
-                $this->level = null;
-            }
+                } else {
+                    $this->level = null;
+                }
             } else {
                 $this->level = null;
             }
