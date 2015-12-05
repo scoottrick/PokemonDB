@@ -1,21 +1,8 @@
 <?php
 class Pokemon {
-
-    private $id;
-    private $name;
-    private $type;
-    private $type2;
-    private $hp;
-    private $speed;
-    private $attack;
-    private $specialAttack;
-    private $defense;
-    private $specialDefense;
-    private $previousEvolution;
-    private $previousEvolutionLevel;
-    private $nextEvolution;
-    private $nextEvolutionLevel;
-    private $level;
+    private $id, $name, $type, $type2, $level,
+        $hp, $speed, $attack, $specialAttack, $defense, $specialDefense,
+        $previousEvolution, $previousEvolutionLevel, $nextEvolution, $nextEvolutionLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -94,8 +81,7 @@ class Pokemon {
     }
 
     public function getTrainers() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::trainersForPokemon($this->id));
+        $result = Database::query(SQL::trainersForPokemon($this->id));
 
         $trainers = array();
         if (mysqli_num_rows($result) > 0) {
@@ -119,14 +105,12 @@ class Pokemon {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allPokemon());
-        Pokemon::pokemonFromResult($result);
+        $result = Database::query(SQL::allPokemon());
+        return Pokemon::pokemonFromResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::pokemonById($id));
+        $result = Database::query(SQL::pokemonById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -138,8 +122,7 @@ class Pokemon {
     }
 
     public static function search($searchStr) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::searchPokemon($searchStr));
+        $result = Database::query(SQL::searchPokemon($searchStr));
         return Pokemon::pokemonFromResult($result);
     }
 

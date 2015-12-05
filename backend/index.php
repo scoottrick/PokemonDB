@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-require 'connection.php';
+require 'database.php';
 require 'sql.php';
 require 'model/Pokemon.php';
 require 'model/Trainer.php';
@@ -48,15 +48,15 @@ $app->get('/trainers', function() use ($app) {
     echo json_encode(Trainer::getAll());
 });
 
-$app->post('/trainers', function($id) use ($app){
-    $body = $app->request->getBody();
-    parse_str(urldecode($body));
-    Trainer::addTrainer($name);
-    $trainers[] = Trainer::getAll();
-    $id = count($trainers) - 1;
-    $trainer = Trainer::getById($id);
-    echo json_encode($trainer);
-});
+//$app->post('/trainers', function($id) use ($app){
+//    $body = $app->request->getBody();
+//    parse_str(urldecode($body));
+//    Trainer::addTrainer($name);
+//    $trainers[] = Trainer::getAll();
+//    $id = count($trainers) - 1;
+//    $trainer = Trainer::getById($id);
+//    echo json_encode($trainer);
+//});
 
 $app->post('/trainers/:id/pokemon/add', function($id) use ($app) {
     $body = $app->request->getBody();

@@ -15,12 +15,34 @@ class SQL {
     static function allTrainers() {
         return "SELECT * FROM `TRAINER`";
     }
+
+    static function createTrainer($name, $rivalId) {
+        return "insert into `TRAINER` (`trainer_name`, `trainer_rival`) values ('" . $name . "'," . $rivalId . ")";
+    }
+
     static function trainerById($id) {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
     static function trainerBadges($id) {
         return "select * from `BADGE` b, `EARNED_BADGE` e where b.badge_id = e.badge_id and e.trainer_id=" . $id;
     }
+
+    static function addPokemonToTrainer($trainerId, $pokemonId, $pokemonLevel) {
+        return "insert into `OWNED_POKEMON` (`trainer_id`, `pokemon_id`, `pokemon_level`) values (". $trainerId . ",'" . $pokemonId . "'," . $pokemonLevel . ")";
+    }
+
+    static function removePokemonFromTrainer($trainerId, $pokemonId) {
+        return "delete from `OWNED_POKEMON` where `trainer_id` =" . $trainerId . " and `pokemon_id`=" . $pokemonId;
+    }
+
+    static function addBadgeToTrainer($trainerId, $badgeId) {
+        return "insert into `EARNED_BADGE` (`trainer_id`, `badge_id`) values (" . $trainerId . "," . $badgeId . ")";
+    }
+
+    static function removeBadgeFromTrainer($trainerId, $badgeId) {
+        return "delete from `EARNED_BADGE` where `trainer_id` =" . $trainerId . " and `badge_id`=" . $badgeId;
+    }
+
     static function allGyms() {
         return "SELECT * FROM `GYM`";
     }

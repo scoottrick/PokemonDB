@@ -1,11 +1,6 @@
 <?php
 class Trainer {
-
-    private $id;
-    private $name;
-    private $rivalId;
-    private $pokemon;
-    private $badges;
+    private $id, $name, $rivalId, $pokemon, $badges;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -32,15 +27,13 @@ class Trainer {
         );
     }
 
-    public function addTrainer(){
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::addTrainer($this->name));
-        echo json_encode($result);
-    }
+//    public function addTrainer(){
+//        $result = Database::query(SQL::addTrainer($this->name));
+//        echo json_encode($result);
+//    }
 
     public function getPokemon() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::pokemonOwnedByTrainer($this->id));
+        $result = Database::query(SQL::pokemonOwnedByTrainer($this->id));
 
         $pokemonArr = array();
         if (mysqli_num_rows($result) > 0) {
@@ -53,20 +46,17 @@ class Trainer {
     }
 
     public function addPokemon($pokemonId, $pokemonLevel) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::addPokemonToTrainer($this->id, $pokemonId, $pokemonLevel));
+        $result = Database::query(SQL::addPokemonToTrainer($this->id, $pokemonId, $pokemonLevel));
         return $result;
     }
 
     public function removePokemon($pokemonId) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::removePokemonFromTrainer($this->id, $pokemonId));
+        $result = Database::query(SQL::removePokemonFromTrainer($this->id, $pokemonId));
         return $result;
     }
 
     public function getBadges() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::trainerBadges($this->id));
+        $result = Database::query(SQL::trainerBadges($this->id));
 
         $badges = array();
         if (mysqli_num_rows($result) > 0) {
@@ -79,14 +69,12 @@ class Trainer {
     }
 
     public function addBadge($badgeId) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::addBadgeToTrainer($this->id, $badgeId));
+        $result = Database::query(SQL::addBadgeToTrainer($this->id, $badgeId));
         return $result;
     }
 
     public function removeBadge($badgeId) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::removeBadgeFromTrainer($this->id, $badgeId));
+        $result = Database::query(SQL::removeBadgeFromTrainer($this->id, $badgeId));
         return $result;
     }
 
@@ -102,14 +90,12 @@ class Trainer {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allTrainers());
+        $result = Database::query(SQL::allTrainers());
         return Trainer::trainersFromResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::trainerById($id));
+        $result = Database::query(SQL::trainerById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -121,16 +107,14 @@ class Trainer {
     }
 
     public static function search($searchStr) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::searchTrainers($searchStr));
+        $result = Database::query(SQL::searchTrainers($searchStr));
         return Trainer::trainersFromResult($result);
     }
 
     public static function create($name, $rivalId, $pokemon, $badgeIds) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::createTrainer($name, $rivalId));
+        $result = Database::query(SQL::createTrainer($name, $rivalId));
         if ($result) {
-            $lastId = mysqli_insert_id($db);
+            $lastId = mysqli_insert_id(Database::sharedDB());
             $trainer = Trainer::getById($lastId);
 
             foreach($pokemon as $p) {
