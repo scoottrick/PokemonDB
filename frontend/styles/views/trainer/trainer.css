@@ -21,7 +21,7 @@
     border-radius: 8px;
     box-shadow: 3px 2px black;
     box-sizing: border-box;
-    cursor: default;
+    cursor: pointer;
     border: 1px solid black;
     display: inline-block;
     font-size: 7px;
@@ -48,6 +48,7 @@
 }
 
 .ownedPokemon {
+    cursor: pointer;
     flex: 0 1 120px;
     height: 120px;
     margin: 10px 5px;
@@ -64,6 +65,10 @@
 
 .ownedPokemonLevel {
     font-size: 9px;
+}
+
+.rival {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 400px){

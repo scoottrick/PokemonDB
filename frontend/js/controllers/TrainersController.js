@@ -7,18 +7,22 @@ function TrainersController($http, $scope, $location) {
     $scope.selectedPokemon = [];
     $scope.addPokemonSize = [0];
 
-    $http({
-        method: 'GET',
-        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
-        url: 'http://localhost:8888/PokemonDB/backend/trainers'
-    }).then(function successCallback(response) {
-        $scope.trainers = response.data;
-        setImage();
-    }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
-    });
 
+    $scope.loadData = function () {
+        $http({
+            method: 'GET',
+            //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
+            url: 'http://localhost:8888/PokemonDB/backend/trainers'
+        }).then(function successCallback(response) {
+            $scope.trainers = response.data;
+            setImage();
+        }, function errorCallback(response) {
+            alert("Database unreachable. Check console for more info.");
+            console.log(response);
+        });
+    }
+
+    $scope.loadData();
 
     $scope.viewTrainer = function (name) {
         $location.path("/trainer/" + name);
@@ -53,20 +57,29 @@ function TrainersController($http, $scope, $location) {
     }
 
     $scope.selectPokemon = function (index, id) {
-        if ($scope.selectedPokemon[index] == null){
-            $scope.selectedPokemon[index] = {pokemonId: id, pokemonLevel: 5};
+        if ($scope.selectedPokemon[index] == null) {
+            $scope.selectedPokemon[index] = {
+                pokemonId: id,
+                pokemonLevel: 5
+            };
         } else {
             var temp = $scope.selectedPokemon[index];
-            temp = {pokemonId: id, pokemonLevel: temp['pokemonLevel']};
+            temp = {
+                pokemonId: id,
+                pokemonLevel: temp['pokemonLevel']
+            };
             $scope.selectedPokemon[index] = temp;
         }
 
         //need to prevent from reselecting same pokemon with same level
     }
 
-    $scope.updatePokemonLevel = function(index, level){
+    $scope.updatePokemonLevel = function (index, level) {
         var temp = $scope.selectedPokemon[index];
-        temp = {pokemonId: temp['pokemonId'], pokemonLevel: level};
+        temp = {
+            pokemonId: temp['pokemonId'],
+            pokemonLevel: level
+        };
         $scope.selectedPokemon[index] = temp;
     }
 
@@ -86,10 +99,12 @@ function TrainersController($http, $scope, $location) {
     }
 
     $scope.submitNewTrainer = function () {
-        var data = {name: $scope.newTrainer.name,
-                   rivalId: $scope.newTrainer.rival.id,
-                   pokemon: $scope.selectedPokemon,
-                   badgeIds: $scope.selectedBadges};
+        var data = {
+            name: $scope.newTrainer.name,
+            rivalId: $scope.newTrainer.rival.id,
+            pokemon: $scope.selectedPokemon,
+            badgeIds: $scope.selectedBadges
+        };
         console.log(data);
 
         $http({
@@ -98,12 +113,6 @@ function TrainersController($http, $scope, $location) {
             headers: {
                 'Content-Type': 'application/json'
             },
-//            transformRequest: function (obj) {
-//                var str = [];
-//                for (var p in obj)
-//                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-//                return str.join("&");
-//            },
             data: {
                 name: data.name,
                 rivalId: data.rivalId,
@@ -113,15 +122,8 @@ function TrainersController($http, $scope, $location) {
         }).then(function callback(response) {
             console.log(response);
         });
-
-//        data: {
-//                name: trainer,
-//                rivalId: id,
-//                pokemon: [{pokemonId: id, pokemonLevel: level}],
-//                badgeIds: [id]
-//            }
-
         $scope.createTrainerMode();
+        $scope.loadData();
     };
 
 
