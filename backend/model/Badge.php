@@ -1,9 +1,6 @@
 <?php
 class Badge {
-
-    private $id;
-    private $name;
-    private $obedienceLevel;
+    private $id, $name, $obedienceLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -38,14 +35,12 @@ class Badge {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allBadges());
+        $result = Database::query(SQL::allBadges());
         return Badge::badgesForResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::badgeById($id));
+        $result = Database::query(SQL::badgeById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -57,8 +52,7 @@ class Badge {
     }
 
     public static function search($searchStr) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::searchBadges($searchStr));
+        $result = Database::query(SQL::searchBadges($searchStr));
         return Badge::badgesForResult($result);
     }
 }

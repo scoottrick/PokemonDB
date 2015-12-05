@@ -1,7 +1,6 @@
 <?php
 class Type {
-    private $id;
-    private $name;
+    private $id, $name;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -29,14 +28,12 @@ class Type {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allTypes());
+        $result = Database::query(SQL::allTypes());
         return Type::typesFromResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::typeById($id));
+        $result = Database::query(SQL::typeById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -48,8 +45,7 @@ class Type {
     }
 
     public static function search($searchStr) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::searchTypes($searchStr));
+        $result = Database::query(SQL::searchTypes($searchStr));
         return Type::typesFromResult($result);
     }
 }

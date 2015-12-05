@@ -1,11 +1,6 @@
 <?php
 class Gym {
-
-    private $id;
-    private $name;
-    private $city;
-    private $type;
-    private $badge;
+    private $id, $name, $city, $type, $badge;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -31,8 +26,7 @@ class Gym {
     }
 
     public function getLeader() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::getLeaderForGym($this->id));
+        $result = Database::query(SQL::getLeaderForGym($this->id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -55,14 +49,12 @@ class Gym {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allGyms());
+        $result = Database::query(SQL::allGyms());
         return Gym::gymsForResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::gymById($id));
+        $result = Database::query(SQL::gymById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -74,8 +66,7 @@ class Gym {
     }
 
     public static function search($searchStr) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::searchGyms($searchStr));
+        $result = Database::query(SQL::searchGyms($searchStr));
         return Gym::gymsForResult($result);
     }
 }
