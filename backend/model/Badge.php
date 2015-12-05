@@ -20,7 +20,7 @@ class Badge {
 
     private static function badgesForResult($result) {
         $badges = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $badge = new Badge($row);
                 array_push($badges, $badge->serialize());

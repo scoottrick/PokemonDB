@@ -63,9 +63,9 @@ class Pokemon {
             if (array_key_exists('pokemon_level', $data)){
                 if (intval($data['pokemon_level']) != null){
                 $this->level = intval($data['pokemon_level']);
-            } else {
-                $this->level = null;
-            }
+                } else {
+                    $this->level = null;
+                }
             } else {
                 $this->level = null;
             }
@@ -107,10 +107,20 @@ class Pokemon {
         return $trainers;
     }
 
+    private static function pokemonFromResult($result) {
+        $pokemonArr = array();
+        if ($result && mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $pokemon = new Pokemon($row);
+                array_push($pokemonArr, $pokemon->serialize());
+            }
+        }
+        return $pokemonArr;
+    }
+
     public static function getAll() {
         $db = Connection::sharedDB();
         $result = $db->query(SQL::allPokemon());
-
         $pokemonArr = array();
         if (mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
@@ -132,6 +142,12 @@ class Pokemon {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchPokemon($searchStr));
+        return Pokemon::pokemonFromResult($result);
     }
 
 }

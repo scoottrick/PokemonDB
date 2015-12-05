@@ -67,15 +67,45 @@
     transform: translate(-50%, -50%);
     min-height: 400px;
     min-width: 300px;
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: scroll;
     width: 50%;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .trainerCreationBlock .child {
     text-align: center;
     margin: 20px auto;
+}
+
+#closeTrainerCreate {
+    background-color: #FFFF00;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 2px 6px;
+    z-index: 2;
+}
+
+#closeTrainerCreate h1 {
+    color: #333;
+    font-family: "PokemonSolid";
+    font-size: 1.5em;
+}
+
+#closeTrainerCreate:hover {
+    background-color: #FFFB67;
+}
+
+#closeTrainerCreate:active {
+    background-color: #E5E200;
+}
+
+.createTrainerForm {
+    margin-top:10px;
 }
 
 .inputTrainerName {
@@ -142,6 +172,7 @@
     background-image: linear-gradient(#E3E000, #FEFB00);
     box-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2) inset;
     color: #04243C;
+    cursor: pointer;
     font-weight: bold;
     line-height: 26px;
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);

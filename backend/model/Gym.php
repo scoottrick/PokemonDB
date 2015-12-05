@@ -43,18 +43,21 @@ class Gym {
         }
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allGyms());
-
+    private static function gymsForResult($result) {
         $gyms = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $gym = new Gym($row);
                 array_push($gyms, $gym->serialize());
             }
         }
         return $gyms;
+    }
+
+    public static function getAll() {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::allGyms());
+        return Gym::gymsForResult($result);
     }
 
     public static function getById($id) {
@@ -68,5 +71,11 @@ class Gym {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $db = Connection::sharedDB();
+        $result = $db->query(SQL::searchGyms($searchStr));
+        return Gym::gymsForResult($result);
     }
 }

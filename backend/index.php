@@ -14,7 +14,13 @@ error_reporting(E_ALL);
 $app = new \Slim\Slim();
 
 $app->get("/search/:str", function($searchStr) use ($app) {
-    echo json_encode(Badge::search($searchStr));
+    $objects = array();
+    $objects["badges"] = Badge::search($searchStr);
+    $objects["gyms"] = Gym::search($searchStr);
+    $objects["pokemon"] = Pokemon::search($searchStr);
+    $objects["trainers"] = Trainer::search($searchStr);
+    $objects["types"] = Type::search($searchStr);
+    echo json_encode($objects);
 });
 
 $app->get("/pokemon", function() use ($app) {
@@ -40,16 +46,6 @@ $app->post('/trainers/create', function() use ($app) {
 
 $app->get('/trainers', function() use ($app) {
     echo json_encode(Trainer::getAll());
-});
-
-$app->post('/trainers', function($id) use ($app){
-    $body = $app->request->getBody();
-    parse_str(urldecode($body));
-    Trainer::addTrainer($name);
-    $trainers[] = Trainer::getAll();
-    $id = count($trainers) - 1;
-    $trainer = Trainer::getById($id);
-    echo json_encode($trainer);
 });
 
 $app->post('/trainers/:id/pokemon/add', function($id) use ($app) {
