@@ -1,6 +1,6 @@
-function GymsController($http, $scope, $location) {
+function GymsController($http, $scope, $location, $rootScope) {
     $scope.gyms = [];
-    
+
     $scope.openGym = function(name){
         name = name.replace(" ", "_");
         $location.path('/gym/' + name);
@@ -8,8 +8,7 @@ function GymsController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/gyms'
-        url: 'http://localhost:8888/PokemonDB/backend/gyms'
+        url: $rootScope.baseURL+'/gyms'
     }).then(function successCallback(response) {
         $scope.gyms = response.data;
     }, function errorCallback(response) {

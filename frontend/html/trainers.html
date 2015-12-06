@@ -1,6 +1,11 @@
 <div class="bodyContent">
     <div id="trainerArea">
         <div class="trainerContainer" ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.name)">
+<!--
+            <div class="itemRemove" ng-click="delete(trainer.id)" ng-show="trainer.id > 10">
+                <p>-</p>
+            </div>
+-->
             <div class="trainerImgDiv">
                 <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.image}}.png" alt="{trainer.name}" />
             </div>
@@ -31,10 +36,10 @@
                     <select class="rivalSelector" ng-options="trainer.name for trainer in trainers track by trainer.id" value="trainer.id" ng-model="newTrainer.rival">
                     </select>
                 </div>
-
             </div>
             <center>
-                <h2><strong>Earned Badges</strong></h2></center>
+                <h2><strong>Earned Badges</strong></h2>
+            </center>
             <div class="badgeSelector child">
                 <div class="trainerBadge" ng-repeat="badge in badges" ng-click="selectBadge(badge.id)" ng-class="badgeIsSelected(badge.id) ? 'badgeSelected' : 'badgeNotSelected'">
                     <center>
@@ -55,7 +60,7 @@
                     <label>Level</label>
                     <input type="text" name="pokemonLevel" placeholder="5" ng-model="pkmn.$index.level" ng-change="updatePokemonLevel($index, pkmn.$index.level)" />
                 </div>
-                <div class="pokeSelectBlock addPokemonBlock" ng-show="addPokemonSize.length < 6 && selectedPokemon.length > 0" ng-click="addMorePokemon()">
+                <div class="pokeSelectBlock addPokemonBlock" ng-show="addPokemonSize.length < 6" ng-click="addMorePokemon()">
                     <div>+</div>
                 </div>
             </div>

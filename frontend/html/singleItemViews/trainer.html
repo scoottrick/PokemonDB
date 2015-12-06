@@ -7,19 +7,61 @@
             <h3 class="rival" ng-show="rival" ng-click="openRival()">Rival: {{rival.name}}</h3>
         </div>
         <div class="trainerBadges">
-            <div class="ownedBadge" ng-repeat="badge in trainer.earned_badges" ng-click="openBadges()">
+            <div class="ownedBadge" ng-repeat="badge in trainer.earned_badges">
+                <div class="itemRemove" ng-click="removeBadge(badge.id)" ng-show="trainer.id > 10">
+                    <p>-</p>
+                </div>
+                <img ng-src="/PokemonDB/frontend/images/badges/{{badge.image}}badge.png" alt="{{badge.name}}" ng-click="openBadges()" />
 
-                <img ng-src="/PokemonDB/frontend/images/badges/{{badge.image}}badge.png" alt="{{badge.name}}" />
-
-                <p>{{badge.name}}</p>
+                <p ng-click="openBadges()">{{badge.name}}</p>
+            </div>
+            <div class="ownedBadge addNewBadge" ng-show="trainer.earned_badges.length < 8 && trainer.id > 10">
+               <div class="plusItemBadge" ng-show="!addingBadge" ng-click="addBadgeMode()">
+                   <p>+</p>
+               </div>
+               <div class="cancelNew cornerIcon" ng-show="addingBadge" ng-click="addBadgeMode()">
+                   <p>X</p>
+               </div>
+               <div class="confirmNew cornerIcon" ng-show="addingBadge" ng-click="addBadge(newBadge)">
+                   <p>&#10003;</p>
+               </div>
+               <img class="addingBadgeImg" ng-src="/PokemonDB/frontend/images/badges/{{newBadge.name.substring(0, newBadge.name.indexOf(' '))}}badge.png" alt="{{newBadge.name}}" ng-show="addingBadge"/>
+                <div class="badgeSelectorCase"  ng-show="addingBadge">
+                    <select class="badgeSelectorDropdown" ng-options="badge.name for badge in badges track by badge.id" ng-model="newBadge">
+                    </select>
+                </div>
             </div>
         </div>
         <div class="ownedPokemonList">
-            <div class="ownedPokemon" ng-repeat="pokemon in trainer.owned_pokemon" ng-click="openPokemon(pokemon.id)">
-                <img class="ownedPokemonImage" ng-src="/PokemonDB/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" />
-                <h4 class="ownedPokemonName">{{pokemon.name}}</h4>
-                <h5 class="ownedPokemonLevel">Level {{pokemon.level}}</h5>
+            <div class="ownedPokemon" ng-repeat="pokemon in trainer.owned_pokemon">
+                <div class="itemRemove" ng-click="removePokemon(pokemon.id)" ng-show="trainer.id > 10">
+                    <p>-</p>
+                </div>
+                <img class="ownedPokemonImage" ng-src="/PokemonDB/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" ng-click="openPokemon(pokemon.id)" />
+                <h4 class="ownedPokemonName" ng-click="openPokemon(pokemon.id)">{{pokemon.name}}</h4>
+                <h5 class="ownedPokemonLevel" ng-click="openPokemon(pokemon.id)">Level {{pokemon.level}}</h5>
             </div>
+            <div class="ownedPokemon addNewPokemon" ng-show="trainer.owned_pokemon.length < 6 && trainer.id > 10">
+               <div class="plusItemPokemon" ng-show="!addingPokemon" ng-click="addPokemonMode()">
+                   <p>+</p>
+               </div>
+               <div class="cancelNew cornerIcon" ng-show="addingPokemon" ng-click="addPokemonMode()">
+                   <p>X</p>
+               </div>
+               <div class="confirmNew cornerIcon" ng-show="addingPokemon" ng-click="addPokemon(selectedPokemon)">
+                   <p>&#10003;</p>
+               </div>
+                <img class="addPokemonImage" ng-show="addingPokemon" ng-src="/PokemonDB/frontend/images/pokemon/{{selectedPokemon.id}}.png" alt="" />
+                <div class="pokemonSelectorCase2"  ng-show="addingPokemon">
+                    <select class="pokemonSelector2" ng-options="pokemon.name for pokemon in pokedex track by pokemon.id" ng-model="selectedPokemon">
+                    </select>
+                </div>
+                <label ng-show="addingPokemon">Level</label>
+                <input type="text" name="pokemonLevel" placeholder="5" ng-model="selectedPokemon.level" ng-show="addingPokemon"/>
+            </div>
+        </div>
+        <div class="deleteButton" ng-show="trainer.id > 10" ng-click="delete()">
+            <h3>Delete Trainer</h3>
         </div>
     </div>
 </div>

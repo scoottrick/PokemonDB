@@ -20,6 +20,10 @@ class SQL {
         return "insert into `TRAINER` (`trainer_name`, `trainer_rival`) values ('" . $name . "'," . $rivalId . ")";
     }
 
+    static function deleteTrainer($id){
+        return "DELETE FROM `TRAINER` WHERE `trainer_id` = ".$id;
+    }
+
     static function trainerById($id) {
         return "SELECT * FROM `TRAINER` WHERE trainer_id=" . $id;
     }
@@ -35,12 +39,20 @@ class SQL {
         return "delete from `OWNED_POKEMON` where `trainer_id` =" . $trainerId . " and `pokemon_id`=" . $pokemonId;
     }
 
+    static function deleteTrainerPokemon($trainerId){
+        return "delete from `OWNED_POKEMON` where `trainer_id` =" . $trainerId;
+    }
+
     static function addBadgeToTrainer($trainerId, $badgeId) {
         return "insert into `EARNED_BADGE` (`trainer_id`, `badge_id`) values (" . $trainerId . "," . $badgeId . ")";
     }
 
     static function removeBadgeFromTrainer($trainerId, $badgeId) {
         return "delete from `EARNED_BADGE` where `trainer_id` =" . $trainerId . " and `badge_id`=" . $badgeId;
+    }
+
+    static function deleteTrainerBadges($trainerId){
+        return "delete from `EARNED_BADGE` where `trainer_id` =" . $trainerId;
     }
 
     static function allGyms() {

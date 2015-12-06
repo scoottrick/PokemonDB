@@ -42,7 +42,7 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: '/PokemonDB/frontend/html/badges.html',
             css: '/PokemonDB/frontend/styles/views/badges.css'
         })
-        .when('/search', {
+        .when('/search/:text', {
             controller: 'SearchResultsController',
             templateUrl: '/PokemonDB/frontend/html/searchResults.html',
             css: '/PokemonDB/frontend/styles/views/searchResults.css'
@@ -52,14 +52,18 @@ app.config(function ($routeProvider, $locationProvider) {
         });
 });
 
-app.controller("NavController", ["$http", "$scope", "$location", NavController]);
-app.controller("SearchController", ["$http", "$scope", "$location", SearchController]);
-app.controller("MainPageController", ["$http", "$scope", "$location", MainPageController]);
-app.controller("PokedexController", ["$http", "$scope", "$location", PokedexController]);
-app.controller("TrainersController", ["$http", "$scope", "$location", TrainersController]);
-app.controller("BadgesController", ["$http", "$scope", "$location", BadgesController]);
-app.controller("GymsController", ["$http", "$scope", "$location", GymsController]);
-app.controller("SearchResultsController", ["$http", "$scope", "$location", SearchResultsController]);
-app.controller("TrainerController", ["$http", "$scope", "$location", "$route", TrainerController]);
-app.controller("GymController", ["$http", "$scope", "$location", "$route", GymController]);
-app.controller("PokemonController", ["$http", "$scope", "$location", "$route", PokemonController]);
+app.run(function($rootScope){
+    $rootScope.baseURL = "http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend";
+});
+
+app.controller("NavController", ["$http", "$scope", "$location", "$rootScope", NavController]);
+app.controller("SearchController", ["$http", "$scope", "$location", "$rootScope", SearchController]);
+app.controller("MainPageController", ["$http", "$scope", "$location", "$rootScope", MainPageController]);
+app.controller("PokedexController", ["$http", "$scope", "$location", "$rootScope", PokedexController]);
+app.controller("TrainersController", ["$http", "$scope", "$location", "$rootScope", TrainersController]);
+app.controller("BadgesController", ["$http", "$scope", "$location", "$rootScope", BadgesController]);
+app.controller("GymsController", ["$http", "$scope", "$location", "$rootScope", GymsController]);
+app.controller("SearchResultsController", ["$http", "$scope", "$location", "$route", "$rootScope", SearchResultsController]);
+app.controller("TrainerController", ["$http", "$scope", "$location", "$route", "$rootScope", TrainerController]);
+app.controller("GymController", ["$http", "$scope", "$location", "$route", "$rootScope", GymController]);
+app.controller("PokemonController", ["$http", "$scope", "$location", "$route", "$rootScope", PokemonController]);
