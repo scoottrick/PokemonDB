@@ -1,7 +1,6 @@
 <?php
 class Type {
-    private $id;
-    private $name;
+    private $id, $name;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -17,12 +16,9 @@ class Type {
         );
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allTypes());
-
+    private static function typesFromResult($result) {
         $types = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $type = new Type($row);
                 array_push($types, $type->serialize());
@@ -31,9 +27,13 @@ class Type {
         return $types;
     }
 
+    public static function getAll() {
+        $result = Database::query(SQL::allTypes());
+        return Type::typesFromResult($result);
+    }
+
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::typeById($id));
+        $result = Database::query(SQL::typeById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -42,5 +42,10 @@ class Type {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $result = Database::query(SQL::searchTypes($searchStr));
+        return Type::typesFromResult($result);
     }
 }

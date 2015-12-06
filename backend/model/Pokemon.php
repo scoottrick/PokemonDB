@@ -1,21 +1,8 @@
 <?php
 class Pokemon {
-
-    private $id;
-    private $name;
-    private $type;
-    private $type2;
-    private $hp;
-    private $speed;
-    private $attack;
-    private $specialAttack;
-    private $defense;
-    private $specialDefense;
-    private $previousEvolution;
-    private $previousEvolutionLevel;
-    private $nextEvolution;
-    private $nextEvolutionLevel;
-    private $level;
+    private $id, $name, $type, $type2, $level,
+        $hp, $speed, $attack, $specialAttack, $defense, $specialDefense,
+        $previousEvolution, $previousEvolutionLevel, $nextEvolution, $nextEvolutionLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -63,9 +50,9 @@ class Pokemon {
             if (array_key_exists('pokemon_level', $data)){
                 if (intval($data['pokemon_level']) != null){
                 $this->level = intval($data['pokemon_level']);
-            } else {
-                $this->level = null;
-            }
+                } else {
+                    $this->level = null;
+                }
             } else {
                 $this->level = null;
             }
@@ -94,8 +81,7 @@ class Pokemon {
     }
 
     public function getTrainers() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::trainersForPokemon($this->id));
+        $result = Database::query(SQL::trainersForPokemon($this->id));
 
         $trainers = array();
         if (mysqli_num_rows($result) > 0) {
@@ -107,12 +93,9 @@ class Pokemon {
         return $trainers;
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allPokemon());
-
+    private static function pokemonFromResult($result) {
         $pokemonArr = array();
-        if (mysqli_num_rows($result) > 0) {
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $pokemon = new Pokemon($row);
                 array_push($pokemonArr, $pokemon->serialize());
@@ -121,9 +104,13 @@ class Pokemon {
         return $pokemonArr;
     }
 
+    public static function getAll() {
+        $result = Database::query(SQL::allPokemon());
+        return Pokemon::pokemonFromResult($result);
+    }
+
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::pokemonById($id));
+        $result = Database::query(SQL::pokemonById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -132,6 +119,11 @@ class Pokemon {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $result = Database::query(SQL::searchPokemon($searchStr));
+        return Pokemon::pokemonFromResult($result);
     }
 
 }

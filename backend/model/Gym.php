@@ -1,11 +1,6 @@
 <?php
 class Gym {
-
-    private $id;
-    private $name;
-    private $city;
-    private $type;
-    private $badge;
+    private $id, $name, $city, $type, $badge;
 
     public function __construct($data) {
         if (is_array($data)) {
@@ -25,16 +20,26 @@ class Gym {
             'name' => $this->name,
             'city' => $this->city,
             'type' => $this->type,
-            'badge' => $this->badge
+            'badge' => $this->badge,
+            'leader' => $this->getLeader()->serialize()
         );
     }
 
-    public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allGyms());
+    public function getLeader() {
+        $result = Database::query(SQL::getLeaderForGym($this->id));
 
-        $gyms = array();
         if (mysqli_num_rows($result) > 0) {
+            $row = $result->fetch_array();
+            $leader = new Trainer($row);
+            return $leader;
+        } else {
+            return false;
+        }
+    }
+
+    private static function gymsForResult($result) {
+        $gyms = array();
+        if ($result && mysqli_num_rows($result) > 0) {
             foreach ($result as $row) {
                 $gym = new Gym($row);
                 array_push($gyms, $gym->serialize());
@@ -43,9 +48,13 @@ class Gym {
         return $gyms;
     }
 
+    public static function getAll() {
+        $result = Database::query(SQL::allGyms());
+        return Gym::gymsForResult($result);
+    }
+
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::gymById($id));
+        $result = Database::query(SQL::gymById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -54,5 +63,10 @@ class Gym {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $result = Database::query(SQL::searchGyms($searchStr));
+        return Gym::gymsForResult($result);
     }
 }

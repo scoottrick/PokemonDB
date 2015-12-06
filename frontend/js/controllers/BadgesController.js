@@ -1,12 +1,11 @@
-function BadgesController($http, $scope, $location) {
+function BadgesController($http, $scope, $location, $rootScope) {
     $scope.badges = [];
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/badges'
+        url: $rootScope.baseURL+'/backend/badges'
     }).then(function successCallback(response) {
         var badgeData = response.data;
-        console.log(badgeData);
         setImage(badgeData);
     }, function errorCallback(response) {
         alert("Database unreachable. Check console for more info.");
@@ -23,7 +22,6 @@ function BadgesController($http, $scope, $location) {
             badge['image'] = image;
             temp[i] = badge;
         };
-        console.log(temp);
         $scope.badges = temp;
     };
 

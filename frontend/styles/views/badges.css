@@ -38,3 +38,7 @@
 .badge h2 {
     margin-bottom: 0;
 }
+
+.badge p {
+    font-size: 10px;
+}

@@ -1,0 +1,67 @@
+.searchResultsArea h1 {
+    color: black;
+    font-family: "PokemonSolid";
+    font-size: 4vw;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000, 3px 3px 5px #FFFF00;
+}
+
+.subjectBlock {
+    border: 2px solid #AAAAAA;
+    border-radius: 10px 10px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 98%;
+}
+
+.subjectHeader {
+    font-size: 24px;
+    font-weight: bold;
+    font-variant: small-caps;
+    text-shadow: 1px 1px 1px #000, 3px 3px 5px #FFFF00;
+}
+
+.subjectDataBlock {
+    cursor: pointer;
+    margin: 7px 0px 7px auto;
+    width: 97%;
+}
+
+.subjectDataBlockText {
+    text-shadow: 1px 1px 1px #000, 1px 1px 3px #555;
+    width: auto;
+}
+
+.subjectDataBlock:hover {
+    color: #FFFF00;
+    text-decoration: underline;
+}
+
+
+/* ----- ng-classes ---- */
+
+.badgesBlock {
+    background-color: #7080C0;
+    background-image: linear-gradient(#8698E4, #7080C0);
+}
+
+.gymsBlock {
+    background-color: #BA762D;
+    background-image: linear-gradient(#BA762D, #E5933A);
+}
+
+.pokemonBlock {
+    background-color: #A1A1A1;
+    background-image: linear-gradient(#B2B2B2, #A1A1A1);
+}
+
+.trainersBlock {
+    background-color: #619466;
+    background-image: linear-gradient(#7EBD83, #619466);
+}
+
+.typesBlock {
+    background-color: #8A8A59;
+    background-image: linear-gradient(#9C9766, #8A8A59);
+}

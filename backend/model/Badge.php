@@ -1,13 +1,10 @@
 <?php
 class Badge {
-
-    private $id;
-    private $name;
-    private $obedienceLevel;
+    private $id, $name, $obedienceLevel;
 
     public function __construct($data) {
         if (is_array($data)) {
-            $this->id = intval(['badge_id']);
+            $this->id = intval($data['badge_id']);
             $this->name = $data['badge_name'];
 
             $obedienceLevel = $data['badge_obedience_level'];
@@ -16,6 +13,17 @@ class Badge {
             }
             $this->obedienceLevel = $obedienceLevel;
         }
+    }
+
+    private static function badgesForResult($result) {
+        $badges = array();
+        if ($result && mysqli_num_rows($result) > 0) {
+            foreach ($result as $row) {
+                $badge = new Badge($row);
+                array_push($badges, $badge->serialize());
+            }
+        }
+        return $badges;
     }
 
     public function serialize() {
@@ -27,22 +35,12 @@ class Badge {
     }
 
     public static function getAll() {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::allBadges());
-
-        $badges = array();
-        if (mysqli_num_rows($result) > 0) {
-            foreach ($result as $row) {
-                $badge = new Badge($row);
-                array_push($badges, $badge->serialize());
-            }
-        }
-        return $badges;
+        $result = Database::query(SQL::allBadges());
+        return Badge::badgesForResult($result);
     }
 
     public static function getById($id) {
-        $db = Connection::sharedDB();
-        $result = $db->query(SQL::badgeById($id));
+        $result = Database::query(SQL::badgeById($id));
 
         if (mysqli_num_rows($result) > 0) {
             $row = $result->fetch_array();
@@ -51,5 +49,10 @@ class Badge {
         } else {
             return false;
         }
+    }
+
+    public static function search($searchStr) {
+        $result = Database::query(SQL::searchBadges($searchStr));
+        return Badge::badgesForResult($result);
     }
 }

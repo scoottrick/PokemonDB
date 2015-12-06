@@ -1,4 +1,4 @@
-function PokedexController($http, $scope, $location) {
+function PokedexController($http, $scope, $location, $rootScope) {
     $scope.pokedex = [];
 
     $scope.viewPokemon = function (pokemon) {
@@ -8,7 +8,7 @@ function PokedexController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon'
+        url: $rootScope.baseURL + '/pokemon'
     }).then(function successCallback(response) {
         $scope.pokedex = response.data;
     }, function errorCallback(response) {

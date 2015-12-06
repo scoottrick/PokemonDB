@@ -21,10 +21,11 @@
     border-radius: 8px;
     box-shadow: 3px 2px black;
     box-sizing: border-box;
-    cursor: default;
+    cursor: pointer;
     border: 1px solid black;
     display: inline-block;
     font-size: 7px;
+    height: 70px;
     margin: 5px;
     padding: 5px;
     text-align: center;
@@ -34,6 +35,51 @@
 
 .ownedBadge img {
     height: 40px;
+}
+
+.addNewBadge {
+
+    vertical-align: top;
+}
+
+.plusItemBadge {
+    display: block;
+    background: #888888;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    margin: 5px auto;
+}
+
+.plusItemBadge p {
+    font-family: "PokemonSolid";
+    font-size: 30px;
+    line-height: 50px;
+}
+
+.badgeSelectorCase {
+    margin: 2px auto;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px #303;
+    background: #619466 scroll 60px 5px;
+    width: 60px;
+}
+
+
+.badgeSelectorDropdown {
+    border: 0px none;
+    color: #EEE;
+    background: transparent none repeat scroll 0% 0%;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 1px 5px;
+    width: 60px;
+}
+
+.addingBadgeImg {
+    border: 1px solid #777777;
 }
 
 .ownedPokemonList {
@@ -48,13 +94,14 @@
 }
 
 .ownedPokemon {
+    cursor: pointer;
     flex: 0 1 120px;
     height: 120px;
     margin: 10px 5px;
     width: 120px;
 }
 
-.ownedPokemon img {
+.ownedPokemonImage {
     width: 95px;
 }
 
@@ -66,11 +113,149 @@
     font-size: 9px;
 }
 
-@media screen and (max-width: 400px){
-    .trainerStats,
-.trainerBadges {
-    display: block;
-    text-align: center;
-    width: 100%;
+.rival {
+    cursor: pointer;
 }
+
+@media screen and (max-width: 400px) {
+    .trainerStats,
+    .trainerBadges {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.deleteButton {
+    background-color: #DE4456;
+    background-image: repeating-linear-gradient(#E93B32, #DE4456);
+    border: 2px solid #AAAAAA;
+    border-radius: 8px 8px;
+    box-shadow: 2px 3px #444444;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 30px auto 10px auto;
+    width: 140px;
+}
+
+.deleteButton h3 {
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.deleteButton:hover {
+    background-color: #FC4443;
+    background-image: radial-gradient(#CCC, #DE4456);
+    box-shadow: 4px 6px #444444;
+}
+
+.deleteButton:active {
+    background-color: #C2181C;
+    background-image: radial-gradient(#E93B32, #444444);
+    box-shadow: 0px 0px #444444;
+}
+
+.addNewPokemon {
+    align-self: flex-start;
+    border-radius: 5px 5px;
+    background-color: #CCCCCC;
+    background-image: radial-gradient(#AAAAAA, #CCCCCC);
+    cursor: default;
+}
+
+.plusItemPokemon {
+    display: block;
+    background: #888888;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    margin: 10px auto;
+}
+
+.plusItemPokemon p {
+    font-family: "PokemonSolid";
+    font-size: 50px;
+    line-height: 100px;
+}
+
+.cornerIcon {
+    cursor: pointer;
+    display: block;
+    height: 13px;
+    position: absolute;
+    top: 0;
+    width: 13px;
+    z-index: 2;
+}
+
+.cornerIcon p {
+    font-size: 10px;
+    line-height: 13px;
+}
+
+.cancelNew {
+    background: red;
+    border-bottom: 0.5px solid black;
+    border-right: 0.5px solid black;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 50%;
+    left: 0;
+}
+
+.confirmNew {
+    background: green;
+    border-bottom: 0.5px solid black;
+    border-left: 0.5px solid black;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 50%;
+    right: 0;
+}
+
+.pokemonSelectorCase2 {
+    margin: 5px auto;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 1px 1px 11px #303;
+    background: #619466 scroll 100px 5px;
+    width: 110px;
+}
+
+
+.pokemonSelector2 {
+    border: 0px none;
+    color: #EEE;
+    background: transparent none repeat scroll 0% 0%;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px 10px;
+    width: 110px;
+}
+
+
+.addNewPokemon label {
+    font-size: 14px;
+}
+
+.addNewPokemon input[type=text] {
+    border: 1px solid white;
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.1);
+    padding: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 1px 2px;
+    font-size: 14px;
+    text-align: center;
+    text-indent: 0;
+    width: 40px;
+}
+
+.addPokemonImage {
+    border: 1px solid black;
+    cursor: default;
+    height: 50px;
+    width: 50px;
 }

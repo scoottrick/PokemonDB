@@ -1,4 +1,4 @@
-function MainPageController($http, $scope, $location) {
+function MainPageController($http, $scope, $location, $rootScope) {
     $scope.pokemon = [];
 
     $scope.viewPokemon = function () {
@@ -13,7 +13,7 @@ function MainPageController($http, $scope, $location) {
 
     $http({
         method: 'GET',
-        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon/' + random
+        url: $rootScope.baseURL + '/pokemon/' + random
     }).then(function successCallback(response) {
         $scope.pokemon = response.data;
     }, function errorCallback(response) {
