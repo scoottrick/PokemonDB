@@ -1,21 +1,20 @@
-function GymController($http, $scope, $location, $route) {
+function GymController($http, $scope, $location, $route, $rootScope) {
     $scope.gym = [];
     $scope.name = $route.current.params.name;
     $scope.name = $scope.name.replace("_", " ");
-    
-    $scope.openBadges = function() {
+
+    $scope.openBadges = function () {
         $location.path("/badges");
     }
-    
-    $scope.openLeader = function() {
+
+    $scope.openLeader = function () {
         var name = $scope.gym['leader']['name'];
-        $location.path("/trainer/"+name);
+        $location.path("/trainer/" + name);
     }
 
     $http({
         method: 'GET',
-        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/gyms'
-        url: 'http://localhost:8888/PokemonDB/backend/gyms'
+        url: $rootScope.baseURL + '/gyms'
     }).then(function successCallback(response) {
         var gyms = response.data;
         var id = findTrainerId(gyms);
@@ -38,8 +37,7 @@ function GymController($http, $scope, $location, $route) {
     var loadTrainerDataForId = function (id) {
         $http({
             method: 'GET',
-            //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/gyms/' + id
-            url: 'http://localhost:8888/PokemonDB/backend/gyms/' + id
+            url: $rootScope.baseURL + '/gyms/' + id
         }).then(function successCallback(response) {
             $scope.gym = response.data;
             setBadgeImage();
@@ -48,7 +46,7 @@ function GymController($http, $scope, $location, $route) {
             console.log(response);
         });
     }
-    
+
     var setBadgeImage = function () {
         var badge = $scope.gym['badge'];
         var name = badge['name'];

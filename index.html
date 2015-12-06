@@ -52,8 +52,8 @@
                 </a>
                 <div class="searchArea" ng-controller="SearchController">
                     <form class="searchForm">
-                        <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" name="q" />
-                        <button id="siteSearchButton" type="submit">Search</button>
+                        <input id="siteSearch" type="text" placeholder="Enter search term" autocomplete="off" ng-model="searchText" />
+                        <button id="siteSearchButton" type="submit" ng-click="search()">Search</button>
                     </form>
                 </div>
             </div>

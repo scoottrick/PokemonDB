@@ -1,10 +1,9 @@
-function BadgesController($http, $scope, $location) {
+function BadgesController($http, $scope, $location, $rootScope) {
     $scope.badges = [];
 
     $http({
         method: 'GET',
-        //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/badges'
-        url: 'http://localhost:8888/PokemonDB/backend/badges'
+        url: $rootScope.baseURL+'/backend/badges'
     }).then(function successCallback(response) {
         var badgeData = response.data;
         setImage(badgeData);

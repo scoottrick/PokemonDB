@@ -1,3 +1,11 @@
 <div class="bodyContent">
-    SEARCHRESULTS
+    <div class="searchResultsArea">
+        <h1>Results for "{{query}}"</h1>
+        <div class="subjectBlock" ng-repeat="(subject, subjectData) in results" ng-class="subject+'Block'">
+            <h2 class="subjectHeader">{{subject}}</h2>
+            <div class="subjectDataBlock" ng-repeat="data in subjectData" ng-click="openItem(subject, data)">
+                <p class="subjectDataBlockText">{{data.name}}</p>
+            </div>
+        </div>
+    </div>
 </div>

@@ -8,7 +8,7 @@ class Trainer {
             $this->name = $data['trainer_name'];
 
             $rivalId = $data['trainer_rival'];
-            if ($rivalId !== null) {
+            if ($rivalId != null) {
                 $rivalId = intval($rivalId);
             }
             $this->rivalId = $rivalId;
@@ -112,6 +112,9 @@ class Trainer {
     }
 
     public static function create($name, $rivalId, $pokemon, $badgeIds) {
+        if ($rivalId == null){
+            $rivalId = "NULL";
+        }
         $result = Database::query(SQL::createTrainer($name, $rivalId));
         if ($result) {
             $lastId = mysqli_insert_id(Database::sharedDB());
@@ -127,6 +130,25 @@ class Trainer {
 
             return Trainer::getById($lastId)->serialize();
         }
+        return false;
+    }
+
+    public static function delete($id) {
+        $badge = Database::query(SQL::trainerBadges($id));
+        $poke = Database::query(SQL::pokemonOwnedByTrainer($id));
+        $result1 = true; $result2 = true;
+        if ($badge != null){
+            $result1 = Database::query(SQL::deleteTrainerBadges($id));
+        }
+        if ($poke != null){
+            $result2 = Database::query(SQL::deleteTrainerPokemon($id));
+        }
+
+        if ($result1 && $result2){
+
+            return Database::query(SQL::deleteTrainer($id));
+        }
+
         return false;
     }
 }

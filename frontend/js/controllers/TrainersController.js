@@ -1,4 +1,4 @@
-function TrainersController($http, $scope, $location) {
+function TrainersController($http, $scope, $location, $rootScope) {
     $scope.trainers = [];
     $scope.createMode = false;
     $scope.badges = [];
@@ -8,11 +8,10 @@ function TrainersController($http, $scope, $location) {
     $scope.addPokemonSize = [0];
 
 
-    $scope.loadData = function () {
+    var loadData = function () {
         $http({
             method: 'GET',
-            //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/trainers'
-            url: 'http://localhost:8888/PokemonDB/backend/trainers'
+            url: $rootScope.baseURL + '/trainers'
         }).then(function successCallback(response) {
             $scope.trainers = response.data;
             setImage();
@@ -21,8 +20,6 @@ function TrainersController($http, $scope, $location) {
             console.log(response);
         });
     }
-
-    $scope.loadData();
 
     $scope.viewTrainer = function (name) {
         $location.path("/trainer/" + name);
@@ -99,17 +96,25 @@ function TrainersController($http, $scope, $location) {
     }
 
     $scope.submitNewTrainer = function () {
+        if (!angular.isObject($scope.newTrainer)) {
+            $scope.createTrainerMode();
+            return;
+        }
+        var rivalID = null;
+        if (angular.isObject($scope.newTrainer.rival)) {
+            rivalID = $scope.newTrainer.rival.id;
+        }
+
         var data = {
             name: $scope.newTrainer.name,
-            rivalId: $scope.newTrainer.rival.id,
+            rivalId: rivalID,
             pokemon: $scope.selectedPokemon,
             badgeIds: $scope.selectedBadges
         };
-        console.log(data);
 
         $http({
             method: 'POST',
-            url: 'http://localhost:8888/PokemonDB/backend/trainers/create',
+            url: $rootScope.baseURL + '/trainers/create',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -121,16 +126,31 @@ function TrainersController($http, $scope, $location) {
             }
         }).then(function callback(response) {
             console.log(response);
+            loadData();
         });
         $scope.createTrainerMode();
-        $scope.loadData();
+
     };
 
+    $scope.delete = function (trainerId) {
+        $http({
+            method: 'POST',
+            url: $rootScope.baseURL + '/trainers/delete',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                id: trainerId
+            }
+        }).then(function callback(response) {
+            if (response.data == true) {
+                loadData();
+            } else {
+                console.log(response);
+            }
+        });
 
-
-
-
-
+    }
 
     var setImage = function () {
         for (var i = 0; i < $scope.trainers.length; i++) {
@@ -147,8 +167,7 @@ function TrainersController($http, $scope, $location) {
     var loadBadges = function () {
         $http({
             method: 'GET',
-            //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/badges'
-            url: 'http://localhost:8888/PokemonDB/backend/badges'
+            url: $rootScope.baseURL + '/badges'
         }).then(function successCallback(response) {
             var badgeData = response.data;
             setBadgeImage(badgeData);
@@ -164,8 +183,7 @@ function TrainersController($http, $scope, $location) {
     var loadPokemon = function () {
         $http({
             method: 'GET',
-            //        url: 'http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend/pokemon'
-            url: 'http://localhost:8888/PokemonDB/backend/pokemon'
+            url: $rootScope.baseURL + '/pokemon'
         }).then(function successCallback(response) {
             $scope.pokedex = response.data;
         }, function errorCallback(response) {
@@ -199,4 +217,6 @@ function TrainersController($http, $scope, $location) {
         };
         $scope.badges = temp;
     };
+
+    loadData();
 };

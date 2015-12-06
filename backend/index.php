@@ -44,6 +44,13 @@ $app->post('/trainers/create', function() use ($app) {
     echo json_encode($trainer);
 });
 
+$app->post('/trainers/delete', function() use ($app) {
+    $body = $app->request->getBody();
+    $json = json_decode($body);
+    $trainer = Trainer::delete($json->id);
+    echo json_encode($trainer);
+});
+
 $app->get('/trainers', function() use ($app) {
     echo json_encode(Trainer::getAll());
 });
