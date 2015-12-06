@@ -3,7 +3,7 @@ function BadgesController($http, $scope, $location, $rootScope) {
 
     $http({
         method: 'GET',
-        url: $rootScope.baseURL+'/backend/badges'
+        url: $rootScope.baseURL+'/badges'
     }).then(function successCallback(response) {
         var badgeData = response.data;
         setImage(badgeData);
