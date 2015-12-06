@@ -35,6 +35,8 @@ a {
 }
 
 
+
+
 /* ---------- HEADER ------------ */
 
 header .siteHeader {
@@ -43,9 +45,10 @@ header .siteHeader {
     background-position: center 0px, 0px center;
     border: 1px solid black;
     border-radius: 8px;
+    box-sizing: border-box;
     display: block;
     margin: 10px auto 0 auto;
-    padding: 5px;
+    padding: 5px auto;
     width: 93%;
 }
 
@@ -68,24 +71,9 @@ header .siteHeader {
     min-width: 250px;
 }
 
-.flexHeader a {
-    flex-shrink: 1;
-    flex-grow: 10;
-    flex-basis: 400px;
-    margin: 0;
-    padding: 0;
-    min-width: 400px;
-}
-
-.flexHeader a img {
+.banner img {
     height: 80px;
     vertical-align: bottom;
-}
-
-.flexHeader a {
-    background-repeat: no-repeat;
-    text-align: left;
-    text-shadow: 1px 1px 1px #000;
 }
 
 .banner {
@@ -95,6 +83,15 @@ header .siteHeader {
     flex-flow: row wrap;
     height: auto;
     justify-content: left;
+    flex-shrink: 1;
+    flex-grow: 10;
+    flex-basis: 400px;
+    margin: 0;
+    padding: 0;
+    min-width: 300px;
+    background-repeat: no-repeat;
+    text-align: left;
+    text-shadow: 1px 1px 1px #000;
 }
 
 .bannerObject {
@@ -164,12 +161,13 @@ header .siteHeader {
 @media screen and (max-width:475px){
     .banner h1 {
         font-size: 3em;
+        padding-left: 0px;
     }
 }
 
 header .siteNavigation {
     margin: 0px auto 10px auto;
-    padding: 0;
+    padding: 0px;
     width: 90%;
 }
 
@@ -178,15 +176,15 @@ header .siteNavigation {
     background-image: linear-gradient(#525252, #404040);
     box-sizing: border-box;
     border-color: use-text-color #000 #000;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0px 0px 8px 8px;
     border-style: none solid solid;
     border-width: 0px 1px 1px;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0px auto;
     list-style: outside none none;
     text-align: center;
     text-shadow: 1px 1px 1px #000;
-    padding: 0;
+    padding: 0px;
     width: 100%;
 }
 
@@ -201,7 +199,7 @@ header .siteNavigation {
     line-height: 26px;
     list-style: outside none none;
     margin: 0 -2.5px;
-    padding: 5px 0;
+    padding: 5px 0px;
     text-decoration: none;
     transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
     width: 25%;
@@ -236,7 +234,7 @@ header .siteNavigation {
     box-sizing: border-box;
     margin: 23px auto 15px auto;
     min-height: 300px;
-    padding: 20px;
+    padding: 20px auto;
     width: 93%;
 }
 
@@ -369,7 +367,7 @@ footer {
     border-radius: 8px;
     display: block;
     margin: 10px auto;
-    padding: 5px;
+    padding: 5px auto;
     width: 93%;
 }
 
