@@ -16,6 +16,7 @@ html {
     background-image: linear-gradient(to top right, #666 0px, #666 2px, #6E6E6E 2px, #6E6E6E 8px, #666 8px, #666 10px, #6E6E6E 10px, #6E6E6E 17px);
     background-size: 12px 12px;
     min-width: 300px;
+    overflow-x: hidden;
 }
 
 html * {

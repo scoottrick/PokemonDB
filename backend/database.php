@@ -20,7 +20,7 @@ class Database {
 
     public static function sharedDB() {
         if (Database::$singleton === null) {
-            $config = self::$localConfig;
+            $config = self::$remoteConfig;
             Database::$singleton = new mysqli(
                 $config["host"],
                 $config["user"],
