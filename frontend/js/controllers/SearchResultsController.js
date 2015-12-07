@@ -1,6 +1,12 @@
 function SearchResultsController($http, $scope, $location, $route, $rootScope) {
     $scope.query = $route.current.params.text;
-    $scope.results = [];
+    $scope.results = {
+        badges: [],
+        gyms: [],
+        pokemon: [],
+        trainers: [],
+        types: []
+    };
 
     var search = function (query) {
         $http({
@@ -8,6 +14,23 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
             url: $rootScope.baseURL+'/search/' + query
         }).then(function successCallback(response) {
             $scope.results = response.data;
+            var data = response.data;
+            var badges = data.badges.length;
+            var gyms = data.gyms.length;
+            var pokemon = data.pokemon.length;
+            var trainers = data.trainers.length;
+            var types = data.types.length;
+            if (badges+gyms+pokemon+trainers+types == 1) {
+                if (data.badges.length) {
+                    $scope.openItem("badges", data.badges[0]);
+                } else if (data.gyms.length) {
+                    $scope.openItem("gyms", data.gyms[0]);
+                } else if (data.pokemon.length) {
+                    $scope.openItem("pokemon", data.pokemon[0]);
+                } else if (data.trainers.length) {
+                    $scope.openItem("trainers", data.trainers[0]);
+                }
+            }
         }, function errorCallback(response) {
             alert("Database unreachable. Check console for more info.");
             console.log(response);
