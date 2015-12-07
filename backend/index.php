@@ -13,6 +13,10 @@ error_reporting(E_ALL);
 
 $app = new \Slim\Slim();
 
+function sendResponse($data) {
+    echo json_encode($data, JSON_PRETTY_PRINT);
+}
+
 $app->get("/search/:str", function($searchStr) use ($app) {
     $objects = array();
     $objects["badges"] = Badge::search($searchStr);
@@ -20,57 +24,55 @@ $app->get("/search/:str", function($searchStr) use ($app) {
     $objects["pokemon"] = Pokemon::search($searchStr);
     $objects["trainers"] = Trainer::search($searchStr);
     $objects["types"] = Type::search($searchStr);
-    echo json_encode($objects);
+
+    foreach($objects["types"] as $type) {
+        $typeId = intval($type["id"]);
+        $pokemonForType = Pokemon::searchByType($typeId);
+        foreach($pokemonForType as $pokemon) {
+            array_push($objects["pokemon"], $pokemon);
+        }
+    }
+    sendResponse($objects);
 });
 
 $app->get("/pokemon", function() use ($app) {
-    echo json_encode(Pokemon::getAll());
+    sendResponse(Pokemon::getAll());
 });
 
 $app->get("/pokemon/:id", function($id) use ($app) {
     $pokemon = Pokemon::getById($id);
-    echo json_encode($pokemon->serialize());
+    sendResponse($pokemon->serialize());
 });
 
 $app->get("/pokemon/:id/owners", function($pokemonId) use ($app) {
     $pokemon = Pokemon::getById($pokemonId);
-    echo json_encode($pokemon->getTrainers());
+    sendResponse($pokemon->getTrainers());
 });
 
 $app->post('/trainers/create', function() use ($app) {
     $body = $app->request->getBody();
     $json = json_decode($body);
     $trainer = Trainer::create($json->name, $json->rivalId, $json->pokemon, $json->badgeIds);
-    echo json_encode($trainer);
+    sendResponse($trainer);
 });
 
 $app->post('/trainers/delete', function() use ($app) {
     $body = $app->request->getBody();
     $json = json_decode($body);
     $trainer = Trainer::delete($json->id);
-    echo json_encode($trainer);
+    sendResponse($trainer);
 });
 
 $app->get('/trainers', function() use ($app) {
-    echo json_encode(Trainer::getAll());
+    sendResponse(Trainer::getAll());
 });
-
-//$app->post('/trainers', function($id) use ($app){
-//    $body = $app->request->getBody();
-//    parse_str(urldecode($body));
-//    Trainer::addTrainer($name);
-//    $trainers[] = Trainer::getAll();
-//    $id = count($trainers) - 1;
-//    $trainer = Trainer::getById($id);
-//    echo json_encode($trainer);
-//});
 
 $app->post('/trainers/:id/pokemon/add', function($id) use ($app) {
     $body = $app->request->getBody();
     $json = json_decode($body);
     $trainer = Trainer::getById($id);
     $result = $trainer->addPokemon($json->pokemonId, $json->pokemonLevel);
-    echo json_encode($result);
+    sendResponse($result);
 });
 
 $app->post('/trainers/:id/pokemon/remove', function($id) use ($app) {
@@ -78,7 +80,7 @@ $app->post('/trainers/:id/pokemon/remove', function($id) use ($app) {
     $json = json_decode($body);
     $trainer = Trainer::getById($id);
     $result = $trainer->removePokemon($json->pokemonId);
-    echo json_encode($result);
+    sendResponse($result);
 });
 
 $app->post('/trainers/:id/badges/add', function($id) use ($app) {
@@ -86,7 +88,7 @@ $app->post('/trainers/:id/badges/add', function($id) use ($app) {
     $json = json_decode($body);
     $trainer = Trainer::getById($id);
     $result = $trainer->addBadge($json->badgeId);
-    echo json_encode($result);
+    sendResponse($result);
 });
 
 $app->post('/trainers/:id/badges/remove', function($id) use ($app) {
@@ -94,54 +96,54 @@ $app->post('/trainers/:id/badges/remove', function($id) use ($app) {
     $json = json_decode($body);
     $trainer = Trainer::getById($id);
     $result = $trainer->removeBadge($json->badgeId);
-    echo json_encode($result);
+    sendResponse($result);
 });
 
 $app->get('/trainers/:id', function($id) use ($app) {
     $trainer = Trainer::getById($id);
-    echo json_encode($trainer->serialize());
+    sendResponse($trainer->serialize());
 });
 
 $app->get('/trainers/:id/pokemon', function($id) use ($app) {
     $trainer = Trainer::getById($id);
-    echo json_encode($trainer->getPokemon());
+    sendResponse($trainer->getPokemon());
 });
 
 $app->get('/trainers/:id/badges', function($id) use ($app) {
     $trainer = Trainer::getById($id);
-    echo json_encode($trainer->getBadges());
+    sendResponse($trainer->getBadges());
 });
 
 $app->get('/gyms', function() use ($app) {
-    echo json_encode(Gym::getAll());
+    sendResponse(Gym::getAll());
 });
 
 $app->get('/gyms/:id', function($id) use ($app) {
     $gym = Gym::getById($id);
-    echo json_encode($gym->serialize());
+    sendResponse($gym->serialize());
 });
 
 $app->get('/gyms/:id/leader', function($id) use ($app) {
     $gym = Gym::getById($id);
-    echo json_encode($gym->getLeader()->serialize());
+    sendResponse($gym->getLeader()->serialize());
 });
 
 $app->get('/types', function() use ($app) {
-    echo json_encode(Type::getAll());
+    sendResponse(Type::getAll());
 });
 
 $app->get('/types/:id', function($id) use ($app) {
     $type = Type::getById($id);
-    echo json_encode($type->serialize());
+    sendResponse($type->serialize());
 });
 
 $app->get('/badges', function() use ($app) {
-    echo json_encode(Badge::getAll());
+    sendResponse(Badge::getAll());
 });
 
 $app->get('/badges/:id', function($id) use ($app) {
     $badge = Badge::getById($id);
-    echo json_encode($badge->serialize());
+    sendResponse($badge->serialize());
 });
 
 $app->run();
