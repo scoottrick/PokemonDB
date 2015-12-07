@@ -31,9 +31,6 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
                     $scope.openItem("trainers", data.trainers[0]);
                 }
             }
-            console.log($scope.results);
-
-
         }, function errorCallback(response) {
             alert("Database unreachable. Check console for more info.");
             console.log(response);

@@ -29,7 +29,9 @@ $app->get("/search/:str", function($searchStr) use ($app) {
         $typeId = intval($type["id"]);
         $pokemonForType = Pokemon::searchByType($typeId);
         foreach($pokemonForType as $pokemon) {
-            array_push($objects["pokemon"], $pokemon);
+            if (!in_array($pokemon, $objects["pokemon"])) {
+                array_push($objects["pokemon"], $pokemon);
+            }
         }
     }
     sendResponse($objects);
