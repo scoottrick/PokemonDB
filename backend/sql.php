@@ -88,7 +88,7 @@ class SQL {
     }
 
     static function searchPokemon($searchStr) {
-        return "select * from `POKEMON` where concat(`pokemon_name`) like '%" . $searchStr . "%'";
+        return "select * from `POKEMON` where concat(`pokemon_id`, `pokemon_name`) like '%" . $searchStr . "%'";
     }
 
     static function searchTrainers($searchStr) {
