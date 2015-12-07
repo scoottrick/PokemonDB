@@ -126,4 +126,9 @@ class Pokemon {
         return Pokemon::pokemonFromResult($result);
     }
 
+    public static function searchByType($typeId) {
+        $result = Database::query(SQL::searchPokemonByType($typeId));
+        return Pokemon::pokemonFromResult($result);
+    }
+
 }
