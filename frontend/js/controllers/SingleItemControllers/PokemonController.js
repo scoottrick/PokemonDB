@@ -19,58 +19,47 @@ app.controller("PokemonController", function ($scope, $location, $route, API) {
 
     var id = $route.current.params.id;
 
-    $http({
-        method: 'GET',
-        url: $rootScope.baseURL + '/pokemon/' + id
-    }).then(function successCallback(response) {
-        $scope.pokemon = response.data;
-        if ($scope.pokemon.id == "133") { //Eevee
-            handleEeveeException();
-        }
-        loadPreEvolutionData();
-        navLoad();
-        if ($scope.pokemon['nextEvolutionLevel'] == null) {
-            $scope.pokemon['nextEvolutionLevel'] = "Special";
-        }
-        if ($scope.pokemon['lastEvolutionLevel'] == null) {
-            $scope.pokemon['lastEvolutionLevel'] = "Special";
-        }
-    }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
-    });
+    API.getPokemonById(id)
+        .then(function successCallback(response) {
+            $scope.pokemon = response.data;
+            if ($scope.pokemon.id == "133") { //Eevee
+                handleEeveeException();
+            }
+            loadPreEvolutionData();
+            loadPostEvolutionData();
+            navLoad();
+            if ($scope.pokemon['nextEvolutionLevel'] == null) {
+                $scope.pokemon['nextEvolutionLevel'] = "Special";
+            }
+            if ($scope.pokemon['lastEvolutionLevel'] == null) {
+                $scope.pokemon['lastEvolutionLevel'] = "Special";
+            }
+        }, function errorCallback(response) {
+            API.errorResponse(response);
+        });
 
 
     var loadPreEvolutionData = function () {
         if ($scope.pokemon['lastEvolution'] != null) {
             var pastID = $scope.pokemon['lastEvolution'];
-            $http({
-                method: 'GET',
-                url: $rootScope.baseURL + '/pokemon/' + pastID
-            }).then(function successCallback(response) {
-                $scope.lastEvolution = response.data;
-                loadPostEvolutionData();
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
-        } else {
-            loadPostEvolutionData();
+            API.getPokemonById(pastID)
+                .then(function successCallback(response) {
+                    $scope.lastEvolution = response.data;
+                }, function errorCallback(response) {
+                    API.errorResponse(response);
+                });
         }
     };
 
     var loadPostEvolutionData = function () {
         if ($scope.pokemon['nextEvolution'] != null) {
             var nextID = $scope.pokemon['nextEvolution'];
-            $http({
-                method: 'GET',
-                url: $rootScope.baseURL + '/pokemon/' + nextID
-            }).then(function successCallback(response) {
-                $scope.nextEvolution = response.data;
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
+            API.getPokemonById(nextID)
+                .then(function successCallback(response) {
+                    $scope.nextEvolution = response.data;
+                }, function errorCallback(response) {
+                    API.errorResponse(response);
+                });
         };
     }
 
@@ -115,34 +104,25 @@ app.controller("PokemonController", function ($scope, $location, $route, API) {
         $scope.pokemon['nextEvolution'] = null;
         var temp = [];
 
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/pokemon/' + 134
-        }).then(function successCallback(response) {
+        API.getPokemonById(134)
+            .then(function successCallback(response) {
             temp[0] = response.data;
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
 
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/pokemon/' + 135
-        }).then(function successCallback(response) {
+        API.getPokemonById(135)
+            .then(function successCallback(response) {
             temp[1] = response.data;
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
 
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/pokemon/' + 136
-        }).then(function successCallback(response) {
+        API.getPokemonById(136)
+            .then(function successCallback(response) {
             temp[2] = response.data;
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
 
         $scope.pokemon['eeveeEvolution'] = temp;

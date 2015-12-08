@@ -11,12 +11,11 @@ app.controller("MainPageController", function ($scope, $location, API) {
         random = "0" + random;
     };
 
-    API.getPokemonByID(random)
+    API.getPokemonById(random)
         .then(function successCallback(response) {
             $scope.pokemon = response.data;
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
 
 });

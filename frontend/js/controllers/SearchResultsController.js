@@ -9,10 +9,8 @@ app.controller("SearchResultsController", function ($scope, $location, $route, A
     };
 
     var search = function (query) {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL+'/search/' + query
-        }).then(function successCallback(response) {
+        API.search(query).
+        then(function successCallback(response) {
             $scope.results = response.data;
             var data = response.data;
             var badges = data.badges.length;
@@ -32,14 +30,11 @@ app.controller("SearchResultsController", function ($scope, $location, $route, A
                 }
             }
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
     }
 
     $scope.openItem = function (subject, data) {
-        console.log(subject);
-        console.log(data);
         switch (subject) {
         case "badges":
             $location.path("/badges");

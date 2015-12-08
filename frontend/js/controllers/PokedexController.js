@@ -6,11 +6,11 @@ app.controller("PokedexController", function ($scope, $location, API) {
         $location.path('/pokedex/' + id);
     }
 
-    API.getAllPokemon().then(function successCallback(response) {
-        $scope.pokedex = response.data;
-    }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
-    });
+    API.getAllPokemon()
+        .then(function successCallback(response) {
+            $scope.pokedex = response.data;
+        }, function errorCallback(response) {
+            API.errorResponse(response);
+        });
 
 });

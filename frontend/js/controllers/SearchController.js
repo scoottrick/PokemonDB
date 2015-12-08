@@ -1,4 +1,4 @@
-app.controller("SearchController", function ($scope, $location, $rootScope) {
+app.controller("SearchController", function ($scope, $location) {
 
     $scope.search = function () {
         if ($scope.searchText == undefined) {

@@ -9,16 +9,12 @@ app.controller("TrainersController", function ($scope, $location, API) {
 
 
     var loadData = function () {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/trainers'
-        }).then(function successCallback(response) {
-            $scope.trainers = response.data;
-            setImage();
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
+        API.getAllTrainers()
+            .then(function successCallback(response) {
+                $scope.trainers = API.setTrainerImages(response.data);
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     }
 
     $scope.viewTrainer = function (name) {
@@ -67,7 +63,6 @@ app.controller("TrainersController", function ($scope, $location, API) {
             };
             $scope.selectedPokemon[index] = temp;
         }
-
         //need to prevent from reselecting same pokemon with same level
     }
 
@@ -112,97 +107,32 @@ app.controller("TrainersController", function ($scope, $location, API) {
             badgeIds: $scope.selectedBadges
         };
 
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/create',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                name: data.name,
-                rivalId: data.rivalId,
-                pokemon: data.pokemon,
-                badgeIds: data.badgeIds
-            }
-        }).then(function callback(response) {
-            console.log(response);
-            loadData();
-        });
-        $scope.createTrainerMode();
-
-    };
-
-    $scope.delete = function (trainerId) {
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/delete',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                id: trainerId
-            }
-        }).then(function callback(response) {
-            if (response.data == true) {
+        API.createNewTrainer(data)
+            .then(function successCallback(response) {
                 loadData();
-            } else {
-                console.log(response);
-            }
-        });
-
-    }
-
-    var setImage = function () {
-        for (var i = 0; i < $scope.trainers.length; i++) {
-            var trainer = $scope.trainers[i];
-            if (trainer['id'] <= 10) {
-                trainer['image'] = trainer['name'];
-            } else {
-                trainer['image'] = "Avatar";
-            }
-            $scope.trainers[i] = trainer;
-        }
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
+        $scope.createTrainerMode();
     };
 
     var loadBadges = function () {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/badges'
-        }).then(function successCallback(response) {
-            var badgeData = response.data;
-            setBadgeImage(badgeData);
-            shortenBadgeName();
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
-
-
+        API.getAllBadges()
+            .then(function successCallback(response) {
+                $scope.badgres = API.setBadgeImage(response.data);
+                shortenBadgeName();
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     };
 
     var loadPokemon = function () {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/pokemon'
-        }).then(function successCallback(response) {
-            $scope.pokedex = response.data;
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
-    };
-
-    var setBadgeImage = function (badgeData) {
-        var temp = badgeData;
-        for (var i = 0; i < temp.length; i++) {
-            var badge = temp[i];
-            var name = badge['name'];
-            var index = name.indexOf(" ");
-            var image = name.substring(0, index);
-            badge['image'] = image;
-            temp[i] = badge;
-        };
-        $scope.badges = temp;
+        API.getAllPokemon()
+            .then(function successCallback(response) {
+                $scope.pokedex = response.data;
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     };
 
     var shortenBadgeName = function () {
@@ -218,5 +148,6 @@ app.controller("TrainersController", function ($scope, $location, API) {
         $scope.badges = temp;
     };
 
+    //loads data for the first time when view is presented
     loadData();
 });
