@@ -1,10 +1,10 @@
-function SearchController($http, $scope, $location, $rootScope) {
+app.controller("SearchController", function ($scope, $location) {
 
-    $scope.search = function(){
-        if ($scope.searchText == undefined){
+    $scope.search = function () {
+        if ($scope.searchText == undefined) {
             return;
         }
-        $location.path("/search/"+$scope.searchText);
+        $location.path("/search/" + $scope.searchText);
     }
 
-};
+});

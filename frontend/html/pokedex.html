@@ -2,8 +2,15 @@
     <div class="pokedexTitle">
         Pokédex
     </div>
+    <div class="sortBlock">
+        <div class="sortBar">
+            <div class="sortOptions" ng-repeat="(title, value) in sortOptions" ng-click="sortBy(value)" ng-class="sortValue == value ? 'currentSortOption' : ''">
+                <h3>{{title}}</h3>
+            </div>
+        </div>
+    </div>
     <div class="pokedexElementArea">
-        <div class="pokemonBox" ng-repeat="pokemon in pokedex" ng-click="viewPokemon(pokemon)">
+        <div class="pokemonBox" ng-repeat="pokemon in pokedex | orderBy: sortValue:reverse" ng-click="viewPokemon(pokemon)" ng-class="sortValue == sortOptions.Type ? pokemon.type.name: ''">
             <center><img ng-src="/PokemonDB/frontend/images/pokemon/{{pokemon.id}}.png" alt="{pokemon.name}" /></center>
             <h1>{{pokemon.name}}</h1>
             <h2>#{{pokemon.id}}</h2>

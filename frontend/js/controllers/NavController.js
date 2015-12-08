@@ -1,19 +1,19 @@
-function NavController($http, $scope, $location, $rootScope) {
+app.controller("NavController", function ($scope, $location) {
 
-    $scope.pokedexClick = function(){
+    $scope.pokedexClick = function () {
         $location.path("/pokedex");
     };
 
-    $scope.trainersClick = function() {
+    $scope.trainersClick = function () {
         $location.path("/trainers");
     };
 
-    $scope.gymsClick = function() {
+    $scope.gymsClick = function () {
         $location.path("/gyms");
     };
 
-    $scope.badgesClick = function() {
+    $scope.badgesClick = function () {
         $location.path("/badges");
     };
 
-};
+});

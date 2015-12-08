@@ -1,4 +1,4 @@
-function SearchResultsController($http, $scope, $location, $route, $rootScope) {
+app.controller("SearchResultsController", function ($scope, $location, $route, API) {
     $scope.query = $route.current.params.text;
     $scope.results = {
         badges: [],
@@ -7,12 +7,25 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
         trainers: [],
         types: []
     };
+    $scope.sortOptions = {
+        Default: $scope.query,
+        Alphabetical: "name"
+    };
+    $scope.reverse = false;
+    $scope.sortValue = $scope.sortOptions.Default;
+
+    $scope.sortBy = function (value) {
+        if ($scope.sortValue == $scope.sortOptions.Alphabetical) {
+            $scope.reverse = !$scope.reverse;
+        } else {
+            $scope.reverse = false;
+        }
+        $scope.sortValue = value;
+    };
 
     var search = function (query) {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL+'/search/' + query
-        }).then(function successCallback(response) {
+        API.search(query).
+        then(function successCallback(response) {
             $scope.results = response.data;
             var data = response.data;
             var badges = data.badges.length;
@@ -20,7 +33,7 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
             var pokemon = data.pokemon.length;
             var trainers = data.trainers.length;
             var types = data.types.length;
-            if (badges+gyms+pokemon+trainers+types == 1) {
+            if (badges + gyms + pokemon + trainers + types == 1) {
                 if (data.badges.length) {
                     $scope.openItem("badges", data.badges[0]);
                 } else if (data.gyms.length) {
@@ -32,14 +45,11 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
                 }
             }
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
     }
 
     $scope.openItem = function (subject, data) {
-        console.log(subject);
-        console.log(data);
         switch (subject) {
         case "badges":
             $location.path("/badges");
@@ -63,4 +73,4 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
     }
 
     search($scope.query);
-};
+});

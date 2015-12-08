@@ -35,8 +35,6 @@ a {
 }
 
 
-
-
 /* ---------- HEADER ------------ */
 
 header .siteHeader {
@@ -158,7 +156,7 @@ header .siteHeader {
     }
 }
 
-@media screen and (max-width:475px){
+@media screen and (max-width:475px) {
     .banner h1 {
         font-size: 3em;
         padding-left: 0px;
@@ -243,6 +241,78 @@ header .siteNavigation {
     width: 95%;
 }
 
+
+/* -------- SORT BAR ----- */
+
+.sortBlock {
+    display: block;
+    margin: 10px auto;
+    max-width: 500px;
+    width: 97%;
+}
+
+.sortBar {
+    align-content: center;
+    align-items: center;
+    background-color: #323638;
+    background-image: linear-gradient(#323638, #1B1D1E);
+    border: 1px solid #BBB;
+    border-radius: 5px 5px;
+    box-shadow: 3px 2px #555;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin: 0px 0px;
+    width: 100%;
+}
+
+.sortOptions {
+    background-color: #F08030;
+    background-image: linear-gradient(#FA8A3A, #F08030);
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 3px 2px #555;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex: 1 1 200px;
+    height: 30px;
+    margin: 10px 5px;
+    min-width: 50px;
+    transition: color 0.2s ease 0s, background-color 0.2s ease 0s;
+}
+
+.sortOptions:first-child {
+    margin-left: 20px;
+}
+
+.sortOptions:last-child {
+    margin-right: 20px;
+}
+
+.sortOptions:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #F08030);
+    box-shadow: 6px 4px #555;
+}
+
+.sortOptions:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#F08030, #676767);
+    box-shadow: none;
+}
+
+.sortOptions h3 {
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.currentSortOption {
+    background-color: #F08030;
+    background-image: linear-gradient(#F08030, #565656);
+}
+
+
 /* -------- REMOVE CORNER BUTTON ----- */
 
 .itemRemove {
@@ -276,84 +346,6 @@ header .siteNavigation {
     background: #5A0010;
     background-image: radial-gradient(#A3001A, #5A0010);
     box-shadow: 0px 0px #666666;
-}
-
-
-/* ------ POKEMON TYPE CLASSES ------- */
-
-.Normal {
-    background-color: #8A8A59;
-    background-image: linear-gradient(#9C9766, #8A8A59);
-}
-
-.Fighting {
-    background-color: #C03028;
-    background-image: linear-gradient(#CA3A32, #C03028);
-}
-
-.Flying {
-    background-color: #A890F0;
-    background-image: linear-gradient(#B29AFA, #A890F0);
-}
-
-.Poison {
-    background-color: #A040A0;
-    background-image: linear-gradient(#AA4AAA, #A040A0);
-}
-
-.Ground {
-    background-color: #E0C068;
-    background-image: linear-gradient(#EACA72, #E0C068);
-}
-
-.Rock {
-    background-color: #B8A038;
-    background-image: linear-gradient(#C2AA42, #B8A038);
-}
-
-.Bug {
-    background-color: #A8B820;
-    background-image: linear-gradient(#B2C22A, #A8B820);
-}
-
-.Ghost {
-    background-color: #705898;
-    background-image: linear-gradient(#7A62A2, #705898);
-}
-
-.Fire {
-    background-color: #F08030;
-    background-image: linear-gradient(#FA8A3A, #F08030);
-}
-
-.Water {
-    background-color: #6890F0;
-    background-image: linear-gradient(#729AFA, #6890F0);
-}
-
-.Grass {
-    background-color: #78C850;
-    background-image: linear-gradient(#82D25A, #78C850);
-}
-
-.Electric {
-    background-color: #F8D030;
-    background-image: linear-gradient(#FFDA3A, #F8D030);
-}
-
-.Psychic {
-    background-color: #F85888;
-    background-image: linear-gradient(#FF6292, #F85888);
-}
-
-.Ice {
-    background-color: #98D8D8;
-    background-image: linear-gradient(#A2E2E2, #98D8D8);
-}
-
-.Dragon {
-    background-color: #7038F8;
-    background-image: linear-gradient(#7A42FF, #7038F8);
 }
 
 

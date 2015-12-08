@@ -1,4 +1,4 @@
-function GymController($http, $scope, $location, $route, $rootScope) {
+app.controller("GymController", function ($scope, $location, $route, API) {
     $scope.gym = [];
     $scope.name = $route.current.params.name;
     $scope.name = $scope.name.replace("_", " ");
@@ -12,16 +12,13 @@ function GymController($http, $scope, $location, $route, $rootScope) {
         $location.path("/trainer/" + name);
     }
 
-    $http({
-        method: 'GET',
-        url: $rootScope.baseURL + '/gyms'
-    }).then(function successCallback(response) {
+    API.getAllGyms()
+        .then(function successCallback(response) {
         var gyms = response.data;
         var id = findTrainerId(gyms);
         loadTrainerDataForId(id);
     }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
+        API.errorResponse(response);
     });
 
     var findTrainerId = function (gymArray) {
@@ -35,25 +32,12 @@ function GymController($http, $scope, $location, $route, $rootScope) {
     }
 
     var loadTrainerDataForId = function (id) {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/gyms/' + id
-        }).then(function successCallback(response) {
+        API.getGymById(id)
+            .then(function successCallback(response) {
             $scope.gym = response.data;
-            setBadgeImage();
+            $scope.gym['badge'] = API.setBadgeImage($scope.gym['badge']);
         }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
+            API.errorResponse(response);
         });
     }
-
-    var setBadgeImage = function () {
-        var badge = $scope.gym['badge'];
-        var name = badge['name'];
-        var index = name.indexOf(" ");
-        var image = name.substring(0, index);
-        badge['image'] = image;
-        $scope.gym['badge'] = badge;
-    };
-
-};
+});

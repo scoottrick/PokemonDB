@@ -1,11 +1,13 @@
 <div class="bodyContent">
-    <div id="trainerArea">
-        <div class="trainerContainer" ng-repeat="trainer in trainers" ng-click="viewTrainer(trainer.name)">
-<!--
-            <div class="itemRemove" ng-click="delete(trainer.id)" ng-show="trainer.id > 10">
-                <p>-</p>
+    <div class="sortBlock">
+        <div class="sortBar">
+            <div class="sortOptions" ng-repeat="(title, value) in sortOptions" ng-click="sortBy(value)" ng-class="sortValue == value ? 'currentSortOption' : ''">
+                <h3>{{title}}</h3>
             </div>
--->
+        </div>
+    </div>
+    <div id="trainerArea">
+        <div class="trainerContainer" ng-repeat="trainer in trainers | orderBy: sortValue:reverse" ng-click="viewTrainer(trainer.name)">
             <div class="trainerImgDiv">
                 <img ng-src="../PokemonDB/frontend/images/trainers/VS{{trainer.image}}.png" alt="{trainer.name}" />
             </div>
