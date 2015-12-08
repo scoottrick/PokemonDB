@@ -51,19 +51,3 @@ app.config(function ($routeProvider, $locationProvider) {
             redirectTo: '/'
         });
 });
-
-app.run(function($rootScope){
-    $rootScope.baseURL = "http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend";
-});
-
-app.controller("NavController", ["$http", "$scope", "$location", "$rootScope", NavController]);
-app.controller("SearchController", ["$http", "$scope", "$location", "$rootScope", SearchController]);
-app.controller("MainPageController", ["$http", "$scope", "$location", "$rootScope", MainPageController]);
-app.controller("PokedexController", ["$http", "$scope", "$location", "$rootScope", PokedexController]);
-app.controller("TrainersController", ["$http", "$scope", "$location", "$rootScope", TrainersController]);
-app.controller("BadgesController", ["$http", "$scope", "$location", "$rootScope", BadgesController]);
-app.controller("GymsController", ["$http", "$scope", "$location", "$rootScope", GymsController]);
-app.controller("SearchResultsController", ["$http", "$scope", "$location", "$route", "$rootScope", SearchResultsController]);
-app.controller("TrainerController", ["$http", "$scope", "$location", "$route", "$rootScope", TrainerController]);
-app.controller("GymController", ["$http", "$scope", "$location", "$route", "$rootScope", GymController]);
-app.controller("PokemonController", ["$http", "$scope", "$location", "$route", "$rootScope", PokemonController]);

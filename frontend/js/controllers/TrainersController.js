@@ -1,4 +1,4 @@
-function TrainersController($http, $scope, $location, $rootScope) {
+app.controller("TrainersController", function ($scope, $location, API) {
     $scope.trainers = [];
     $scope.createMode = false;
     $scope.badges = [];
@@ -219,4 +219,4 @@ function TrainersController($http, $scope, $location, $rootScope) {
     };
 
     loadData();
-};
+});

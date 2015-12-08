@@ -1,4 +1,4 @@
-function GymController($http, $scope, $location, $route, $rootScope) {
+app.controller("GymController", function ($scope, $location, $route, API) {
     $scope.gym = [];
     $scope.name = $route.current.params.name;
     $scope.name = $scope.name.replace("_", " ");
@@ -56,4 +56,4 @@ function GymController($http, $scope, $location, $route, $rootScope) {
         $scope.gym['badge'] = badge;
     };
 
-};
+});

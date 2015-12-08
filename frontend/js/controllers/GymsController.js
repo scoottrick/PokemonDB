@@ -1,14 +1,14 @@
-function GymsController($http, $scope, $location, $rootScope) {
+app.controller("GymsController", function ($http, $scope, $location, API) {
     $scope.gyms = [];
 
-    $scope.openGym = function(name){
+    $scope.openGym = function (name) {
         name = name.replace(" ", "_");
         $location.path('/gym/' + name);
     };
 
     $http({
         method: 'GET',
-        url: $rootScope.baseURL+'/gyms'
+        url: $rootScope.baseURL + '/gyms'
     }).then(function successCallback(response) {
         $scope.gyms = response.data;
     }, function errorCallback(response) {
@@ -16,4 +16,4 @@ function GymsController($http, $scope, $location, $rootScope) {
         console.log(response);
     });
 
-};
+});

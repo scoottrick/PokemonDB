@@ -1,4 +1,4 @@
-function TrainerController($http, $scope, $location, $route, $rootScope) {
+app.controller("TrainerController", function ($scope, $location, $route, API) {
 
     $scope.trainer = [];
     $scope.rival = null;
@@ -239,4 +239,4 @@ function TrainerController($http, $scope, $location, $route, $rootScope) {
     }
 
     loadData();
-};
+});

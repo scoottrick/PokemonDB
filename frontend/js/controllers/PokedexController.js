@@ -1,4 +1,4 @@
-function PokedexController($http, $scope, $location, $rootScope) {
+app.controller("PokedexController", function ($scope, $location, API) {
     $scope.pokedex = [];
 
     $scope.viewPokemon = function (pokemon) {
@@ -6,14 +6,11 @@ function PokedexController($http, $scope, $location, $rootScope) {
         $location.path('/pokedex/' + id);
     }
 
-    $http({
-        method: 'GET',
-        url: $rootScope.baseURL + '/pokemon'
-    }).then(function successCallback(response) {
+    API.getAllPokemon().then(function successCallback(response) {
         $scope.pokedex = response.data;
     }, function errorCallback(response) {
         alert("Database unreachable. Check console for more info.");
         console.log(response);
     });
 
-};
+});

@@ -1,4 +1,4 @@
-function MainPageController($http, $scope, $location, $rootScope) {
+app.controller("MainPageController", function ($scope, $location, API) {
     $scope.pokemon = [];
 
     $scope.viewPokemon = function () {
@@ -11,14 +11,12 @@ function MainPageController($http, $scope, $location, $rootScope) {
         random = "0" + random;
     };
 
-    $http({
-        method: 'GET',
-        url: $rootScope.baseURL + '/pokemon/' + random
-    }).then(function successCallback(response) {
-        $scope.pokemon = response.data;
-    }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
-    });
+    API.getPokemonByID(random)
+        .then(function successCallback(response) {
+            $scope.pokemon = response.data;
+        }, function errorCallback(response) {
+            alert("Database unreachable. Check console for more info.");
+            console.log(response);
+        });
 
-};
+});

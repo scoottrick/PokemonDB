@@ -1,9 +1,9 @@
-function BadgesController($http, $scope, $location, $rootScope) {
+app.controller("BadgesController", function ($http, $scope, $location, API) {
     $scope.badges = [];
 
     $http({
         method: 'GET',
-        url: $rootScope.baseURL+'/badges'
+        url: $rootScope.baseURL + '/badges'
     }).then(function successCallback(response) {
         var badgeData = response.data;
         setImage(badgeData);
@@ -25,4 +25,4 @@ function BadgesController($http, $scope, $location, $rootScope) {
         $scope.badges = temp;
     };
 
-};
+});

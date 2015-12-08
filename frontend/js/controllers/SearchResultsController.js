@@ -1,4 +1,4 @@
-function SearchResultsController($http, $scope, $location, $route, $rootScope) {
+app.controller("SearchResultsController", function ($scope, $location, $route, API) {
     $scope.query = $route.current.params.text;
     $scope.results = {
         badges: [],
@@ -63,4 +63,5 @@ function SearchResultsController($http, $scope, $location, $route, $rootScope) {
     }
 
     search($scope.query);
-};
+})
+;
