@@ -1,7 +1,7 @@
 app.factory("API", function ($http) {
 
-    //    var baseURL = "http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend";
-    var baseURL = "http://localhost:8888/PokemonDB/backend";
+    var baseURL = "http://bgroff-pi2.dhcp.bsu.edu/PokemonDB/backend";
+    //var baseURL = "http://localhost:8888/PokemonDB/backend";
     var factory = {};
 
     /* ---- GET Requests ---- */
