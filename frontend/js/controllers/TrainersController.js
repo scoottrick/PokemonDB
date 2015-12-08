@@ -6,7 +6,20 @@ app.controller("TrainersController", function ($scope, $location, API) {
     $scope.selectedBadges = [];
     $scope.selectedPokemon = [];
     $scope.addPokemonSize = [0];
+    $scope.sortOptions = {
+        ID: "id",
+        Name: "name",
+        Badges: "-earned_badges.length"
+    };
+    $scope.reverse = false;
+    $scope.sortValue = $scope.sortOptions.ID;
 
+    $scope.sortBy = function(value){
+        if ($scope.sortValue == value){
+            $scope.reverse = !$scope.reverse;
+        }
+        $scope.sortValue = value;
+    };
 
     var loadData = function () {
         API.getAllTrainers()
@@ -119,7 +132,7 @@ app.controller("TrainersController", function ($scope, $location, API) {
     var loadBadges = function () {
         API.getAllBadges()
             .then(function successCallback(response) {
-                $scope.badgres = API.setBadgeImage(response.data);
+                $scope.badges = API.setBadgeImages(response.data);
                 shortenBadgeName();
             }, function errorCallback(response) {
                 API.errorResponse(response);

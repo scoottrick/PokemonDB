@@ -7,6 +7,21 @@ app.controller("SearchResultsController", function ($scope, $location, $route, A
         trainers: [],
         types: []
     };
+    $scope.sortOptions = {
+        Default: $scope.query,
+        Alphabetical: "name"
+    };
+    $scope.reverse = false;
+    $scope.sortValue = $scope.sortOptions.Default;
+
+    $scope.sortBy = function (value) {
+        if ($scope.sortValue == $scope.sortOptions.Alphabetical) {
+            $scope.reverse = !$scope.reverse;
+        } else {
+            $scope.reverse = false;
+        }
+        $scope.sortValue = value;
+    };
 
     var search = function (query) {
         API.search(query).
@@ -18,7 +33,7 @@ app.controller("SearchResultsController", function ($scope, $location, $route, A
             var pokemon = data.pokemon.length;
             var trainers = data.trainers.length;
             var types = data.types.length;
-            if (badges+gyms+pokemon+trainers+types == 1) {
+            if (badges + gyms + pokemon + trainers + types == 1) {
                 if (data.badges.length) {
                     $scope.openItem("badges", data.badges[0]);
                 } else if (data.gyms.length) {
@@ -58,5 +73,4 @@ app.controller("SearchResultsController", function ($scope, $location, $route, A
     }
 
     search($scope.query);
-})
-;
+});
