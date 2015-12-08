@@ -1,4 +1,4 @@
-function TrainerController($http, $scope, $location, $route, $rootScope) {
+app.controller("TrainerController", function ($scope, $location, $route, API) {
 
     $scope.trainer = [];
     $scope.rival = null;
@@ -21,17 +21,14 @@ function TrainerController($http, $scope, $location, $route, $rootScope) {
     }
 
     var loadData = function () {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/trainers'
-        }).then(function successCallback(response) {
-            var trainers = response.data;
-            var id = findTrainerId(trainers);
-            loadTrainer(id);
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
+        API.getAllTrainers()
+            .then(function successCallback(response) {
+                var trainers = response.data;
+                var id = findTrainerId(trainers);
+                loadTrainer(id);
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     }
 
     var findTrainerId = function (trainerArray) {
@@ -42,76 +39,46 @@ function TrainerController($http, $scope, $location, $route, $rootScope) {
             }
         }
         return -1;
-    }
+    };
 
 
     var loadTrainer = function (id) {
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/trainers/' + id
-        }).then(function successCallback(response) {
-            $scope.trainer = response.data;
-            $scope.trainer['earned_badges'] = setBadgeImages(response.data['earned_badges']);
-            setTrainerImage();
-            if ($scope.trainer['rival_id'] != null) {
-                loadRival();
-            }
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
-    }
-
-    var setBadgeImages = function (badgeData) {
-        var temp = badgeData;
-        for (var i = 0; i < temp.length; i++) {
-            var badge = temp[i];
-            var name = badge['name'];
-            var index = name.indexOf(" ");
-            var image = name.substring(0, index);
-            badge['image'] = image;
-            temp[i] = badge;
-        };
-        return temp;
+        API.getTrainerById(id)
+            .then(function successCallback(response) {
+                $scope.trainer = response.data;
+                $scope.trainer['earned_badges'] = API.setBadgeImages(response.data['earned_badges']);
+                $scope.trainer = API.setTrainerImage($scope.trainer);
+                if ($scope.trainer['rival_id'] != null) {
+                    loadRival();
+                }
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     };
 
-    var setTrainerImage = function () {
-        var trainer = $scope.trainer;
-        if (trainer['id'] <= 10) {
-            trainer['image'] = trainer['name'];
-        } else {
-            trainer['image'] = "Avatar";
-        }
-        $scope.trainer = trainer;
-    };
+
 
     var loadRival = function () {
         var rivalId = $scope.trainer['rival_id'];
-        $http({
-            method: 'GET',
-            url: $rootScope.baseURL + '/trainers/' + rivalId
-        }).then(function successCallback(response) {
-            $scope.rival = response.data;
-        }, function errorCallback(response) {
-            alert("Database unreachable. Check console for more info.");
-            console.log(response);
-        });
-    }
+        API.getTrainerById(rivalId)
+            .then(function successCallback(response) {
+                $scope.rival = response.data;
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
+    };
 
     $scope.addPokemonMode = function () {
         if ($scope.addingPokemon == true) {
             $scope.addingPokemon = false;
         } else {
             $scope.addingPokemon = true;
-            $http({
-                method: 'GET',
-                url: $rootScope.baseURL + '/pokemon'
-            }).then(function successCallback(response) {
-                $scope.pokedex = response.data;
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
+            API.getAllPokemon()
+                .then(function successCallback(response) {
+                    $scope.pokedex = response.data;
+                }, function errorCallback(response) {
+                    API.errorResponse(response);
+                });
         }
     }
 
@@ -120,17 +87,14 @@ function TrainerController($http, $scope, $location, $route, $rootScope) {
             $scope.addingBadge = false;
         } else {
             $scope.addingBadge = true;
-            $http({
-                method: 'GET',
-                url: $rootScope.baseURL + '/badges'
-            }).then(function successCallback(response) {
-                var badgeData = response.data;
-                $scope.badges = setBadgeImages(badgeData);
-                removeAlreadyOwnedBadges();
-            }, function errorCallback(response) {
-                alert("Database unreachable. Check console for more info.");
-                console.log(response);
-            });
+            API.getAllBadges()
+                .then(function successCallback(response) {
+                    var badgeData = response.data;
+                    $scope.badges = API.setBadgeImages(badgeData);
+                    removeAlreadyOwnedBadges();
+                }, function errorCallback(response) {
+                    API.errorResponse(response);
+                });
         }
     }
 
@@ -154,89 +118,51 @@ function TrainerController($http, $scope, $location, $route, $rootScope) {
     }
 
     $scope.delete = function () {
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/delete',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                id: $scope.trainer.id
-            }
-        }).then(function callback(response) {
-            $location.path('/trainers');
-        });
+        API.deleteTrainerById($scope.trainer.id)
+            .then(function successCallback(response) {
+                $location.path('/trainers');
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     }
 
     $scope.removeBadge = function (badgeId) {
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/' + $scope.trainer.id + '/badges/remove',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                badgeId: badgeId
-            }
-        }).then(function callback(response) {
-            loadData();
-        });
+        API.deleteBadgeFromTrainer($scope.trainer.id, badgeId)
+            .then(function successCallback(response) {
+                loadData();
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     }
 
     $scope.removePokemon = function (pokemonId) {
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/' + $scope.trainer.id + '/pokemon/remove',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                pokemonId: pokemonId
-            }
-        }).then(function callback(response) {
-            loadData();
-        });
+        API.deletePokemonFromTrainer($scope.trainer.id, pokemonId)
+            .then(function successCallback(response) {
+                loadData();
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
     }
 
     $scope.addPokemon = function (selectedPokemon) {
-        console.log(selectedPokemon);
-        var pokemonId = selectedPokemon.id;
-        var pokemonLevel = selectedPokemon.level;
-
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/' + $scope.trainer.id + '/pokemon/add',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                pokemonId: pokemonId,
-                pokemonLevel: pokemonLevel
-            }
-        }).then(function callback(response) {
-            loadData();
-        });
+        API.addSinglePokemonToTrainer($scope.trainer.id, selectedPokemon)
+            .then(function successCallback(response) {
+                loadData();
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
         $scope.addPokemonMode();
     }
 
     $scope.addBadge = function (newBadge) {
-        console.log(newBadge);
-        var badgeId = newBadge.id;
-
-        $http({
-            method: 'POST',
-            url: $rootScope.baseURL + '/trainers/' + $scope.trainer.id + '/badges/add',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                badgeId: badgeId,
-            }
-        }).then(function callback(response) {
-            loadData();
-        });
+        API.addSingleBadgeToTrainer($scope.trainer.id, newBadge.id)
+            .then(function successCallback(response) {
+                loadData();
+            }, function errorCallback(response) {
+                API.errorResponse(response);
+            });
         $scope.addBadgeMode();
     }
 
     loadData();
-};
+});

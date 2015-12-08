@@ -78,7 +78,7 @@
 .pokemonEvolution span {
     cursor: pointer;
     flex: 0 1 200px;
-    height: 100px;
+    height: 145px;
     margin: 10px;
     padding: 10px;
 }

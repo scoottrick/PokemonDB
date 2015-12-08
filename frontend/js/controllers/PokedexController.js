@@ -1,19 +1,30 @@
-function PokedexController($http, $scope, $location, $rootScope) {
+app.controller("PokedexController", function ($scope, $location, API) {
     $scope.pokedex = [];
+    $scope.sortOptions = {
+        ID: "id",
+        Name: "name",
+        Type: "[type.name, name]"
+    };
+    $scope.reverse = false;
+    $scope.sortValue = $scope.sortOptions.ID;
 
     $scope.viewPokemon = function (pokemon) {
         var id = pokemon['id'];
         $location.path('/pokedex/' + id);
-    }
+    };
 
-    $http({
-        method: 'GET',
-        url: $rootScope.baseURL + '/pokemon'
-    }).then(function successCallback(response) {
-        $scope.pokedex = response.data;
-    }, function errorCallback(response) {
-        alert("Database unreachable. Check console for more info.");
-        console.log(response);
-    });
+    $scope.sortBy = function(value){
+        if ($scope.sortValue == value){
+            $scope.reverse = !$scope.reverse;
+        }
+        $scope.sortValue = value;
+    };
 
-};
+    API.getAllPokemon()
+        .then(function successCallback(response) {
+            $scope.pokedex = response.data;
+        }, function errorCallback(response) {
+            API.errorResponse(response);
+        });
+
+});

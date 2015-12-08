@@ -1,0 +1,256 @@
+/* ------ POKEMON TYPE CLASSES ------- */
+
+.Normal {
+    background-color: #8A8A59;
+    background-image: linear-gradient(#9C9766, #8A8A59);
+}
+
+.Normal:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #8A8A59);
+    box-shadow: 6px 4px black;
+}
+
+.Normal:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#8A8A59, #676767);
+    box-shadow: none;
+}
+
+.Fighting {
+    background-color: #C03028;
+    background-image: linear-gradient(#CA3A32, #C03028);
+}
+
+.Fighting:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #C03028);
+    box-shadow: 6px 4px black;
+}
+
+.Fighting:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#C03028, #676767);
+    box-shadow: none;
+}
+
+.Flying {
+    background-color: #A890F0;
+    background-image: linear-gradient(#B29AFA, #A890F0);
+}
+
+.Flying:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #A890F0);
+    box-shadow: 6px 4px black;
+}
+
+.Flying:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#A890F0, #676767);
+    box-shadow: none;
+}
+
+.Poison {
+    background-color: #A040A0;
+    background-image: linear-gradient(#AA4AAA, #A040A0);
+}
+
+.Poison:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #A040A0);
+    box-shadow: 6px 4px black;
+}
+
+.Poison:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#A040A0, #676767);
+    box-shadow: none;
+}
+
+.Ground {
+    background-color: #E0C068;
+    background-image: linear-gradient(#EACA72, #E0C068);
+}
+
+.Ground:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #E0C068);
+    box-shadow: 6px 4px black;
+}
+
+.Ground:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#E0C068, #676767);
+    box-shadow: none;
+}
+
+.Rock {
+    background-color: #B8A038;
+    background-image: linear-gradient(#C2AA42, #B8A038);
+}
+
+.Rock:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #B8A038);
+    box-shadow: 6px 4px black;
+}
+
+.Rock:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#B8A038, #676767);
+    box-shadow: none;
+}
+
+.Bug {
+    background-color: #A8B820;
+    background-image: linear-gradient(#B2C22A, #A8B820);
+}
+
+.Bug:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #A8B820);
+    box-shadow: 6px 4px black;
+}
+
+.Bug:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#A8B820, #676767);
+    box-shadow: none;
+}
+
+.Ghost {
+    background-color: #705898;
+    background-image: linear-gradient(#7A62A2, #705898);
+}
+
+.Ghost:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #705898);
+    box-shadow: 6px 4px black;
+}
+
+.Ghost:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#705898, #676767);
+    box-shadow: none;
+}
+
+.Fire {
+    background-color: #F08030;
+    background-image: linear-gradient(#FA8A3A, #F08030);
+}
+
+.Fire:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #F08030);
+    box-shadow: 6px 4px black;
+}
+
+.Fire:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#F08030, #676767);
+    box-shadow: none;
+}
+
+.Water {
+    background-color: #6890F0;
+    background-image: linear-gradient(#729AFA, #6890F0);
+}
+
+.Water:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #6890F0);
+    box-shadow: 6px 4px black;
+}
+
+.Water:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#6890F0, #676767);
+    box-shadow: none;
+}
+
+.Grass {
+    background-color: #78C850;
+    background-image: linear-gradient(#82D25A, #78C850);
+}
+
+.Grass:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #78C850);
+    box-shadow: 6px 4px black;
+}
+
+.Grass:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#78C850, #676767);
+    box-shadow: none;
+}
+
+.Electric {
+    background-color: #F8D030;
+    background-image: linear-gradient(#FFDA3A, #F8D030);
+}
+
+.Electric:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #F8D030);
+    box-shadow: 6px 4px black;
+}
+
+.Electric:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#F8D030, #676767);
+    box-shadow: none;
+}
+
+.Psychic {
+    background-color: #F85888;
+    background-image: linear-gradient(#FF6292, #F85888);
+}
+
+.Psychic:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #F85888);
+    box-shadow: 6px 4px black;
+}
+
+.Psychic:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#F85888, #676767);
+    box-shadow: none;
+}
+
+.Ice {
+    background-color: #98D8D8;
+    background-image: linear-gradient(#A2E2E2, #98D8D8);
+}
+
+.Ice:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #98D8D8);
+    box-shadow: 6px 4px black;
+}
+
+.Ice:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#98D8D8, #676767);
+    box-shadow: none;
+}
+
+.Dragon {
+    background-color: #7038F8;
+    background-image: linear-gradient(#7A42FF, #7038F8);
+}
+
+.Dragon:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: radial-gradient(#DDDDDD, #7038F8);
+    box-shadow: 6px 4px black;
+}
+
+.Dragon:active {
+    background-color: rgba(255, 255, 255, 0.25);
+    background-image: radial-gradient(#7038F8, #676767);
+    box-shadow: none;
+}
