@@ -145,6 +145,12 @@ app.controller("TrainerController", function ($scope, $location, $route, API) {
     }
 
     $scope.addPokemon = function (selectedPokemon) {
+        if (selectedPokemon.level == null
+            || !angular.isObject(selectedPokemon.level
+            || selectedPokemon.level > 100
+            || selectedPokemon.level < 5)){
+            selectedPokemon.level = 5;
+        };
         API.addSinglePokemonToTrainer($scope.trainer.id, selectedPokemon)
             .then(function successCallback(response) {
                 loadData();
