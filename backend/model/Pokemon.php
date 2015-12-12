@@ -81,7 +81,7 @@ class Pokemon {
     }
 
     public function getTrainers() {
-        $result = Database::query(SQL::trainersForPokemon($this->id));
+        $result = Database::query(SQL::ownersOfPokemon($this->id));
 
         $trainers = array();
         if (mysqli_num_rows($result) > 0) {

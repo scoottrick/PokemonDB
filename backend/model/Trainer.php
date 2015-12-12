@@ -33,7 +33,7 @@ class Trainer {
 //    }
 
     public function getPokemon() {
-        $result = Database::query(SQL::pokemonOwnedByTrainer($this->id));
+        $result = Database::query(SQL::trainerPokemon($this->id));
 
         $pokemonArr = array();
         if (mysqli_num_rows($result) > 0) {
@@ -135,7 +135,7 @@ class Trainer {
 
     public static function delete($id) {
         $badge = Database::query(SQL::trainerBadges($id));
-        $poke = Database::query(SQL::pokemonOwnedByTrainer($id));
+        $poke = Database::query(SQL::trainerPokemon($id));
         $result1 = true; $result2 = true;
         if ($badge != null){
             $result1 = Database::query(SQL::deleteTrainerBadges($id));
